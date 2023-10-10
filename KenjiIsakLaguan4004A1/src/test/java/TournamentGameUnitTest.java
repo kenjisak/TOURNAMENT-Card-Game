@@ -111,7 +111,7 @@ class TournamentGameUnitTest {
 
         for (int i = 0; i < testPlayerNum * 3; i++) {//tests for 9 rounds passing, for when Round Leader should loop back to the 1st Player
             assertEquals(testPlayersNames[i % 3],testGame.currLeader);
-            testGame.playRound();
+            testGame.updateRoundLeader();
         }
     }
     @Test
