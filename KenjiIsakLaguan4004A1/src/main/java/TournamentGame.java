@@ -17,6 +17,25 @@ public class TournamentGame {
         gameDeck = new ArrayList<>();
         currMeleeCardsPlayed = new HashMap<>();//empty list init
         roundNum = 1;
+        //basic weapon cards
+        for(int i = 1; i <= 15; i++){//swords
+            gameDeck.add(new Card("Basic","Swords",i));
+            gameDeck.add(new Card("Basic","Arrows",i));
+            gameDeck.add(new Card("Basic","Sorcery",i));
+            gameDeck.add(new Card("Basic","Deception",i));
+        }
+
+        for(int i = 1; i <= 3; i++){
+            gameDeck.add(new Card("Merlin"));
+        }
+
+        for(int i = 1; i <= 2; i++){
+            gameDeck.add(new Card("Apprentice"));
+        }
+
+        for(int i = 1; i <= 15; i++){
+            gameDeck.add(new Card("Alchemy",i));
+        }
     }
     public static void main(String[] args) {
 
