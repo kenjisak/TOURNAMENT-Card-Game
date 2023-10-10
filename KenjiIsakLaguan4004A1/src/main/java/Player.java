@@ -9,12 +9,16 @@ public class Player {
     private List<Card> injuryDeck;
 
     public Player(String inputName,int inputHealthPoints){
-
+        name = inputName;
+        healthPoints = inputHealthPoints;
+        totalInjuryPoints = 0;
+        deckInHand = new ArrayList<>();
+        injuryDeck = new ArrayList<>();
     }
-    public String getName(){ return null; }
-    public int getHealthPoints(){ return -1;}
-    public int getTotalInjuryPoints(){ return -1; }
-    public List<Card> getDeckInHand(){ return null; }
-    public List<Card> getInjuryDeck(){ return null; }
+    public String getName(){ return this.name; }
+    public int getHealthPoints(){ return this.healthPoints; }
+    public int getTotalInjuryPoints(){ return totalInjuryPoints; }
+    public List<Card> getDeckInHand(){ return this.deckInHand; }
+    public List<Card> getInjuryDeck(){ return this.injuryDeck; }
 }
 
