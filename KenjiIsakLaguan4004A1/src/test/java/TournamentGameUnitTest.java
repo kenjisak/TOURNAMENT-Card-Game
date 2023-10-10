@@ -102,4 +102,16 @@ class TournamentGameUnitTest {
             assertFalse(TournamentGame.checkInputNumPlayers(testPlayerNum));
         }
     }
+    @Test
+    @DisplayName("U-TEST-011: Test Rounds start with an Initial Leader based on Order of Players Inputted Names.")
+    void testRoundInitLeader(){
+        int testPlayerNum = 3;
+        String[] testPlayersNames = {"1", "2", "3"};
+        TournamentGame testGame = new TournamentGame(testPlayerNum, testPlayersNames,50);
+
+        for (int i = 0; i < testPlayerNum * 3; i++) {//tests for 9 rounds passing, for when Round Leader should loop back to the 1st Player
+            assertEquals(testPlayersNames[i % 3],testGame.currLeader);
+            testGame.playRound();
+        }
+    }
 }
