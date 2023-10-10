@@ -86,4 +86,20 @@ class TournamentGameUnitTest {
         assertEquals(80,game.gameDeck.size());
         assertNotEquals(beforeShuffle,afterShuffle);
     }
+    @Test
+    @DisplayName("U-TEST-010: Test Game Stores Players inputted names properly.")
+    void testPlayersNameInput(){
+        int testPlayerNum = 3;
+        String[] testPlayersNames = {"1", "2", "3"};
+
+        if(TournamentGame.checkInputNumPlayers(testPlayerNum)){//if valid Number of Players
+            TournamentGame testGame = new TournamentGame(testPlayerNum, testPlayersNames,50);
+
+            for (int i = 0; i < testPlayerNum; i++) {//test if names were stored correctly
+                assertEquals(testPlayersNames[i],testGame.players[i].getName());
+            }
+        }else{//should return false to ask input for Valid Player Num Again
+            assertFalse(TournamentGame.checkInputNumPlayers(testPlayerNum));
+        }
+    }
 }
