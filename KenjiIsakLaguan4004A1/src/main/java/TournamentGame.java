@@ -56,13 +56,15 @@ public class TournamentGame {
             }
         }
     }
+    public void updateRoundLeader(){
+        currLeader = players[roundNum % players.length].getName();//don't need separate round and melee leader. this calcs based on round Num not currLeader
+        roundNum++;
+    }
     public void playRound(){
         distributePlayersHands();
         System.out.println("Round " + roundNum + " over...");
 
-        //else update leader and continue round
-        currLeader = players[roundNum % players.length].getName();//don't need separate round and melee leader. this calcs based on round Num not currLeader
-        roundNum++;
+        updateRoundLeader();//else update leader and continue round
     }
     public static void main(String[] args) {
         System.out.println("Welcome to the TOURNAMENT Game.");
