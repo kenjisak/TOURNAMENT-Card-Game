@@ -20,7 +20,12 @@ public class Card {
         }
     }
     public Card(String cardType, int value){
-
+        //cardType == Alchemy
+        this.type = cardType;
+        this.suit = "";//empty
+        this.value = value;
+        this.isPoisoned = false;
+        this.injuryPoints = 5;
     }
     public Card(String cardType){
         //cardType == Me,Ap only
