@@ -47,7 +47,11 @@ public class TournamentGame {
         Collections.shuffle(gameDeck);
     }
     public void playRound(){
+        System.out.println("Round " + roundNum + " over...");
 
+        //else update leader and continue round
+        currLeader = players[roundNum % players.length].getName();//don't need separate round and melee leader. this calcs based on round Num not currLeader
+        roundNum++;
     }
     public static void main(String[] args) {
         System.out.println("Welcome to the TOURNAMENT Game.");
@@ -74,6 +78,10 @@ public class TournamentGame {
 
         TournamentGame tournamentGame = new TournamentGame(numPlayers, playersNames, 100);
 
+//        while (true) {//disable loop to play 1 round at a time
+        System.out.println("\nRound " + tournamentGame.roundNum + " Starting...Initial Leader of this round is " + tournamentGame.currLeader);
+        tournamentGame.playRound();
+//        }
     }
     public static boolean checkInputNumPlayers(int input){
         return input >= 3 && input <= 5;//if true then valid, else not
