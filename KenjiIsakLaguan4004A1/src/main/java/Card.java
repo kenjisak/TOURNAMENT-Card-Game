@@ -20,7 +20,12 @@ public class Card {
         }
     }
     public Card(String cardType){
-
+        //cardType == Me,Ap only
+        this.type = cardType;
+        this.suit = "";
+        this.value = 0;//values are above 0, this needs to be set by user
+        this.isPoisoned = false;
+        this.injuryPoints = 25;
     }
     //getters
     public String getType(){ return this.type; }
