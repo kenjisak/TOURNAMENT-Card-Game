@@ -56,4 +56,22 @@ class TournamentGameUnitTest {
             assertTrue(TournamentGame.checkInputNumPlayers(i));
         }
     }
+    @Test
+    @DisplayName("U-TEST-008: Test Game sets Players initial HP to a Non-Negative Value.")
+    void testValidHpInit(){
+        TournamentGame testGameHPzero = new TournamentGame(3,new String[]{"1", "2", "3"},0);
+        for (int i = 0; i < 3; i++) {
+            assertEquals(50,testGameHPzero.players[i].getHealthPoints());
+        }
+
+        TournamentGame testGameHPneg = new TournamentGame(3,new String[]{"1", "2", "3"},-5);
+        for (int i = 0; i < 3; i++) {
+            assertEquals(50,testGameHPneg.players[i].getHealthPoints());
+        }
+
+        TournamentGame testGameHPpos = new TournamentGame(3,new String[]{"1", "2", "3"},100);
+        for (int i = 0; i < 3; i++) {
+            assertEquals(100,testGameHPpos.players[i].getHealthPoints());
+        }
+    }
 }
