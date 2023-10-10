@@ -47,6 +47,14 @@ public class TournamentGame {
         Collections.shuffle(gameDeck);
     }
     public void playRound(){
+        shuffleDeck();
+        //iterate and give each player 12 cards
+        int cardIndex = 0;//cant restart from 0 after each player, so players don't get duplicate hands
+        for (Player currPlayer: players){
+            for (int i = 0; i < 12; i++) {
+                currPlayer.addToHand(gameDeck.get(cardIndex++));//never empty, don't need to remove from deck, just reshuffle each round
+            }
+        }
         System.out.println("Round " + roundNum + " over...");
 
         //else update leader and continue round

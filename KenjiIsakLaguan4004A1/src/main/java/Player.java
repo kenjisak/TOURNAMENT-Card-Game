@@ -20,5 +20,8 @@ public class Player {
     public int getTotalInjuryPoints(){ return totalInjuryPoints; }
     public List<Card> getDeckInHand(){ return this.deckInHand; }
     public List<Card> getInjuryDeck(){ return this.injuryDeck; }
+    public void addToHand(Card givenCard){
+        deckInHand.add(givenCard);
+    }
 }
 
