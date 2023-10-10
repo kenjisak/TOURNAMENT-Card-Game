@@ -18,6 +18,9 @@ public class TournamentGame {
         gameDeck = new ArrayList<>();
         currMeleeCardsPlayed = new HashMap<>();//empty list init
         roundNum = 1;
+        recreateDeck();
+    }
+    public void recreateDeck(){//when shuffling, the card is edited and not reverted back for Merlin and Apprentice
         //basic weapon cards
         for(int i = 1; i <= 15; i++){//swords
             gameDeck.add(new Card("Basic","Swords",i));
@@ -40,6 +43,7 @@ public class TournamentGame {
     }
     public void shuffleDeck(){
         System.out.println("Shuffling Deck...");
+        recreateDeck();
         Collections.shuffle(gameDeck);
     }
     public static void main(String[] args) {
