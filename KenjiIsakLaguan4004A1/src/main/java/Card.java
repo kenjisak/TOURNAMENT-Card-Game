@@ -19,6 +19,9 @@ public class Card {
             this.injuryPoints = 5;
         }
     }
+    public Card(String cardType, int value){
+
+    }
     public Card(String cardType){
         //cardType == Me,Ap only
         this.type = cardType;

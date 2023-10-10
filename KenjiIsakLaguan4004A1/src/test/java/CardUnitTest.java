@@ -32,4 +32,14 @@ public class CardUnitTest {
         assertEquals(false,testMeAp.getIsPoisoned());
         assertEquals(25,testMeAp.getInjuryPoints());
     }
+    @Test
+    @DisplayName("U-TEST-003: Test if an Alchemy Card initializes correctly.")
+    void testCardCreationAl(){
+        Card testAl = new Card("Alchemy", 1);
+        assertEquals("Alchemy", testAl.getType());
+        assertEquals("", testAl.getSuit());
+        assertEquals(1,testAl.getValue());
+        assertEquals(false,testAl.getIsPoisoned());
+        assertEquals(5,testAl.getInjuryPoints());
+    }
 }
