@@ -15,12 +15,12 @@ public class TournamentGame {
             players[i] = new Player(namesOfPlayers[i], initHealthPoints);
         }
         currLeader = namesOfPlayers[0];//init to player 1
-        gameDeck = new ArrayList<>();
         currMeleeCardsPlayed = new HashMap<>();//empty list init
         roundNum = 1;
         recreateDeck();
     }
     public void recreateDeck(){//when shuffling, the card is edited and not reverted back for Merlin and Apprentice
+        gameDeck = new ArrayList<>();
         //basic weapon cards
         for(int i = 1; i <= 15; i++){//swords
             gameDeck.add(new Card("Basic","Swords",i));
