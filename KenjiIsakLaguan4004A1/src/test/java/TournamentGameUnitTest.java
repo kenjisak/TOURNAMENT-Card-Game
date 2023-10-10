@@ -121,7 +121,7 @@ class TournamentGameUnitTest {
         String[] testPlayersNames = {"1", "2", "3"};
         TournamentGame testGame = new TournamentGame(testPlayerNum, testPlayersNames,50);
 
-        testGame.playRound();
+        testGame.distributePlayersHands();
         for (int i = 0; i < testPlayerNum ; i++) {//check if each player has 12 cards
             assertEquals(12,testGame.players[i].getDeckInHand().size());
         }
