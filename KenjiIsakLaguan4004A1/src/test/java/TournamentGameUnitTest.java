@@ -114,4 +114,16 @@ class TournamentGameUnitTest {
             testGame.playRound();
         }
     }
+    @Test
+    @DisplayName("U-TEST-012: Test if each player receives 12 cards after the game deck is shuffled.")
+    void testPlayerGetsStartingHand(){
+        int testPlayerNum = 3;
+        String[] testPlayersNames = {"1", "2", "3"};
+        TournamentGame testGame = new TournamentGame(testPlayerNum, testPlayersNames,50);
+
+        testGame.playRound();
+        for (int i = 0; i < testPlayerNum ; i++) {//check if each player has 12 cards
+            assertEquals(12,testGame.players[i].getDeckInHand().size());
+        }
+    }
 }
