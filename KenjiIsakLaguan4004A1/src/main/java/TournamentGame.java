@@ -10,6 +10,7 @@ public class TournamentGame {
     public TournamentGame(int numPlayers, String[] namesOfPlayers, int initHealthPoints){
         players = new Player[numPlayers];
 
+        if (initHealthPoints <= 0){ initHealthPoints = 50; }//default value if given non-positive HP
         for(int i = 0; i < numPlayers; i++){
             players[i] = new Player(namesOfPlayers[i], initHealthPoints);
         }
