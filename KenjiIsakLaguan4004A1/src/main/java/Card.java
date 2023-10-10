@@ -19,6 +19,9 @@ public class Card {
             this.injuryPoints = 5;
         }
     }
+    public Card(String cardType){
+
+    }
     //getters
     public String getType(){ return this.type; }
     public String getSuit(){ return this.suit; }

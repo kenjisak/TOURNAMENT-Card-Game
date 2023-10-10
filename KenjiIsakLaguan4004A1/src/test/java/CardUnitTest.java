@@ -22,4 +22,14 @@ public class CardUnitTest {
         assertEquals(true,testBasicPoisoned.getIsPoisoned());
         assertEquals(10,testBasicPoisoned.getInjuryPoints());
     }
+    @Test
+    @DisplayName("U-TEST-002: Test if a Merlin or Apprentice Card initializes correctly.")
+    void testCardCreationMeAp(){
+        Card testMeAp = new Card("Merlin");
+        assertEquals("Merlin", testMeAp.getType());
+        assertEquals("", testMeAp.getSuit());
+        assertEquals(0,testMeAp.getValue());
+        assertEquals(false,testMeAp.getIsPoisoned());
+        assertEquals(25,testMeAp.getInjuryPoints());
+    }
 }
