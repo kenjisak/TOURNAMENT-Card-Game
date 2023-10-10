@@ -38,6 +38,9 @@ public class TournamentGame {
             gameDeck.add(new Card("Alchemy",i));
         }
     }
+    public void shuffleDeck(){
+
+    }
     public static void main(String[] args) {
         System.out.println("Welcome to the TOURNAMENT Game.");
         System.out.print("\nPlease enter the number of players (3-5 is acceptable): ");

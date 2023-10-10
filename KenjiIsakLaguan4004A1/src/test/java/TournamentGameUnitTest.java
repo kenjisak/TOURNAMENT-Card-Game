@@ -74,4 +74,15 @@ class TournamentGameUnitTest {
             assertEquals(100,testGameHPpos.players[i].getHealthPoints());
         }
     }
+    @Test
+    @DisplayName("U-TEST-009: Test Game shuffles the cards properly.")
+    void testCardShuffle(){
+        TournamentGame game = new TournamentGame(3, new String[]{"1", "2", "3"},50);
+
+        String beforeShuffle = game.gameDeck.toString();
+        game.shuffleDeck();
+        String afterShuffle = game.gameDeck.toString();
+
+        assertNotEquals(beforeShuffle,afterShuffle);
+    }
 }
