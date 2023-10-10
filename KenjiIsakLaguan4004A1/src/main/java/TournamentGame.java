@@ -40,4 +40,7 @@ public class TournamentGame {
     public static void main(String[] args) {
 
     }
+    public static boolean checkInputNumPlayers(int input){
+        return false;
+    }
 }

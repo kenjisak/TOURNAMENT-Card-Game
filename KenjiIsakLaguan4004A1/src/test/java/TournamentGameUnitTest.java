@@ -46,4 +46,14 @@ class TournamentGameUnitTest {
         assertEquals(2,apprenticeCount);
         assertEquals(15,alchemyCount);
     }
+    @Test
+    @DisplayName("U-TEST-007: Test user input for number of players is entered and stored properly.")
+    void testNumPlayersInput(){
+        assertFalse(TournamentGame.checkInputNumPlayers(2));//checks lower than 3
+        assertFalse(TournamentGame.checkInputNumPlayers(6));//checks higher than 5
+
+        for (int i = 3; i <= 5 ; i++) {//checks all valid inputs
+            assertTrue(TournamentGame.checkInputNumPlayers(i));
+        }
+    }
 }
