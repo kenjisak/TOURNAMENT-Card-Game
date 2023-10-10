@@ -83,6 +83,7 @@ class TournamentGameUnitTest {
         game.shuffleDeck();
         String afterShuffle = game.gameDeck.toString();
 
+        assertEquals(80,game.gameDeck.size());
         assertNotEquals(beforeShuffle,afterShuffle);
     }
 }
