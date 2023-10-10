@@ -62,6 +62,15 @@ public class TournamentGame {
             }
         }
         scanner.nextLine();//clear input buffer
+
+        String[] playersNames = new String[numPlayers];
+        for (int i = 0; i < numPlayers; i++){
+            System.out.print("Enter (" + (i + 1) + ") Player's name: ");
+            playersNames[i] = scanner.nextLine();
+        }
+
+        TournamentGame tournamentGame = new TournamentGame(numPlayers, playersNames, 100);
+
     }
     public static boolean checkInputNumPlayers(int input){
         return input >= 3 && input <= 5;//if true then valid, else not
