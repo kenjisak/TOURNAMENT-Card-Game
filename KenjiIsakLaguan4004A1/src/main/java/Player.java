@@ -41,6 +41,9 @@ public class Player {
         return dmgPtsThisMelee;
     }
     public void takeDmg(){
-
+        for (Card dmgCard: injuryDeck){
+            healthPoints -= dmgCard.getInjuryPoints();
+        }
+        injuryDeck = new ArrayList<>();//resets the injury deck for next melee
     }
 }
