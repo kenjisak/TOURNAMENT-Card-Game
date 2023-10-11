@@ -172,4 +172,32 @@ class TournamentGameUnitTest {
         assertEquals(40,testGame.players[1].getHealthPoints());
         assertEquals(45,testGame.players[2].getHealthPoints());
     }
+    @Test
+    @DisplayName("U-TEST-019: Test if each player's updated health points is displayed properly after taking damage at the end of a round.")
+    void testPlayersHPDisplay(){
+        List<Card> testMeleeDeck1 = new ArrayList<>();//only add 3 cards ease of testing
+        List<Card> testMeleeDeck2 = new ArrayList<>();
+        List<Card> testMeleeDeck3 = new ArrayList<>();
+        testMeleeDeck1.add(new Card("Merlin"));//25 dmg
+        testMeleeDeck2.add(new Card("Basic","Arrows", 8));//10 dmg
+        testMeleeDeck3.add(new Card("Alchemy",10));//5 dmg
+
+        int testPlayerNum = 3;
+        String[] testPlayersNames = {"1", "2", "3"};
+        TournamentGame testGame = new TournamentGame(testPlayerNum, testPlayersNames,50);
+
+        testGame.players[0].addToInjuryDeck(testMeleeDeck1);//50-25 = 25
+        testGame.players[1].addToInjuryDeck(testMeleeDeck2);//50-10 = 40
+        testGame.players[2].addToInjuryDeck(testMeleeDeck3);//50-5 = 45
+
+        testGame.playersTakeDmg();
+
+        String expectedOutput = """
+
+                Player 1 HP: 25
+                Player 2 HP: 40
+                Player 3 HP: 45
+                """;
+        assertEquals(expectedOutput, testGame.displayAllPlayersHP());
+    }
 }
