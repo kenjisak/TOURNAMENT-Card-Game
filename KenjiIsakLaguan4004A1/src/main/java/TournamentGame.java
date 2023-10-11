@@ -80,10 +80,15 @@ public class TournamentGame {
         return returnthis + "\n";
     }
     public boolean checkDeadPlayers(){
+        for(Player currPlayer: players){//if any players are dead after dmg taken, end the game
+            if (!currPlayer.isAlive()){
+                return true;
+            }
+        }
         return false;
     }
     public void endGame(){
-
+        System.exit(0);
     }
     public void playRound(){
         System.out.println("\nRound " + roundNum + " Starting... Initial Leader of this round is " + currLeader);
@@ -95,7 +100,9 @@ public class TournamentGame {
         System.out.println(displayAllPlayersHP());
 
         System.out.println("Round " + roundNum + " over...");
-
+        if(checkDeadPlayers()){//if a players dead then end the game
+            endGame();
+        }
         updateRoundLeader();//else update leader and continue round
     }
     public static void main(String[] args) {
