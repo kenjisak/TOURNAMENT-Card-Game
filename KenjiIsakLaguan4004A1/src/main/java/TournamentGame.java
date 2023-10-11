@@ -60,6 +60,9 @@ public class TournamentGame {
         currLeader = players[roundNum % players.length].getName();//don't need separate round and melee leader. this calcs based on round Num not currLeader
         roundNum++;
     }
+    public String displayAllPlayersHandsHP(){
+        return null;
+    }
     public void playRound(){
         distributePlayersHands();
         System.out.println("Round " + roundNum + " over...");

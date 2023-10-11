@@ -126,4 +126,25 @@ class TournamentGameUnitTest {
             assertEquals(12,testGame.players[i].getDeckInHand().size());
         }
     }
+    @Test
+    @DisplayName("U-TEST-015: Test if each player's hand and health points is displayed after being given.")
+    void testPlayersHandsHPDisplay(){
+        int testPlayerNum = 3;
+        String[] testPlayersNames = {"1", "2", "3"};
+        TournamentGame testGame = new TournamentGame(testPlayerNum, testPlayersNames,50);
+
+        //simulates distributePlayersHands but with only 1 card for a player's hand for ease of testing
+        testGame.players[0].addToHand(new Card("Basic","Deception",12));
+        testGame.players[1].addToHand(new Card("Basic","Sorcery",6));
+        testGame.players[2].addToHand(new Card("Alchemy",3));
+
+        String expectedOutput = """
+
+                Player 1's Hand: [De(12)] Health Points: 50
+                Player 2's Hand: [So(6)] Health Points: 50
+                Player 3's Hand: [Al(3)] Health Points: 50
+                """;
+
+        assertEquals(expectedOutput, testGame.displayAllPlayersHandsHP());
+    }
 }
