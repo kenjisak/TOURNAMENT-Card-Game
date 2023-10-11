@@ -73,7 +73,11 @@ public class TournamentGame {
         }
     }
     public String displayAllPlayersHP(){
-        return null;
+        String returnthis = "";
+        for (Player currPlayer: players){//print round over with players hp
+            returnthis += "\nPlayer " + currPlayer.getName() + " HP: " + currPlayer.getHealthPoints();
+        }
+        return returnthis + "\n";
     }
     public void playRound(){
         System.out.println("\nRound " + roundNum + " Starting... Initial Leader of this round is " + currLeader);
@@ -82,6 +86,7 @@ public class TournamentGame {
         System.out.println(displayAllPlayersHandsHP());
 
         playersTakeDmg();
+        System.out.println(displayAllPlayersHP());
 
         System.out.println("Round " + roundNum + " over...");
 
