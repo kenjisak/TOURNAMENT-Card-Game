@@ -69,6 +69,10 @@ public class TournamentGame {
     }
     public void playRound(){
         distributePlayersHands();
+        //display each player's initial hands
+        System.out.println(displayAllPlayersHandsHP());
+
+        
         System.out.println("Round " + roundNum + " over...");
 
         updateRoundLeader();//else update leader and continue round
