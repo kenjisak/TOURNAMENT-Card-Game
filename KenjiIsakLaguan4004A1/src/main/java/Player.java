@@ -32,4 +32,7 @@ public class Player {
         playersHand += "]";
         return "Player " + name + "'s Hand: " + playersHand;
     }
+    public int addToInjuryDeck(List<Card> meleeDeck){
+        return 0;
+    }
 }
