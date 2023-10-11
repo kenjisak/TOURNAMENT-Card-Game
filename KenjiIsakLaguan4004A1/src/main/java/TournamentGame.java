@@ -68,7 +68,9 @@ public class TournamentGame {
         return returnThis + "\n";
     }
     public void playersTakeDmg(){
-
+        for(Player currPlayer: players){
+            currPlayer.takeDmg();//subtracts player's hp from all of their injury deck
+        }
     }
     public void playRound(){
         System.out.println("\nRound " + roundNum + " Starting... Initial Leader of this round is " + currLeader);
@@ -76,6 +78,7 @@ public class TournamentGame {
         //display each player's initial hands
         System.out.println(displayAllPlayersHandsHP());
 
+        playersTakeDmg();;
 
         System.out.println("Round " + roundNum + " over...");
 
