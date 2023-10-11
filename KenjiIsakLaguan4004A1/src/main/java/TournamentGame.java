@@ -88,10 +88,48 @@ public class TournamentGame {
         return false;
     }
     public String endGame(){
-        return null;
+        //print out hp
+        String returnthis = "";
+        for (Player currPlayer: players){
+            returnthis += "\nPlayer " + currPlayer.getName() + " HP: " + currPlayer.getHealthPoints();
+        }
+        String winners = findWinners();
+        if(Objects.equals(winners, "")){
+            return returnthis + "\nThere are no winners of the Tournament.";
+        }else{
+            return returnthis + "\nThe winner(s) of the Tournament is:" + findWinners();
+        }
     }
     public String findWinners(){
-        return null;
+        List<Player> winners = new ArrayList<>();
+        //find highest hp player(s) and display as winner
+        int maxHP;
+        String winnersName = "";
+        maxHP = 0;
+
+        List<Player> numDead = new ArrayList<>();
+        for (Player currPlayer: players){//checks if ALL players are dead
+            if(!currPlayer.isAlive()){
+                numDead.add(currPlayer);
+            }
+        }
+        if(numDead.size() == players.length){
+            return "";
+        }
+
+        for (Player currPlayer: players) {
+            if (currPlayer.getHealthPoints() > maxHP){
+                winners.clear();
+                winners.add(currPlayer);
+                maxHP = currPlayer.getHealthPoints();
+            }else if(currPlayer.getHealthPoints() == maxHP){
+                winners.add(currPlayer);
+            }
+        }
+        for(Player winner: winners){
+            winnersName += " " + winner.getName();
+        }
+        return winnersName;
     }
     public void playRound(){
         System.out.println("\nRound " + roundNum + " Starting... Initial Leader of this round is " + currLeader);
