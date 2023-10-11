@@ -155,10 +155,17 @@ public class TournamentGame {
         updateRoundLeader();//else update leader and continue round
     }
     public int findMeleeLeaderIndex(){
-        return -1;
+        int meleeLeaderIndex = 0;
+        for (int i = 0; i < players.length; i++) {
+            if (Objects.equals(players[i].getName(), currLeader)) {
+                meleeLeaderIndex = i;//sets the index of leader of this melee
+            }
+        }
+        return meleeLeaderIndex;
     }
     public void playMelee() {
-
+        System.out.println("Leader " + currLeader + " starts this Melee...");
+        int meleeLeaderIndex = findMeleeLeaderIndex();
     }
     public static void main(String[] args) {
         System.out.println("Welcome to the TOURNAMENT Game.");
