@@ -68,11 +68,12 @@ public class TournamentGame {
         return returnThis + "\n";
     }
     public void playRound(){
+        System.out.println("\nRound " + roundNum + " Starting... Initial Leader of this round is " + currLeader);
         distributePlayersHands();
         //display each player's initial hands
         System.out.println(displayAllPlayersHandsHP());
 
-        
+
         System.out.println("Round " + roundNum + " over...");
 
         updateRoundLeader();//else update leader and continue round
@@ -103,7 +104,6 @@ public class TournamentGame {
         TournamentGame tournamentGame = new TournamentGame(numPlayers, playersNames, 100);
 
 //        while (true) {//disable loop to play 1 round at a time
-        System.out.println("\nRound " + tournamentGame.roundNum + " Starting...Initial Leader of this round is " + tournamentGame.currLeader);
         tournamentGame.playRound();
 //        }
     }
