@@ -55,4 +55,19 @@ public class PlayerUnitTest {
         assertEquals(testPlayer.getInjuryDeck(),testMeleeDeck);
         assertEquals(35,dmgForCurrMelee);
     }
+    @Test
+    @DisplayName("U-TEST-017: Test if a Player properly takes damage.")
+    void testPlayerTakeDmg(){
+        List<Card> testMeleeDeck = new ArrayList<>();//only add 3 cards ease of testing
+        testMeleeDeck.add(new Card("Basic","Swords", 1));//5 dmg
+        testMeleeDeck.add(new Card("Apprentice"));//5 dmg
+        testMeleeDeck.add(new Card("Alchemy",1));//5 dmg
+        //= 15 dmg pts
+
+        Player testPlayer = new Player("Test", 100);
+        testPlayer.addToInjuryDeck(testMeleeDeck);
+        testPlayer.takeDmg();//100-15 = 85
+
+        assertEquals(85,testPlayer.getHealthPoints());
+    }
 }

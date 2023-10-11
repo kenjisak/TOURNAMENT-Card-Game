@@ -40,4 +40,7 @@ public class Player {
         }
         return dmgPtsThisMelee;
     }
+    public void takeDmg(){
+
+    }
 }
