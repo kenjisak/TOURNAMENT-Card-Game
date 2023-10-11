@@ -216,4 +216,44 @@ class TournamentGameUnitTest {
 
         assertTrue(testGame.checkDeadPlayers());
     }
+    @Test
+    @DisplayName("U-TEST-021: Test if the Game finds the Correct Winners and displays them.")
+    void testFindWinners(){
+        int testPlayerNum = 3;
+        String[] testPlayersNames = {"1", "2", "3"};
+        TournamentGame testGame = new TournamentGame(testPlayerNum, testPlayersNames,25);
+
+        List<Card> testMeleeDeck3 = new ArrayList<>();
+        testMeleeDeck3.add(new Card("Merlin"));//25 dmg
+        testGame.players[2].addToInjuryDeck(testMeleeDeck3);//25-25 = 0
+        testGame.playersTakeDmg();
+
+        String expectedOutput = """
+
+                Player 1 HP: 25
+                Player 2 HP: 25
+                Player 3 HP: 0
+                The winner(s) of the Tournament is: 1 2""";
+        assertEquals(expectedOutput, testGame.endGame());//tests several winners, 1 winner
+
+        testGame.players[1].addToInjuryDeck(testMeleeDeck3);//25-25 = 0
+        testGame.playersTakeDmg();
+        String expectedOutput2 = """
+
+                Player 1 HP: 25
+                Player 2 HP: 0
+                Player 3 HP: 0
+                The winner(s) of the Tournament is: 1""";
+        assertEquals(expectedOutput2, testGame.endGame());
+
+        testGame.players[0].addToInjuryDeck(testMeleeDeck3);//25-25 = 0
+        testGame.playersTakeDmg();
+        String expectedOutput3 = """
+
+                Player 1 HP: 0
+                Player 2 HP: 0
+                Player 3 HP: 0
+                There are no winners of the Tournament.""";
+        assertEquals(expectedOutput3, testGame.endGame());
+    }
 }

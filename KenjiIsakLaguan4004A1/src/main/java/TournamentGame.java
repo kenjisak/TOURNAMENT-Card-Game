@@ -87,8 +87,11 @@ public class TournamentGame {
         }
         return false;
     }
-    public void endGame(){
-        System.exit(0);
+    public String endGame(){
+        return null;
+    }
+    public String findWinners(){
+        return null;
     }
     public void playRound(){
         System.out.println("\nRound " + roundNum + " Starting... Initial Leader of this round is " + currLeader);
@@ -101,7 +104,8 @@ public class TournamentGame {
 
         System.out.println("Round " + roundNum + " over...");
         if(checkDeadPlayers()){//if a players dead then end the game
-            endGame();
+            System.out.println(endGame());
+            System.exit(0);
         }
         updateRoundLeader();//else update leader and continue round
     }
