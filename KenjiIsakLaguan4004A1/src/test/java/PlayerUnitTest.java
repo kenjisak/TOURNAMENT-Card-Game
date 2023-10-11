@@ -34,7 +34,7 @@ public class PlayerUnitTest {
         assertEquals("Player Test's Hand: [Sw(2),Ap(0),Al(1)]", testPlayer.displayHand());
     }
     @Test
-    @DisplayName("U-TEST-016: Test if a Player properly adds the melee deck to their injury deck and returns the right number of damage received for that melee.")
+    @DisplayName("U-TEST-016: Test if a Player properly adds the melee deck to their injury deck and returns the right number of damage accumulated for that melee.")
     void testInjuryDeckReceive(){
         //5 dmg
         Card testCardBasic = new Card("Basic","Swords", 1);
