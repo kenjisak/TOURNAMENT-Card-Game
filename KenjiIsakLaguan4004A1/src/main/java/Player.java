@@ -23,5 +23,7 @@ public class Player {
     public void addToHand(Card givenCard){
         deckInHand.add(givenCard);
     }
+    public String displayHand(){
+        return null;
+    }
 }
-
