@@ -67,6 +67,9 @@ public class TournamentGame {
         }
         return returnThis + "\n";
     }
+    public void playersTakeDmg(){
+
+    }
     public void playRound(){
         System.out.println("\nRound " + roundNum + " Starting... Initial Leader of this round is " + currLeader);
         distributePlayersHands();

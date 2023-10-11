@@ -1,6 +1,8 @@
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -146,5 +148,28 @@ class TournamentGameUnitTest {
                 """;
 
         assertEquals(expectedOutput, testGame.displayAllPlayersHandsHP());
+    }
+    @Test
+    @DisplayName("U-TEST-018: Test if All Players properly receive damage at the end of a round.")
+    void testPlayerTakeDmg(){
+        List<Card> testMeleeDeck1 = new ArrayList<>();//only add 3 cards ease of testing
+        List<Card> testMeleeDeck2 = new ArrayList<>();
+        List<Card> testMeleeDeck3 = new ArrayList<>();
+        testMeleeDeck1.add(new Card("Merlin"));//25 dmg
+        testMeleeDeck2.add(new Card("Basic","Arrows", 8));//10 dmg
+        testMeleeDeck3.add(new Card("Alchemy",10));//5 dmg
+
+        int testPlayerNum = 3;
+        String[] testPlayersNames = {"1", "2", "3"};
+        TournamentGame testGame = new TournamentGame(testPlayerNum, testPlayersNames,50);
+
+        testGame.players[0].addToInjuryDeck(testMeleeDeck1);//50-25 = 25
+        testGame.players[1].addToInjuryDeck(testMeleeDeck2);//50-10 = 40
+        testGame.players[2].addToInjuryDeck(testMeleeDeck3);//50-5 = 45
+
+        testGame.playersTakeDmg();
+        assertEquals(25,testGame.players[0].getHealthPoints());
+        assertEquals(40,testGame.players[1].getHealthPoints());
+        assertEquals(45,testGame.players[2].getHealthPoints());
     }
 }
