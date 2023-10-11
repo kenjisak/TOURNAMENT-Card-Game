@@ -24,6 +24,12 @@ public class Player {
         deckInHand.add(givenCard);
     }
     public String displayHand(){
-        return null;
+        String playersHand = "[";
+        for (Card currCard: deckInHand){
+            playersHand += currCard.displayCard() + ",";
+        }
+        if(playersHand.length() > 1){ playersHand = playersHand.substring(0,playersHand.length() - 1);}
+        playersHand += "]";
+        return "Player " + name + "'s Hand: " + playersHand;
     }
 }
