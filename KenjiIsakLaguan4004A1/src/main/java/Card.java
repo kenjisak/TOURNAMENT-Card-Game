@@ -44,6 +44,10 @@ public class Card {
     public Boolean getIsPoisoned(){ return this.isPoisoned; }
     public int getInjuryPoints(){ return this.injuryPoints; }
     public String displayCard(){
-        return null;
+        if(Objects.equals(type, "Basic")){
+            return suit.substring(0,2) + "(" + value + ")";
+        }else{
+            return type.substring(0,2) + "(" + value + ")";
+        }
     }
 }
