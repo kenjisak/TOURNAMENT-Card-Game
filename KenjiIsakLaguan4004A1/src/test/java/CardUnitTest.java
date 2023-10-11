@@ -42,4 +42,16 @@ public class CardUnitTest {
         assertEquals(false,testAl.getIsPoisoned());
         assertEquals(5,testAl.getInjuryPoints());
     }
+    @Test
+    @DisplayName("U-TEST-013: Test if a Card Displays Properly.")
+    void testCardDisplay(){
+        Card testCardBasic = new Card("Basic","Swords", 1);
+        assertEquals("Sw(1)", testCardBasic.displayCard());
+
+        Card testCardMeAp = new Card("Merlin");
+        assertEquals("Me(0)", testCardMeAp.displayCard());
+
+        Card testCardAl = new Card("Alchemy",1);
+        assertEquals("Al(1)", testCardAl.displayCard());
+    }
 }

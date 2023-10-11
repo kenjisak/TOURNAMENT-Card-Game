@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public class Card {
     private String type;//Basic, Me,Ap,Al
     private String suit;//Sw,Ar,So,De, or empty if not Basic
@@ -41,4 +43,7 @@ public class Card {
     public int getValue(){ return this.value; }
     public Boolean getIsPoisoned(){ return this.isPoisoned; }
     public int getInjuryPoints(){ return this.injuryPoints; }
+    public String displayCard(){
+        return null;
+    }
 }
