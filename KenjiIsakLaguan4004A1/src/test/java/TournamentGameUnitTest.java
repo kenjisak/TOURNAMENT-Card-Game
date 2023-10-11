@@ -256,4 +256,16 @@ class TournamentGameUnitTest {
                 There are no winners of the Tournament.""";
         assertEquals(expectedOutput3, testGame.endGame());
     }
+    @Test
+    @DisplayName("U-TEST-022: Test Melee starts with the correct Leader.")
+    void testMeleeInitLeader(){
+        int testPlayerNum = 3;
+        String[] testPlayersNames = {"1", "2", "3"};
+        TournamentGame testGame = new TournamentGame(testPlayerNum, testPlayersNames,50);
+
+        for (int i = 0; i < testPlayerNum; i++) {
+            assertEquals(i,testGame.findMeleeLeaderIndex());
+            testGame.updateRoundLeader();//simulates changing the leader to 1,2,3 since loser of melee isnt implemented yet
+        }
+    }
 }

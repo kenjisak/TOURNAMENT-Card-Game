@@ -137,6 +137,13 @@ public class TournamentGame {
         //display each player's initial hands
         System.out.println(displayAllPlayersHandsHP());
 
+        //playMelee in 12 time loop
+//        for (int i = 1; i <= 12; i++) {
+//        System.out.println("\nRound " + roundNum + ", Melee " + i + " Starting...");
+        playMelee();
+//        System.out.println("Round " + roundNum + ", Melee " + i + " over...");
+//        }
+
         playersTakeDmg();
         System.out.println(displayAllPlayersHP());
 
@@ -146,6 +153,12 @@ public class TournamentGame {
             System.exit(0);
         }
         updateRoundLeader();//else update leader and continue round
+    }
+    public int findMeleeLeaderIndex(){
+        return -1;
+    }
+    public void playMelee() {
+
     }
     public static void main(String[] args) {
         System.out.println("Welcome to the TOURNAMENT Game.");
