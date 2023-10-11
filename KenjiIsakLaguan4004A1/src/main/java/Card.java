@@ -35,7 +35,11 @@ public class Card {
         this.suit = "";
         this.value = 0;//values are above 0, this needs to be set by user
         this.isPoisoned = false;
-        this.injuryPoints = 25;
+        if (Objects.equals(cardType, "Merlin")){
+            this.injuryPoints = 25;
+        } else if (Objects.equals(cardType, "Apprentice")) {
+            this.injuryPoints = 5;
+        }
     }
     //getters
     public String getType(){ return this.type; }
