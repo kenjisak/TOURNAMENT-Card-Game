@@ -61,7 +61,11 @@ public class TournamentGame {
         roundNum++;
     }
     public String displayAllPlayersHandsHP(){
-        return null;
+        String returnThis = "";
+        for (Player currPlayer: players){
+            returnThis += "\n" + currPlayer.displayHand() + " Health Points: " + currPlayer.getHealthPoints();
+        }
+        return returnThis + "\n";
     }
     public void playRound(){
         distributePlayersHands();
