@@ -33,6 +33,11 @@ public class Player {
         return "Player " + name + "'s Hand: " + playersHand;
     }
     public int addToInjuryDeck(List<Card> meleeDeck){
-        return 0;
+        injuryDeck.addAll(meleeDeck);
+        int dmgPtsThisMelee = 0;
+        for (Card currCard: meleeDeck){
+            dmgPtsThisMelee += currCard.getInjuryPoints();
+        }
+        return dmgPtsThisMelee;
     }
 }
