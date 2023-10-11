@@ -200,4 +200,20 @@ class TournamentGameUnitTest {
                 """;
         assertEquals(expectedOutput, testGame.displayAllPlayersHP());
     }
+    @Test
+    @DisplayName("U-TEST-020: Test if a Player is 0 or below HP that it ends the game.")
+    void testCheckDeadPlayers(){
+        int testPlayerNum = 3;
+        String[] testPlayersNames = {"1", "2", "3"};
+        TournamentGame testGame = new TournamentGame(testPlayerNum, testPlayersNames,25);
+
+        assertFalse(testGame.checkDeadPlayers());// no one is dead,still at Init HP
+
+        List<Card> testMeleeDeck3 = new ArrayList<>();
+        testMeleeDeck3.add(new Card("Merlin"));//25 dmg
+        testGame.players[2].addToInjuryDeck(testMeleeDeck3);//25-25 = 0
+        testGame.playersTakeDmg();
+
+        assertTrue(testGame.checkDeadPlayers());
+    }
 }

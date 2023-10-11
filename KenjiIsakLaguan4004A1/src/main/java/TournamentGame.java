@@ -79,6 +79,12 @@ public class TournamentGame {
         }
         return returnthis + "\n";
     }
+    public boolean checkDeadPlayers(){
+        return false;
+    }
+    public void endGame(){
+
+    }
     public void playRound(){
         System.out.println("\nRound " + roundNum + " Starting... Initial Leader of this round is " + currLeader);
         distributePlayersHands();
