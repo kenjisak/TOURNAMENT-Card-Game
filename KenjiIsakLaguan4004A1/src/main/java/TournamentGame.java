@@ -194,7 +194,11 @@ public class TournamentGame {
     }
     public String printMeleeDeck(Map<Player, Card> deckGiven){
         String returnthis = "";
-
+        for (Map.Entry<Player, Card> entry : deckGiven.entrySet()) {
+            Player player = entry.getKey();
+            Card card = entry.getValue();
+            returnthis += "\nPlayer: " + player.getName() + ", Card: " + card.displayCard();
+        }
         return returnthis;
     }
     public void playMelee() {
@@ -233,7 +237,8 @@ public class TournamentGame {
             Card chosenCard = players[currPlyrIndex].getDeckInHand().get(cardIndexSelected);
             addChosenCard(currPlyrIndex,cardIndexSelected,chosenCard);
         }
-
+        System.out.println("\nCurrent Melee Cards Played: ");//display melee deck
+        System.out.println(printMeleeDeck(currMeleeCardsPlayed));
     }
     public static void main(String[] args) {
         System.out.println("Welcome to the TOURNAMENT Game.");
