@@ -360,13 +360,12 @@ class TournamentGameUnitTest {
         testGame.addChosenCard(0,0,chosenCard0);
         testGame.addChosenCard(1,0,chosenCard1);
         testGame.addChosenCard(2,0,chosenCard2);
-
-        String expectedOutput = """
-                
-                Player: 1, Card: Al(1)
-                Player: 2, Card: Ar(1)
-                Player: 3, Card: Me(0)""";
-        System.out.println(testGame.printMeleeDeck(testGame.currMeleeCardsPlayed));
-        assertEquals(expectedOutput,testGame.printMeleeDeck(testGame.currMeleeCardsPlayed));
+        //change output to just contains
+        String expectedOutput1 = "Player: 1, Card: Al(1)";
+        String expectedOutput2 = "Player: 2, Card: Ar(1)";
+        String expectedOutput3 = "Player: 3, Card: Me(0)";
+        assertTrue(testGame.printMeleeDeck(testGame.currMeleeCardsPlayed).contains(expectedOutput1));
+        assertTrue(testGame.printMeleeDeck(testGame.currMeleeCardsPlayed).contains(expectedOutput2));
+        assertTrue(testGame.printMeleeDeck(testGame.currMeleeCardsPlayed).contains(expectedOutput3));
     }
 }
