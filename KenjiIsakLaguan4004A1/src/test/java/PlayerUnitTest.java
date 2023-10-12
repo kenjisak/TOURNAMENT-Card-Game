@@ -72,7 +72,7 @@ public class PlayerUnitTest {
     }
     @Test
     @DisplayName("U-TEST-025: Test if Player's card is discarded from their deck properly when shamed.")
-    void testShamePlayer(){
+    void testShamePlayerDiscard(){
         Player testPlayer = new Player("Test",50);
 
         Card discardCard = new Card("Basic","Swords",1);

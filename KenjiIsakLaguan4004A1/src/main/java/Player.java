@@ -48,6 +48,9 @@ public class Player {
     }
     public boolean isAlive(){ return healthPoints > 0; }
     public boolean shamed(int cardIndex){//discard a card and take -5hp points
-        return false;
+        deckInHand.remove(cardIndex);
+        //print updated dmg
+        System.out.println("Player " + name + " Shamed Health Points: " + healthPoints + "\n");
+        return isAlive();
     }
 }
