@@ -197,6 +197,9 @@ public class TournamentGame {
     public boolean checkValidValue(int valueChosen){
         return valueChosen > 0 && valueChosen <= 15;
     }
+    public boolean checkNonAlPlayableCards(int currPlyrIndex){
+        return false;
+    }
     public void playMelee() {
         System.out.println("Leader " + currLeader + " starts this Melee...");
         int meleeLeaderIndex = findMeleeLeaderIndex();
@@ -271,6 +274,7 @@ public class TournamentGame {
                             System.out.println("The Suit Set for this Melee is: " + currSuit);
                             break;
                         }
+
 
                     }
                 }
