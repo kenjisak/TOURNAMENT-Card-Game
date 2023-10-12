@@ -55,5 +55,4 @@ public class Card {
         }
     }
     public void setSuit(String givenSuit){ this.suit = givenSuit; }
-    public void setValue(int givenValue){ this.value = givenValue; }
 }

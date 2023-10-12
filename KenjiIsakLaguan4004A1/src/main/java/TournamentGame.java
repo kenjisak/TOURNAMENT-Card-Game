@@ -195,7 +195,7 @@ public class TournamentGame {
         return Objects.equals(currSuit, "Swords") || Objects.equals(currSuit, "Arrows") || Objects.equals(currSuit, "Sorcery") || Objects.equals(currSuit, "Deception");
     }
     public boolean checkValidValue(int valueChosen){
-        return valueChosen > 0 && valueChosen <= 15;
+        return false;
     }
     public void playMelee() {
         System.out.println("Leader " + currLeader + " starts this Melee...");
@@ -259,15 +259,7 @@ public class TournamentGame {
                                     break;//valid suit
                                 }
                             }
-                            //ask input again to choose the value
-                            while (true){
-                                System.out.print("Please choose a value (1-15) for your " + chosenCard.getType() + " card: ");
-                                int valueChosen = valueInput.nextInt();
-                                if(checkValidValue(valueChosen)){
-                                    chosenCard.setValue(valueChosen);
-                                    break;
-                                }
-                            }
+
                             System.out.println("The Suit Set for this Melee is: " + currSuit);
                             break;
                         }
