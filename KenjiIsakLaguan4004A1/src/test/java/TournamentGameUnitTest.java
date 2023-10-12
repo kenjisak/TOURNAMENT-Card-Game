@@ -316,4 +316,16 @@ class TournamentGameUnitTest {
         boolean endGame = !testEndGame.shamePlayer(0,testPlayerDiscardInputValid);//returns if the player is alive
         assertTrue(endGame);
     }
+    @Test
+    @DisplayName("U-TEST-029: Test if the Leader for the melee, Basic Weapon Card's Suit Gets set to the Current suit.")
+    void testMeleeSuitSet(){
+        String[] testPlayersNames = {"1","2","3"};
+        TournamentGame testGame = new TournamentGame(3, testPlayersNames,50);
+
+        testGame.players[0].addToHand(new Card("Basic","Swords",1));
+        Card chosenCard = testGame.players[0].getDeckInHand().get(0);
+
+        testGame.setMeleeSuit(chosenCard);
+        assertEquals("Swords",testGame.currSuit);
+    }
 }
