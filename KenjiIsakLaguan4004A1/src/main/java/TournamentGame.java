@@ -189,7 +189,7 @@ public class TournamentGame {
         return players[currPlyrIndex].shamed(cardIndexSelected);//remove card from players hand
     }
     public void setMeleeSuit(Card chosenCard){
-        currSuit = chosenCard.getSuit();
+        
     }
     public void playMelee() {
         System.out.println("Leader " + currLeader + " starts this Melee...");
@@ -225,27 +225,7 @@ public class TournamentGame {
                     continue;//skip while loop below, not gonna ask player to play a card
                 }
             }
-            Card chosenCard;
-            while (true){
-                //display players hand
-                System.out.println("\n" + players[currPlyrIndex].displayHand());
-                System.out.print("Player " + players[currPlyrIndex].getName() + " Select a VALID Card Index: ");
-                cardIndexSelected = cardInput.nextInt();
 
-                if (checkCardInput(currPlyrIndex,cardIndexSelected)){
-                    chosenCard = players[currPlyrIndex].getDeckInHand().get(cardIndexSelected);
-
-                    if(i == 0){//then Leader can set the suit,
-                        //if non Alchemy, check if Basic or Merlin or Apprentice,
-                        if (Objects.equals(chosenCard.getType(), "Basic")) {
-                            setMeleeSuit(chosenCard);
-                            System.out.println("The Suit Set for this Melee is: " + currSuit);
-                            break;
-                        }
-                    }
-                }
-
-            }
 
         }
     }
