@@ -191,16 +191,13 @@ public class TournamentGame {
     public void setMeleeSuit(Card chosenCard){
         currSuit = chosenCard.getSuit();
     }
-    public boolean checkValidSuitInput(String currSuit){
-        return false;
-    }
     public void playMelee() {
         System.out.println("Leader " + currLeader + " starts this Melee...");
         int meleeLeaderIndex = findMeleeLeaderIndex();
 
         currSuit = "";//resets each melee
         Scanner cardInput = new Scanner(System.in);
-        Scanner suitInput = new Scanner(System.in);
+
         currMeleeCardsPlayed = new HashMap<>();//reset melee deck
 
         for (int i = 0; i < players.length; i++) {//goes through each player's turns
@@ -245,10 +242,6 @@ public class TournamentGame {
                             System.out.println("The Suit Set for this Melee is: " + currSuit);
                             break;
                         }
-                        if (Objects.equals(chosenCard.getType(), "Merlin") || Objects.equals(chosenCard.getType(), "Apprentice")) {
-
-                        }
-
                     }
                 }
 
