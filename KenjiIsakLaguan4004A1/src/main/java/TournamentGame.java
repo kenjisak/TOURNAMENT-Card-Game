@@ -180,7 +180,7 @@ public class TournamentGame {
         }
         return anyPlayableCardsFound;
     }
-    public boolean checkDiscardInput(int currPlyrIndex, int cardIndexSelected){
+    public boolean checkCardInput(int currPlyrIndex, int cardIndexSelected){
         return cardIndexSelected >= 0 && cardIndexSelected < players[currPlyrIndex].getDeckInHand().size();//stop asking for input, game hasn't ended
     }
     public boolean shamePlayer(int currPlyrIndex, int cardIndexSelected){
@@ -206,7 +206,7 @@ public class TournamentGame {
                     while(true){
                         System.out.print("Choose a card to Discard: ");
                         cardIndexSelected = cardInput.nextInt();
-                        if (checkDiscardInput(currPlyrIndex,cardIndexSelected)){//if var = true/within index then break and stop asking input
+                        if (checkCardInput(currPlyrIndex,cardIndexSelected)){//if var = true/within index then break and stop asking input
                             boolean shamedPlayerisAlive = shamePlayer(currPlyrIndex,cardIndexSelected);
                             if(!shamedPlayerisAlive){//if the player died then end the game
                                 System.out.println(endGame());
