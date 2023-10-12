@@ -268,4 +268,19 @@ class TournamentGameUnitTest {
             testGame.updateRoundLeader();//simulates changing the leader to 1,2,3 since loser of melee isnt implemented yet
         }
     }
+    @Test
+    @DisplayName("U-TEST-023: Test if Melee can find Player(that's not the leader) if has Any Playable Cards properly.")
+    void testAnyPlayableCards(){
+        String[] testPlayersNames = {"1","2","3","4"};
+        TournamentGame testGame = new TournamentGame(4, testPlayersNames,50);
+
+        testGame.players[1].addToHand(new Card("Merlin"));
+        assertTrue(testGame.checkAnyPlayableCards(1,"Arrows"));
+
+        testGame.players[2].addToHand(new Card("Basic","Swords",1));
+        assertFalse(testGame.checkAnyPlayableCards(2,"Sorcery"));
+
+        testGame.players[3].addToHand(new Card("Alchemy",1));
+        assertTrue(testGame.checkAnyPlayableCards(3,"Deception"));
+    }
 }

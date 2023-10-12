@@ -163,9 +163,24 @@ public class TournamentGame {
         }
         return meleeLeaderIndex;
     }
+    public boolean checkAnyPlayableCards(int currPlyrIndex, String currSuit){
+        return false;
+    }
     public void playMelee() {
         System.out.println("Leader " + currLeader + " starts this Melee...");
         int meleeLeaderIndex = findMeleeLeaderIndex();
+
+        String currSuit = "";//if we want to set to no suit then well set it to "No Suit"
+
+        for (int i = 0; i < players.length; i++) {//goes through each player's turns
+            int currPlyrIndex = (meleeLeaderIndex + i) % players.length;
+
+            boolean anyPlayableCardsFound;
+            if (i > 0){//not possible for leader to be SHAMED
+                anyPlayableCardsFound = checkAnyPlayableCards(currPlyrIndex,currSuit);
+            }
+
+        }
     }
     public static void main(String[] args) {
         System.out.println("Welcome to the TOURNAMENT Game.");
