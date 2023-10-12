@@ -198,7 +198,20 @@ public class TournamentGame {
         return valueChosen > 0 && valueChosen <= 15;
     }
     public boolean checkNonAlPlayableCards(int currPlyrIndex){
-        return false;
+        boolean nonAlFound = false;
+        for (Card checkCard: players[currPlyrIndex].getDeckInHand()){
+            if (!Objects.equals(checkCard.getType(), "Alchemy")) {
+                //loop through all cards and check if theres any non Al
+                nonAlFound = true;
+                break;
+            }
+        }
+
+        if (!nonAlFound){//else looped through and couldn't find any
+            currSuit = "No Suit";
+            System.out.println("There is No Suit set for this Melee.");
+        }
+        return nonAlFound;
     }
     public void playMelee() {
         System.out.println("Leader " + currLeader + " starts this Melee...");
@@ -274,7 +287,13 @@ public class TournamentGame {
                             System.out.println("The Suit Set for this Melee is: " + currSuit);
                             break;
                         }
-
+                        if(Objects.equals(chosenCard.getType(), "Alchemy")){
+                            boolean nonAlFound = checkNonAlPlayableCards(currPlyrIndex);
+                            if (!nonAlFound){//no NON Alchemy found, is forced to play it
+                                break;
+                            }
+                            System.out.println("You cannot start with an Alchemy card, with other type of cards left in hand.");
+                        }
 
                     }
                 }
