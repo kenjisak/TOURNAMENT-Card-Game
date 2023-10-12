@@ -164,7 +164,21 @@ public class TournamentGame {
         return meleeLeaderIndex;
     }
     public boolean checkAnyPlayableCards(int currPlyrIndex, String currSuit){
-        return false;
+        //check if player has any cards that match the suit
+        boolean anyPlayableCardsFound = false;
+        for (Card checkCard: players[currPlyrIndex].getDeckInHand()){
+            if(Objects.equals(currSuit, "No Suit")){
+                anyPlayableCardsFound = true;
+                //skip the check
+            }else{
+                if ((Objects.equals(checkCard.getType(), "Basic") && Objects.equals(checkCard.getSuit(), currSuit)) || Objects.equals(checkCard.getType(), "Merlin") || Objects.equals(checkCard.getType(), "Apprentice") || Objects.equals(checkCard.getType(), "Alchemy")) {
+                    //loop through all cards and check if theres Basic cards that match the suit or, a Merlin or Apprentice, Alchemy
+                    anyPlayableCardsFound = true;
+                    break;//cut for loop short
+                }
+            }
+        }
+        return anyPlayableCardsFound;
     }
     public void playMelee() {
         System.out.println("Leader " + currLeader + " starts this Melee...");
