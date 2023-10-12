@@ -284,19 +284,18 @@ class TournamentGameUnitTest {
         assertTrue(testGame.checkAnyPlayableCards(3,"Deception"));
     }
     @Test
-    @DisplayName("U-TEST-024: Test if input is validated correctly when Player is choosing to discard.")
-    void testValidateDiscardInput(){
+    @DisplayName("U-TEST-024: Test if input is validated correctly when Player is choosing a Card.")
+    void testValidateCardInput(){
         String[] testPlayersNames = {"1","2","3"};
         TournamentGame testGame = new TournamentGame(3, testPlayersNames,50);
 
         testGame.players[2].addToHand(new Card("Basic","Swords",1));
-        assertFalse(testGame.checkAnyPlayableCards(2,"Sorcery"));
 
-        int testPlayerDiscardInputValid = 0;//Simulates Input saved into cardIndexSelected
-        assertTrue(testGame.checkDiscardInput(2,testPlayerDiscardInputValid));
+        int testPlayerCardInputValid = 0;//Simulates Input saved into cardIndexSelected
+        assertTrue(testGame.checkCardInput(2,testPlayerCardInputValid));
 
-        int testPlayerDiscardInputInvalid = 1;//Out of Bounds simulation, causing while loop restart and ask input again
-        assertFalse(testGame.checkDiscardInput(2,testPlayerDiscardInputInvalid));
+        int testPlayerCardInputInValid = 1;//Out of Bounds simulation, causing while loop restart and ask input again
+        assertFalse(testGame.checkCardInput(2,testPlayerCardInputInValid));
     }
     @Test
     @DisplayName("U-TEST-027: Test if a Shamed Player ends or does not end a game properly.")
