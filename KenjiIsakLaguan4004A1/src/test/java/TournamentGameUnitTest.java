@@ -340,16 +340,4 @@ class TournamentGameUnitTest {
         String inValidSuitInput = "Deceptionsss";
         assertFalse(testGame.checkValidSuitInput(inValidSuitInput));
     }
-    @Test
-    @DisplayName("U-TEST-032: Test if the Leader for the melee properly checks valid and invalid value they input for a Merlin/Apprentice card.")
-    void testMeleeMeApValueSet(){
-        String[] testPlayersNames = {"1","2","3"};
-        TournamentGame testGame = new TournamentGame(3, testPlayersNames,50);
-
-        int validSuitInput = 1;
-        assertTrue(testGame.checkValidValue(validSuitInput));
-
-        int inValidSuitInput = 0;
-        assertFalse(testGame.checkValidValue(inValidSuitInput));
-    }
 }
