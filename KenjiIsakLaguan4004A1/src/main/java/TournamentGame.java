@@ -189,7 +189,8 @@ public class TournamentGame {
         return players[currPlyrIndex].shamed(cardIndexSelected);//remove card from players hand
     }
     public void addChosenCard(int currPlyrIndex, int cardIndexSelected, Card chosenCard){
-
+        currMeleeCardsPlayed.put(players[currPlyrIndex],chosenCard);//addChosenCard to meleeDeck
+        players[currPlyrIndex].playCard(cardIndexSelected);//remove chose card from players hand
     }
     public void playMelee() {
         System.out.println("Leader " + currLeader + " starts this Melee...");
@@ -223,7 +224,9 @@ public class TournamentGame {
                     continue;//skip while loop below, not gonna ask player to play a card
                 }
             }
-
+            cardIndexSelected = cardInput.nextInt();
+            Card chosenCard = players[currPlyrIndex].getDeckInHand().get(cardIndexSelected);
+            addChosenCard(currPlyrIndex,cardIndexSelected,chosenCard);
         }
     }
     public static void main(String[] args) {
