@@ -292,7 +292,10 @@ class TournamentGameUnitTest {
         testGame.players[2].addToHand(new Card("Basic","Swords",1));
         assertFalse(testGame.checkAnyPlayableCards(2,"Sorcery"));
 
-        int testPlayerDiscardInput = 0;//Simulates Input saved into cardIndexSelected
-        assertTrue(testGame.checkDiscardInput(2,testPlayerDiscardInput));
+        int testPlayerDiscardInputValid = 0;//Simulates Input saved into cardIndexSelected
+        assertTrue(testGame.checkDiscardInput(2,testPlayerDiscardInputValid));
+
+        int testPlayerDiscardInputInvalid = 1;//Out of Bounds simulation, causing while loop restart and ask input again
+        assertFalse(testGame.checkDiscardInput(2,testPlayerDiscardInputInvalid));
     }
 }
