@@ -54,4 +54,5 @@ public class Card {
             return type.substring(0,2) + "(" + value + ")";
         }
     }
+    public void setSuit(String givenSuit){  }
 }
