@@ -398,30 +398,4 @@ class TournamentGameUnitTest {
         testGame.players[0].addToHand(new Card("Basic", "Arrows", 1));
         assertTrue(testGame.checkSuitPlayableCards(0));//does have other Suit Matching Playable Cards
     }
-    @Test
-    @DisplayName("U-TEST-036: Test if Players Chosen Cards was added to the Current Melee Deck properly.")
-    void testAddChosenCard() {
-        String[] testPlayersNames = {"1", "2", "3"};
-        TournamentGame testGame = new TournamentGame(3, testPlayersNames, 50);
-
-        testGame.players[0].addToHand(new Card("Alchemy", 1));
-        testGame.players[1].addToHand(new Card("Basic", "Arrows", 1));
-        testGame.players[2].addToHand(new Card("Merlin"));
-
-        int playerInput = 0;
-        Card chosenCard0 = testGame.players[0].getDeckInHand().get(playerInput);
-        Card chosenCard1 = testGame.players[1].getDeckInHand().get(playerInput);
-        Card chosenCard2 = testGame.players[2].getDeckInHand().get(playerInput);
-
-        testGame.addChosenCard(0,0,chosenCard0);
-        testGame.addChosenCard(1,0,chosenCard1);
-        testGame.addChosenCard(2,0,chosenCard2);
-
-        assertTrue(testGame.currMeleeCardsPlayed.containsKey(testGame.players[0]));
-        assertEquals(chosenCard0, testGame.currMeleeCardsPlayed.get(testGame.players[0]));
-        assertTrue(testGame.currMeleeCardsPlayed.containsKey(testGame.players[1]));
-        assertEquals(chosenCard1, testGame.currMeleeCardsPlayed.get(testGame.players[1]));
-        assertTrue(testGame.currMeleeCardsPlayed.containsKey(testGame.players[2]));
-        assertEquals(chosenCard2, testGame.currMeleeCardsPlayed.get(testGame.players[2]));
-    }
 }

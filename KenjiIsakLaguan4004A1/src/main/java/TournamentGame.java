@@ -230,9 +230,6 @@ public class TournamentGame {
         }
         return playableCardsFound;
     }
-    public void addChosenCard(int currPlyrIndex, int cardIndexSelected, Card chosenCard){
-        
-    }
     public void playMelee() {
         System.out.println("Leader " + currLeader + " starts this Melee...");
         int meleeLeaderIndex = findMeleeLeaderIndex();
@@ -343,7 +340,7 @@ public class TournamentGame {
                 }
 
             }
-            addChosenCard(currPlyrIndex,cardIndexSelected,chosenCard);
+
         }
     }
     public static void main(String[] args) {
