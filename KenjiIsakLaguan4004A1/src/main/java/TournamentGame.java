@@ -213,6 +213,9 @@ public class TournamentGame {
         }
         return nonAlFound;
     }
+    public boolean checkNoSuitorSuitMatches(Card chosenCard){
+        return false;
+    }
     public void playMelee() {
         System.out.println("Leader " + currLeader + " starts this Melee...");
         int meleeLeaderIndex = findMeleeLeaderIndex();
@@ -295,6 +298,9 @@ public class TournamentGame {
                             System.out.println("You cannot start with an Alchemy card, with other type of cards left in hand.");
                         }
 
+                    }else{//else check for the suit if card matches
+                        //if no suit or suit matches ,dont bother checking the type/playable cards
+                        if (checkNoSuitorSuitMatches(chosenCard)){ break; }
                     }
                 }
 
