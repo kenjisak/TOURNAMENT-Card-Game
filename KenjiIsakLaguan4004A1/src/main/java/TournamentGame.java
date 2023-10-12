@@ -6,6 +6,7 @@ public class TournamentGame {
     public List<Card> gameDeck;
     public Map<Player, Card> currMeleeCardsPlayed;
     public int roundNum;
+    String currSuit;
 
     public TournamentGame(int numPlayers, String[] namesOfPlayers, int initHealthPoints){
         players = new Player[numPlayers];
@@ -17,6 +18,7 @@ public class TournamentGame {
         currLeader = namesOfPlayers[0];//init to player 1
         currMeleeCardsPlayed = new HashMap<>();//empty list init
         roundNum = 1;
+        currSuit = "";//if we want to set to no suit then well set it to "No Suit"
         recreateDeck();
     }
     public void recreateDeck(){//when shuffling, the card is edited and not reverted back for Merlin and Apprentice
@@ -186,11 +188,14 @@ public class TournamentGame {
     public boolean shamePlayer(int currPlyrIndex, int cardIndexSelected){
         return players[currPlyrIndex].shamed(cardIndexSelected);//remove card from players hand
     }
+    public void addChosenCard(int currPlyrIndex, int cardIndexSelected, Card chosenCard){
+
+    }
     public void playMelee() {
         System.out.println("Leader " + currLeader + " starts this Melee...");
         int meleeLeaderIndex = findMeleeLeaderIndex();
 
-        String currSuit = "";//if we want to set to no suit then well set it to "No Suit"
+        currSuit = "";//if we want to set to no suit then well set it to "No Suit"
         Scanner cardInput = new Scanner(System.in);
 
         for (int i = 0; i < players.length; i++) {//goes through each player's turns
