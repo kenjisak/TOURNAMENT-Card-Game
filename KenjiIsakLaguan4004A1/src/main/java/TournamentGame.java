@@ -181,7 +181,7 @@ public class TournamentGame {
         return anyPlayableCardsFound;
     }
     public boolean checkDiscardInput(int currPlyrIndex, int cardIndexSelected){
-        return false;
+        return cardIndexSelected >= 0 && cardIndexSelected < players[currPlyrIndex].getDeckInHand().size();//stop asking for input, game hasn't ended
     }
     public void playMelee() {
         System.out.println("Leader " + currLeader + " starts this Melee...");
@@ -197,6 +197,18 @@ public class TournamentGame {
 
             if (i > 0){//not possible for leader to be SHAMED
                 anyPlayableCardsFound = checkAnyPlayableCards(currPlyrIndex,currSuit);
+                if (!anyPlayableCardsFound){//if no Playable Cards then force player to discard
+                    System.out.println("\nPlayer " + players[currPlyrIndex].getName() + " has No Playable Cards this Melee, and is SHAMED.");
+                    System.out.println("\n" + players[currPlyrIndex].displayHand());
+                    while(true){
+                        System.out.print("Choose a card to Discard: ");
+                        cardIndexSelected = cardInput.nextInt();
+                        if (checkDiscardInput(currPlyrIndex,cardIndexSelected)){//if var = true/within index then break and stop asking input
+                            break;
+                        }
+                    }
+                    continue;//skip while loop below, not gonna ask player to play a card
+                }
             }
 
         }
