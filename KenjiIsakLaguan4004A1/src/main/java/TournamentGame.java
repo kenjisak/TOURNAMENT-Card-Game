@@ -236,7 +236,11 @@ public class TournamentGame {
     }
     public String printMeleeDeck(Map<Player, Card> deckGiven){
         String returnthis = "";
-
+        for (Map.Entry<Player, Card> entry : deckGiven.entrySet()) {
+            Player player = entry.getKey();
+            Card card = entry.getValue();
+            returnthis += "\nPlayer: " + player.getName() + ", Card: " + card.displayCard();
+        }
         return returnthis;
     }
     public void playMelee() {
