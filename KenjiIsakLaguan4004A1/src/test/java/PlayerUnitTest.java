@@ -86,4 +86,19 @@ public class PlayerUnitTest {
         assertFalse(testPlayer.getDeckInHand().contains(discardCard));
         assertTrue(testPlayer.getDeckInHand().contains(stayCard));
     }
+    @Test
+    @DisplayName("U-TEST-026: Test if Player's Health is subtracted properly when shamed.")
+    void testShamePlayerHealth(){
+        Player testPlayer = new Player("Test",50);
+
+        Card discardCard = new Card("Basic","Swords",1);
+        Card stayCard = new Card("Merlin");
+        testPlayer.addToHand(discardCard);
+        testPlayer.addToHand(stayCard);
+
+        int testPlayerDiscardInputValid = 0;//Simulates Input saved into cardIndexSelected
+        testPlayer.shamed(testPlayerDiscardInputValid);
+
+        assertEquals(45,testPlayer.getHealthPoints());
+    }
 }
