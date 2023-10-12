@@ -54,4 +54,7 @@ public class Player {
         System.out.println("Player " + name + " Shamed Health Points: " + healthPoints + "\n");
         return isAlive();
     }
+    public void playCard(int cardIndex){
+        
+    }
 }

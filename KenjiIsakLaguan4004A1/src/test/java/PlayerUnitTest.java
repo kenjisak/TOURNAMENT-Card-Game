@@ -101,4 +101,13 @@ public class PlayerUnitTest {
 
         assertEquals(45,testPlayer.getHealthPoints());
     }
+    @Test
+    @DisplayName("U-TEST-028: Test if Player's Hand is updated correctly when playing a card.")
+    void testPlayCard(){
+        Player testPlayer = new Player("Test",50);
+        testPlayer.addToHand(new Card("Merlin"));
+        testPlayer.playCard(0);
+
+        assertFalse(testPlayer.getDeckInHand().contains(new Card("Merlin")));
+    }
 }
