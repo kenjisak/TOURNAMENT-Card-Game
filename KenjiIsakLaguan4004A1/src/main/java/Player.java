@@ -47,4 +47,7 @@ public class Player {
         injuryDeck = new ArrayList<>();//resets the injury deck for next melee
     }
     public boolean isAlive(){ return healthPoints > 0; }
+    public boolean shamed(int cardIndex){//discard a card and take -5hp points
+        return false;
+    }
 }
