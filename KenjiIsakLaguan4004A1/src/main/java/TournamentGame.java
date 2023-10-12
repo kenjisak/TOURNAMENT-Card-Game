@@ -192,7 +192,7 @@ public class TournamentGame {
         currSuit = chosenCard.getSuit();
     }
     public boolean checkValidSuitInput(String currSuit){
-        return false;
+        return Objects.equals(currSuit, "Swords") || Objects.equals(currSuit, "Arrows") || Objects.equals(currSuit, "Sorcery") || Objects.equals(currSuit, "Deception");
     }
     public void playMelee() {
         System.out.println("Leader " + currLeader + " starts this Melee...");
@@ -246,7 +246,18 @@ public class TournamentGame {
                             break;
                         }
                         if (Objects.equals(chosenCard.getType(), "Merlin") || Objects.equals(chosenCard.getType(), "Apprentice")) {
+                            //ask input again to choose the suit
+                            while (true){
+                                System.out.print("Please choose a VALID Suit(Swords, Arrows, Sorcery, Deception): ");
+                                currSuit = suitInput.nextLine();
+                                if (checkValidSuitInput(currSuit)){
+                                    chosenCard.setSuit(currSuit);
+                                    break;//valid suit
+                                }
+                            }
 
+                            System.out.println("The Suit Set for this Melee is: " + currSuit);
+                            break;
                         }
 
                     }
