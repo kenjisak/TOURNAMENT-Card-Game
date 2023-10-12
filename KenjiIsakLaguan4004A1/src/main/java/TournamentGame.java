@@ -301,19 +301,6 @@ public class TournamentGame {
                     }else{//else check for the suit if card matches
                         //if no suit or suit matches ,dont bother checking the type/playable cards
                         if (checkNoSuitorSuitMatches(chosenCard)){ break; }
-                        if(Objects.equals(chosenCard.getType(), "Merlin") || Objects.equals(chosenCard.getType(), "Apprentice")){
-                            chosenCard.setSuit(currSuit);
-                            //ask for a valid Value
-                            while (true){
-                                System.out.print("Please choose a value (1-15) for your " + chosenCard.getType() + " card: ");
-                                int valueChosen = valueInput.nextInt();
-                                if(checkValidValue(valueChosen)){
-                                    chosenCard.setValue(valueChosen);
-                                    break;
-                                }
-                            }
-                            break;
-                        }
                     }
                 }
 
