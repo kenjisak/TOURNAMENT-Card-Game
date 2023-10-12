@@ -214,7 +214,7 @@ public class TournamentGame {
         return nonAlFound;
     }
     public boolean checkNoSuitorSuitMatches(Card chosenCard){
-        return false;
+        return Objects.equals(currSuit, "No Suit") || Objects.equals(chosenCard.getSuit(), currSuit);
     }
     public void playMelee() {
         System.out.println("Leader " + currLeader + " starts this Melee...");
