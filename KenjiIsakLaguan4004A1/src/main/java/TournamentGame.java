@@ -184,7 +184,7 @@ public class TournamentGame {
         return cardIndexSelected >= 0 && cardIndexSelected < players[currPlyrIndex].getDeckInHand().size();//stop asking for input, game hasn't ended
     }
     public boolean shamePlayer(int currPlyrIndex, int cardIndexSelected){
-        return false;
+        return players[currPlyrIndex].shamed(cardIndexSelected);//remove card from players hand
     }
     public void playMelee() {
         System.out.println("Leader " + currLeader + " starts this Melee...");
@@ -207,6 +207,11 @@ public class TournamentGame {
                         System.out.print("Choose a card to Discard: ");
                         cardIndexSelected = cardInput.nextInt();
                         if (checkDiscardInput(currPlyrIndex,cardIndexSelected)){//if var = true/within index then break and stop asking input
+                            boolean shamedPlayerisAlive = shamePlayer(currPlyrIndex,cardIndexSelected);
+                            if(!shamedPlayerisAlive){//if the player died then end the game
+                                System.out.println(endGame());
+                                System.exit(0);
+                            }
                             break;
                         }
                     }
