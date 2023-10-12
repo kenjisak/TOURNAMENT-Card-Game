@@ -234,6 +234,11 @@ public class TournamentGame {
         currMeleeCardsPlayed.put(players[currPlyrIndex],chosenCard);//addChosenCard to meleeDeck
         players[currPlyrIndex].playCard(cardIndexSelected);//remove chose card from players hand
     }
+    public String printMeleeDeck(Map<Player, Card> deckGiven){
+        String returnthis = "";
+
+        return returnthis;
+    }
     public void playMelee() {
         System.out.println("Leader " + currLeader + " starts this Melee...");
         int meleeLeaderIndex = findMeleeLeaderIndex();
@@ -346,6 +351,8 @@ public class TournamentGame {
             }
             addChosenCard(currPlyrIndex,cardIndexSelected,chosenCard);
         }
+        System.out.println("\nCurrent Melee Cards Played: ");//display melee deck
+        System.out.println(printMeleeDeck(currMeleeCardsPlayed));
     }
     public static void main(String[] args) {
         System.out.println("Welcome to the TOURNAMENT Game.");
