@@ -231,7 +231,8 @@ public class TournamentGame {
         return playableCardsFound;
     }
     public void addChosenCard(int currPlyrIndex, int cardIndexSelected, Card chosenCard){
-        
+        currMeleeCardsPlayed.put(players[currPlyrIndex],chosenCard);//addChosenCard to meleeDeck
+        players[currPlyrIndex].playCard(cardIndexSelected);//remove chose card from players hand
     }
     public void playMelee() {
         System.out.println("Leader " + currLeader + " starts this Melee...");
