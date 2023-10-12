@@ -298,4 +298,23 @@ class TournamentGameUnitTest {
         int testPlayerDiscardInputInvalid = 1;//Out of Bounds simulation, causing while loop restart and ask input again
         assertFalse(testGame.checkDiscardInput(2,testPlayerDiscardInputInvalid));
     }
+    @Test
+    @DisplayName("U-TEST-027: Test if a Shamed Player ends or does not end a game properly.")
+    void testShamedPlayerEndGame(){
+        String[] testPlayersNames = {"1","2","3"};
+        TournamentGame testNotEndGame = new TournamentGame(3, testPlayersNames,50);
+
+        Card discardCard = new Card("Basic","Swords",1);
+        testNotEndGame.players[0].addToHand(discardCard);
+
+        int testPlayerDiscardInputValid = 0;//Simulates Input saved into cardIndexSelected
+        boolean NotEndGame = !testNotEndGame.shamePlayer(0,testPlayerDiscardInputValid);//returns if the player is alive
+        assertFalse(NotEndGame);
+
+        TournamentGame testEndGame = new TournamentGame(3, testPlayersNames,5);
+        testEndGame.players[0].addToHand(discardCard);
+
+        boolean endGame = !testEndGame.shamePlayer(0,testPlayerDiscardInputValid);//returns if the player is alive
+        assertTrue(endGame);
+    }
 }

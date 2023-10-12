@@ -183,6 +183,9 @@ public class TournamentGame {
     public boolean checkDiscardInput(int currPlyrIndex, int cardIndexSelected){
         return cardIndexSelected >= 0 && cardIndexSelected < players[currPlyrIndex].getDeckInHand().size();//stop asking for input, game hasn't ended
     }
+    public boolean shamePlayer(int currPlyrIndex, int cardIndexSelected){
+        return false;
+    }
     public void playMelee() {
         System.out.println("Leader " + currLeader + " starts this Melee...");
         int meleeLeaderIndex = findMeleeLeaderIndex();
