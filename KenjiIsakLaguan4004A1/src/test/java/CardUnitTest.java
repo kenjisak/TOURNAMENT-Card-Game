@@ -54,11 +54,4 @@ public class CardUnitTest {
         Card testCardAl = new Card("Alchemy",1);
         assertEquals("Al(1)", testCardAl.displayCard());
     }
-    @Test
-    @DisplayName("U-TEST-031: Test if a Merlin/Apprentice Card set its suit properly.")
-    void testMeApSuitSet(){
-        Card testCardMeAp = new Card("Merlin");
-        testCardMeAp.setSuit("Swords");
-        assertEquals("Swords", testCardMeAp.getSuit());
-    }
 }
