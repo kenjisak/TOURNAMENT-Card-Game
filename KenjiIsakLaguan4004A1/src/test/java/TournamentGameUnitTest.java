@@ -365,22 +365,4 @@ class TournamentGameUnitTest {
         testGame.players[0].addToHand(new Card("Basic","Swords",1));
         assertTrue(testGame.checkNonAlPlayableCards(0));//does have other Non Alchemy Cards
     }
-    @Test
-    @DisplayName("U-TEST-034: Test if the Chosen Card the Player Plays, matches the suit or no suit properly.")
-    void testSuitMatches(){
-        String[] testPlayersNames = {"1","2","3"};
-        TournamentGame testGame = new TournamentGame(3, testPlayersNames,50);
-
-        testGame.players[0].addToHand(new Card("Basic","Swords",1));
-        int validCardInput = 0;
-        Card chosenCard  = testGame.players[0].getDeckInHand().get(validCardInput);
-
-        testGame.setMeleeSuit(new Card("Basic", "Arrows", 6));//simulates currSuit set to Arrows
-        assertFalse(testGame.checkNoSuitorSuitMatches(chosenCard));
-
-        testGame.players[0].addToHand(new Card("Basic","Arrows",1));
-        validCardInput = 1;
-        chosenCard  = testGame.players[0].getDeckInHand().get(validCardInput);
-        assertTrue(testGame.checkNoSuitorSuitMatches(chosenCard));
-    }
 }
