@@ -194,6 +194,9 @@ public class TournamentGame {
     public boolean checkValidSuitInput(String currSuit){
         return Objects.equals(currSuit, "Swords") || Objects.equals(currSuit, "Arrows") || Objects.equals(currSuit, "Sorcery") || Objects.equals(currSuit, "Deception");
     }
+    public boolean checkValidValue(int valueChosen){
+        return false;
+    }
     public void playMelee() {
         System.out.println("Leader " + currLeader + " starts this Melee...");
         int meleeLeaderIndex = findMeleeLeaderIndex();
@@ -201,6 +204,7 @@ public class TournamentGame {
         currSuit = "";//resets each melee
         Scanner cardInput = new Scanner(System.in);
         Scanner suitInput = new Scanner(System.in);
+        Scanner valueInput = new Scanner(System.in);
         currMeleeCardsPlayed = new HashMap<>();//reset melee deck
 
         for (int i = 0; i < players.length; i++) {//goes through each player's turns
