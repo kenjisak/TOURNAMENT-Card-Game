@@ -390,12 +390,12 @@ class TournamentGameUnitTest {
         TournamentGame testGame = new TournamentGame(3, testPlayersNames, 50);
 
         testGame.players[0].addToHand(new Card("Alchemy", 1));
-        assertFalse(testGame.checkNonAlPlayableCards(0));//doesn't have any other Suit Matching Playable Cards
+        assertFalse(testGame.checkSuitPlayableCards(0));//doesn't have any other Suit Matching Playable Cards
 
         testGame.setMeleeSuit(new Card("Basic", "Arrows", 6));//simulates currSuit set to Arrows
 
         testGame.players[0].addToHand(new Card("Merlin"));
         testGame.players[0].addToHand(new Card("Basic", "Arrows", 1));
-        assertTrue(testGame.checkNonAlPlayableCards(0));//does have other Suit Matching Playable Cards
+        assertTrue(testGame.checkSuitPlayableCards(0));//does have other Suit Matching Playable Cards
     }
 }
