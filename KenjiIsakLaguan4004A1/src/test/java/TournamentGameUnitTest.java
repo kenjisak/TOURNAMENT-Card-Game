@@ -283,4 +283,16 @@ class TournamentGameUnitTest {
         testGame.players[3].addToHand(new Card("Alchemy",1));
         assertTrue(testGame.checkAnyPlayableCards(3,"Deception"));
     }
+    @Test
+    @DisplayName("U-TEST-024: Test if input is validated correctly when Player is choosing to discard.")
+    void testValidateDiscardInput(){
+        String[] testPlayersNames = {"1","2","3"};
+        TournamentGame testGame = new TournamentGame(3, testPlayersNames,50);
+
+        testGame.players[2].addToHand(new Card("Basic","Swords",1));
+        assertFalse(testGame.checkAnyPlayableCards(2,"Sorcery"));
+
+        int testPlayerDiscardInput = 0;//Simulates Input saved into cardIndexSelected
+        assertTrue(testGame.checkDiscardInput(2,testPlayerDiscardInput));
+    }
 }
