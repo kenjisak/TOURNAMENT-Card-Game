@@ -216,6 +216,9 @@ public class TournamentGame {
     public boolean checkNoSuitorSuitMatches(Card chosenCard){
         return Objects.equals(currSuit, "No Suit") || Objects.equals(chosenCard.getSuit(), currSuit);
     }
+    public boolean checkSuitPlayableCards(int currPlyrIndex){
+        return false;
+    }
     public void playMelee() {
         System.out.println("Leader " + currLeader + " starts this Melee...");
         int meleeLeaderIndex = findMeleeLeaderIndex();
@@ -314,6 +317,7 @@ public class TournamentGame {
                             }
                             break;
                         }
+
                     }
                 }
 
