@@ -412,4 +412,31 @@ class TournamentGameUnitTest {
 
         assertEquals(testGame.players[0],testGame.findLowestCard(testGame.currMeleeCardsPlayed));
     }
+
+    @Test
+    @DisplayName("U-TEST-033: Test if Melee finds a Loser Properly.")
+    void testFindLoser() {
+        String[] testPlayersNames = {"1", "2", "3","4"};
+        TournamentGame testGame = new TournamentGame(4, testPlayersNames, 50);
+
+        testGame.players[0].addToHand(new Card("Alchemy", 1));
+        testGame.players[1].addToHand(new Card("Basic", "Arrows", 1));
+        testGame.players[2].addToHand(new Card("Basic", "Arrows", 5));
+        testGame.players[3].addToHand(new Card("Basic","Arrows",6));
+
+        int playerInput = 0;
+        Card chosenCard0 = testGame.players[0].getDeckInHand().get(playerInput);
+        Card chosenCard1 = testGame.players[1].getDeckInHand().get(playerInput);
+        Card chosenCard2 = testGame.players[2].getDeckInHand().get(playerInput);
+        Card chosenCard3 = testGame.players[3].getDeckInHand().get(playerInput);
+
+
+        testGame.addChosenCard(0,0,chosenCard0);
+        testGame.addChosenCard(1,0,chosenCard1);
+        testGame.addChosenCard(2,0,chosenCard2);
+        testGame.addChosenCard(3,0,chosenCard3);
+
+        System.out.println(testGame.printMeleeDeck(testGame.currMeleeCardsPlayed));
+        assertEquals(testGame.players[2],testGame.findLoser());
+    }
 }
