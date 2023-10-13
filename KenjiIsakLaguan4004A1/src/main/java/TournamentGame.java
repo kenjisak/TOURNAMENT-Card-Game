@@ -288,7 +288,6 @@ public class TournamentGame {
                 if(Objects.equals(currSuit, "No Suit") || Objects.equals(chosenCard.getSuit(), currSuit)){ return cardIndexSelected; }
                 if(Objects.equals(chosenCard.getType(), "Basic")){//error message for only Basic Type
                     System.out.println("This Card doesn't match the Suit of this Melee: " + currSuit);
-//                    System.out.println("Card Played: " + chosenCard.getSuit() + "(" + chosenCard.getValue()+ ")");
                 }
                 if(Objects.equals(chosenCard.getType(), "Merlin") || Objects.equals(chosenCard.getType(), "Apprentice")){
                     chosenCard.setSuit(currSuit);
@@ -367,6 +366,7 @@ public class TournamentGame {
                 cardIndexSelected = processCardInput(cardInput,output,currPlyrIndex,i);
                 output.flush();
             }
+            System.out.println("Card Played: " + chosenCard.displayCard());
             addChosenCard(currPlyrIndex,cardIndexSelected,chosenCard);
         }
         System.out.println("\nCurrent Melee Cards Played: ");//display melee deck
