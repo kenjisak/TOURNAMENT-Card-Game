@@ -236,6 +236,10 @@ public class TournamentGame {
         output.println("Invalid card Index Selected.");
         return -1;
     }
+    public String processSuitInput(Scanner suitInput, PrintWriter output) {
+
+        return "";
+    }
     public void playMelee() {
         System.out.println("Leader " + currLeader + " starts this Melee...");
         int meleeLeaderIndex = findMeleeLeaderIndex();
