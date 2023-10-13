@@ -6,7 +6,8 @@ public class TournamentGame {
     public List<Card> gameDeck;
     public Map<Player, Card> currMeleeCardsPlayed;
     public int roundNum;
-    String currSuit;
+    public String currSuit;
+    public Player loser;
 
     public TournamentGame(int numPlayers, String[] namesOfPlayers, int initHealthPoints){
         players = new Player[numPlayers];
@@ -239,6 +240,17 @@ public class TournamentGame {
         }
         System.out.println("\nCurrent Melee Cards Played: ");//display melee deck
         System.out.println(printMeleeDeck(currMeleeCardsPlayed));
+        //determine loser
+        loser = findLoser();
+    }
+    public Map<Player,Card> feintStep(){//return a Map List of Unique Played Cards, after feint step
+        return null;
+    }
+
+    public Player findLoser(){
+        //feint step, remove all cards in meleeDeck that have matching values
+        Map<Player, Card> uniquePlayerCard = feintStep();
+        return null;
     }
     public static void main(String[] args) {
         System.out.println("Welcome to the TOURNAMENT Game.");
