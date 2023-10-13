@@ -278,7 +278,21 @@ public class TournamentGame {
         return uniquePlayerCard;
     }
     public Player findLowestCard(Map<Player, Card> uniquePlayerCard){
+        if(!uniquePlayerCard.isEmpty()){//find lowest card of all of them
+            Card lowestCard = null;
+            Player playerWithLowestCard = null;
 
+            for (Map.Entry<Player, Card> entry : uniquePlayerCard.entrySet()) {
+                Player player = entry.getKey();
+                Card card = entry.getValue();
+
+                if (lowestCard == null || card.getValue() < lowestCard.getValue()) {
+                    lowestCard = card;
+                    playerWithLowestCard = player;
+                }
+            }
+            return playerWithLowestCard;
+        }
         return null;//if empty then no losers, keep currLeader.
     }
     public static void main(String[] args) {
