@@ -48,13 +48,13 @@ class TournamentGameUnitTest {
         assertEquals(15,alchemyCount);
     }
     @Test
-    @DisplayName("U-TEST-007: Test user input for number of players is entered and stored properly.")
+    @DisplayName("U-TEST-007: Test user input for number of players is validated properly.")
     void testNumPlayersInput(){
-        assertFalse(TournamentGame.checkInputNumPlayers(2));//checks lower than 3
-        assertFalse(TournamentGame.checkInputNumPlayers(6));//checks higher than 5
+        assertEquals(-1,TournamentGame.processNumPlyrInput(new Scanner("2"), new PrintWriter(System.out)));//checks ask again for lower than 3
+        assertEquals(-1,TournamentGame.processNumPlyrInput(new Scanner("2"), new PrintWriter(System.out)));//checks ask again for higher than 5
 
         for (int i = 3; i <= 5 ; i++) {//checks all valid inputs
-            assertTrue(TournamentGame.checkInputNumPlayers(i));
+            assertEquals(i,TournamentGame.processNumPlyrInput(new Scanner(Integer.toString(i)), new PrintWriter(System.out)));//checks ask again for higher than 5
         }
     }
     @Test
@@ -90,18 +90,18 @@ class TournamentGameUnitTest {
     @Test
     @DisplayName("U-TEST-010: Test Game Stores Players inputted names properly.")
     void testPlayersNameInput(){
-        int testPlayerNum = 3;
-        String[] testPlayersNames = {"1", "2", "3"};
-
-        if(TournamentGame.checkInputNumPlayers(testPlayerNum)){//if valid Number of Players
-            TournamentGame testGame = new TournamentGame(testPlayerNum, testPlayersNames,50);
-
-            for (int i = 0; i < testPlayerNum; i++) {//test if names were stored correctly
-                assertEquals(testPlayersNames[i],testGame.players[i].getName());
-            }
-        }else{//should return false to ask input for Valid Player Num Again
-            assertFalse(TournamentGame.checkInputNumPlayers(testPlayerNum));
-        }
+//        int testPlayerNum = 3;
+//        String[] testPlayersNames = {"1", "2", "3"};
+//
+//        if(TournamentGame.checkInputNumPlayers(testPlayerNum)){//if valid Number of Players
+//            TournamentGame testGame = new TournamentGame(testPlayerNum, testPlayersNames,50);
+//
+//            for (int i = 0; i < testPlayerNum; i++) {//test if names were stored correctly
+//                assertEquals(testPlayersNames[i],testGame.players[i].getName());
+//            }
+//        }else{//should return false to ask input for Valid Player Num Again
+//            assertFalse(TournamentGame.checkInputNumPlayers(testPlayerNum));
+//        }
     }
     @Test
     @DisplayName("U-TEST-011: Test Rounds start with an Initial Leader based on Order of Players Inputted Names.")

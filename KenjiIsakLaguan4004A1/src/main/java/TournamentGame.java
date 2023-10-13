@@ -446,18 +446,14 @@ public class TournamentGame {
     }
     public static void main(String[] args) {
         System.out.println("Welcome to the TOURNAMENT Game.");
-        System.out.print("\nPlease enter the number of players (3-5 is acceptable): ");
 
         Scanner scanner = new Scanner(System.in);
-        int numPlayers;
+        PrintWriter output = new PrintWriter(System.out);
 
-        while (true){
-            numPlayers = scanner.nextInt();
-            if(!checkInputNumPlayers(numPlayers)){//if not valid
-                System.out.print("Please enter an ACCEPTABLE number of players (3-5 is acceptable): ");
-            } else {
-                break;
-            }
+        int numPlayers = -1;
+        while (numPlayers == -1){
+            numPlayers = processNumPlyrInput(scanner,output);
+            output.flush();
         }
         scanner.nextLine();//clear input buffer
 
@@ -473,7 +469,13 @@ public class TournamentGame {
             tournamentGame.playRound();
         }
     }
-    public static boolean checkInputNumPlayers(int input){
-        return input >= 3 && input <= 5;//if true then valid, else not
+    public static int processNumPlyrInput(Scanner numPlyrInput, PrintWriter output) {
+        System.out.print("Please enter an ACCEPTABLE number of players (3-5 is acceptable): ");
+        int numPlyr = numPlyrInput.nextInt();
+        if(numPlyr >= 3 && numPlyr <= 5){
+            return numPlyr;
+        }
+        output.println("Invalid Number Entered.");
+        return -1;
     }
 }
