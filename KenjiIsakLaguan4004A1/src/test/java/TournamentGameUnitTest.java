@@ -1,9 +1,7 @@
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -374,9 +372,10 @@ class TournamentGameUnitTest {
         String[] testPlayersNames = {"1", "2", "3"};
         TournamentGame testGame = new TournamentGame(3, testPlayersNames, 50);
 
+        Card uniqueCard = new Card("Basic", "Arrows", 5);
         testGame.players[0].addToHand(new Card("Alchemy", 1));
         testGame.players[1].addToHand(new Card("Basic", "Arrows", 1));
-        testGame.players[2].addToHand(new Card("Basic", "Arrows", 5));
+        testGame.players[2].addToHand(uniqueCard);
 
         int playerInput = 0;
         Card chosenCard0 = testGame.players[0].getDeckInHand().get(playerInput);
@@ -387,7 +386,8 @@ class TournamentGameUnitTest {
         testGame.addChosenCard(1,0,chosenCard1);
         testGame.addChosenCard(2,0,chosenCard2);
 
-        System.out.println(testGame.printMeleeDeck(testGame.currMeleeCardsPlayed));
-        assertEquals(testGame.players[2],testGame.findLoser());
+        Map<Player,Card> expectedReturn = new HashMap<>();
+        expectedReturn.put(testGame.players[2],uniqueCard);
+        assertEquals(expectedReturn,testGame.feintStep());
     }
 }

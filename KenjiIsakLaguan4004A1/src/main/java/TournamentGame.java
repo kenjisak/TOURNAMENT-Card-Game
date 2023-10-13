@@ -244,7 +244,38 @@ public class TournamentGame {
         loser = findLoser();
     }
     public Map<Player,Card> feintStep(){//return a Map List of Unique Played Cards, after feint step
-        return null;
+        //feint step, remove all cards in meleeDeck that have matching values
+        Map<Player, Card> uniquePlayerCard = new HashMap<>();//copy and dont use currMeleeDeck to be able to add to players deck after
+        Map<Integer, Integer> cardValueCounter = new HashMap<>();
+
+        for (Map.Entry<Player, Card> entry : currMeleeCardsPlayed.entrySet()) {//Creates a counter for checking singletons in the meleeDeck
+            Player player = entry.getKey();
+            Card card = entry.getValue();
+            int cardValue = card.getValue();
+
+            if (cardValueCounter.containsKey(cardValue)) {// Check if the card value is already in the counter map
+                int count = cardValueCounter.get(cardValue);
+                cardValueCounter.put(cardValue, count + 1);// Increment the counter for this card value
+            } else {// Initialize the counter for this card value
+                cardValueCounter.put(cardValue, 1);
+            }
+            uniquePlayerCard.put(player, card);// Add the card to uniquePlayerCard
+        }
+
+        // Remove from map if card values aren't singletons
+        Iterator<Map.Entry<Player, Card>> iterator = uniquePlayerCard.entrySet().iterator();
+        while (iterator.hasNext()) {//Iterate through map
+            Map.Entry<Player, Card> entry = iterator.next();
+            int cardValue = entry.getValue().getValue();
+            int count = cardValueCounter.get(cardValue);
+
+            if (count > 1) {//If more than 1 instance, remove
+                iterator.remove();
+            }
+        }
+        System.out.println("Current Melee Deck After Feint Step: ");
+        System.out.println(printMeleeDeck(uniquePlayerCard));
+        return uniquePlayerCard;
     }
 
     public Player findLoser(){
