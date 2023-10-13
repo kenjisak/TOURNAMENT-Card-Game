@@ -462,4 +462,15 @@ class TournamentGameUnitTest {
         System.out.println(testGame.printMeleeDeck(testGame.currMeleeCardsPlayed));
         assertNull(testGame.findLoser());
     }
+    @Test
+    @DisplayName("U-TEST-034: Test if the loser gets updated to be the Leader correctly.")
+    void testMeleeLoserUpdate() {
+        String[] testPlayersNames = {"1", "2", "3"};
+        TournamentGame testGame = new TournamentGame(3, testPlayersNames, 50);
+
+        testGame.loser = testGame.players[2];//"3", rig the loser for testing
+        testGame.meleeLoserUpdate();
+
+        assertEquals("3",testGame.currLeader);
+    }
 }

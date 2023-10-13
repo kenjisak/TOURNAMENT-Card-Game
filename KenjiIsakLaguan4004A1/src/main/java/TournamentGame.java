@@ -242,12 +242,13 @@ public class TournamentGame {
         System.out.println(printMeleeDeck(currMeleeCardsPlayed));
         //determine loser
         loser = findLoser();
+        meleeLoserUpdate();//if theres a loser then update as leader, remove their hp and display their name
     }
+
     public Map<Player,Card> feintStep(){//return a Map List of Unique Played Cards, after feint step
-        //feint step, remove all cards in meleeDeck that have matching values
         Map<Player, Card> uniquePlayerCard = new HashMap<>();//copy and dont use currMeleeDeck to be able to add to players deck after
         Map<Integer, Integer> cardValueCounter = new HashMap<>();
-
+        //feint step, remove all cards in meleeDeck that have matching values
         for (Map.Entry<Player, Card> entry : currMeleeCardsPlayed.entrySet()) {//Creates a counter for checking singletons in the meleeDeck
             Player player = entry.getKey();
             Card card = entry.getValue();
@@ -300,6 +301,9 @@ public class TournamentGame {
         Player loser = findLowestCard(uniquePlayerCard);
 
         return loser;
+    }
+    public void meleeLoserUpdate(){
+
     }
     public static void main(String[] args) {
         System.out.println("Welcome to the TOURNAMENT Game.");
