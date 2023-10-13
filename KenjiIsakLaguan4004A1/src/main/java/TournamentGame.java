@@ -236,7 +236,11 @@ public class TournamentGame {
                         currSuit = processSuitInput(cardInput,output);//Use same scanner for ease
                         output.flush();
                     }
-
+                    //ask input again to choose the value
+                    int valueChosen = -1;
+                    while (valueChosen == -1){
+                        valueChosen = processValueInput(cardInput,output);
+                    }
                     System.out.println("The Suit Set for this Melee is: " + currSuit);
                     return cardIndexSelected;
                 }
