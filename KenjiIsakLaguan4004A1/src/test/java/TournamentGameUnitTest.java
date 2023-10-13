@@ -502,7 +502,7 @@ class TournamentGameUnitTest {
         assertNull(testGame.processCardInput(new Scanner("6"), new PrintWriter(System.out), 2, 0));//out of bounds
         assertEquals("",testGame.currSuit);
         assertEquals(testGame.players[2].getDeckInHand().get(0),testGame.processCardInput(new Scanner("0"),new PrintWriter(System.out),2,0));//inbounds
-        assertEquals("Basic",testGame.currSuit);
+        assertEquals("Swords",testGame.currSuit);
 
     }
 }
