@@ -217,7 +217,23 @@ public class TournamentGame {
         return -1;
     }
     public Card processCardInput(Scanner cardInput, PrintWriter output,int currPlyrIndex,int turnIndex){
+        //display players hand
+        System.out.println("\n" + players[currPlyrIndex].displayHand());
+        System.out.print("Player " + players[currPlyrIndex].getName() + " Select a VALID Card Index: ");
+        int cardIndexSelected = cardInput.nextInt();
+        if (cardIndexSelected >= 0 && cardIndexSelected < players[currPlyrIndex].getDeckInHand().size()){
+            chosenCard = players[currPlyrIndex].getDeckInHand().get(cardIndexSelected);
 
+            if(turnIndex == 0){//then Leader can set the suit,
+                //if non Alchemy, check if Basic or Merlin or Apprentice,
+                if (Objects.equals(chosenCard.getType(), "Basic")) {
+                    currSuit = chosenCard.getSuit();
+                    System.out.println("The Suit Set for this Melee is: " + currSuit);
+                    return chosenCard;
+                }
+            }
+        }
+        output.println("Invalid card Index Selected.");
         return null;
     }
     public void playMelee() {
