@@ -143,8 +143,7 @@ class TournamentGameUnitTest {
 
                 Player 1's Hand: [De(12)] Health Points: 50
                 Player 2's Hand: [So(6)] Health Points: 50
-                Player 3's Hand: [Al(3)] Health Points: 50
-                """;
+                Player 3's Hand: [Al(3)] Health Points: 50""";
 
         assertEquals(expectedOutput, testGame.displayAllPlayersHandsHP());
     }
@@ -195,8 +194,7 @@ class TournamentGameUnitTest {
 
                 Player 1 HP: 25
                 Player 2 HP: 40
-                Player 3 HP: 45
-                """;
+                Player 3 HP: 45""";
         assertEquals(expectedOutput, testGame.displayAllPlayersHP());
     }
     @Test

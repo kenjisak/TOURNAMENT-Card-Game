@@ -51,7 +51,7 @@ public class Player {
         deckInHand.remove(cardIndex);
         healthPoints -= 5;
         //print updated dmg
-        System.out.println("Player " + name + " Shamed Health Points: " + healthPoints + "\n");
+        System.out.println("Player " + name + " Shamed Health Points: " + healthPoints);
         return isAlive();
     }
     public void playCard(int cardIndex){ deckInHand.remove(cardIndex); }

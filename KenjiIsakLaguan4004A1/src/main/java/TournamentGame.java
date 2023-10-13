@@ -71,7 +71,7 @@ public class TournamentGame {
         for (Player currPlayer: players){
             returnThis += "\n" + currPlayer.displayHand() + " Health Points: " + currPlayer.getHealthPoints();
         }
-        return returnThis + "\n";
+        return returnThis;
     }
     public void playersTakeDmg(){
         for(Player currPlayer: players){
@@ -83,7 +83,7 @@ public class TournamentGame {
         for (Player currPlayer: players){//print round over with players hp
             returnthis += "\nPlayer " + currPlayer.getName() + " HP: " + currPlayer.getHealthPoints();
         }
-        return returnthis + "\n";
+        return returnthis;
     }
     public boolean checkDeadPlayers(){
         for(Player currPlayer: players){//if any players are dead after dmg taken, end the game
