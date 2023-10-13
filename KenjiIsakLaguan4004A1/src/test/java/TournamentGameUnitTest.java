@@ -570,4 +570,20 @@ class TournamentGameUnitTest {
         assertEquals(0,testGame.processCardInput(new Scanner("0"), new PrintWriter(System.out), 0, 0));//doesn't have any other Non Alchemy Playable cards
         assertEquals("No Suit",testGame.currSuit);
     }
+    @Test
+    @DisplayName("U-TEST-042: Test if a following Player inputted Basic Weapon Card Matches the Suit.")
+    void testSuitMatches(){
+        String[] testPlayersNames = {"1","2","3"};
+        TournamentGame testGame = new TournamentGame(3, testPlayersNames,50);
+
+        testGame.players[0].addToHand(new Card("Basic","Swords",1));
+        testGame.players[0].addToHand(new Card("Basic","Arrows",1));
+
+        testGame.currSuit = "Arrows";
+        assertEquals(-1,testGame.processCardInput(new Scanner("0"), new PrintWriter(System.out), 0, 1));//Doesn't match the suit
+        assertEquals(1,testGame.processCardInput(new Scanner("1"), new PrintWriter(System.out), 0, 1));//Matches the suit
+
+        testGame.currSuit = "No Suit";
+        assertEquals(0,testGame.processCardInput(new Scanner("0"), new PrintWriter(System.out), 0, 1));//Now Matches the suit
+    }
 }

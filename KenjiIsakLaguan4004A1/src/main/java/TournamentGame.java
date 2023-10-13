@@ -267,6 +267,8 @@ public class TournamentGame {
                     }
                     System.out.println("You cannot start with an Alchemy card, with other type of cards left in hand.");
                 }
+            }else{//not the Leader,check if card matches curr Suit
+
             }
         }
         output.println("Invalid card Index Selected.");
