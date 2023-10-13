@@ -219,7 +219,18 @@ public class TournamentGame {
         return nonAlFound;
     }
     public boolean checkSuitPlayableCards(int currPlyrIndex){
-        return false;
+        boolean playableCardsFound = false;
+        for (Card checkCard: players[currPlyrIndex].getDeckInHand()){
+            if ((Objects.equals(checkCard.getType(), "Basic") && Objects.equals(checkCard.getSuit(), currSuit)) || Objects.equals(checkCard.getType(), "Merlin") || Objects.equals(checkCard.getType(), "Apprentice")) {
+                //loop through all cards and check if theres Basic cards that match the suit or, a Merlin or Apprentice
+                playableCardsFound = true;
+                break;//cut for loop short
+            }
+        }
+        if (!playableCardsFound){//else looped through and couldn't find any
+            System.out.println("No Other Playable Cards and is forced to play an Alchemy.");
+        }
+        return playableCardsFound;
     }
     public int processDiscardInput(Scanner cardInput, PrintWriter output,int currPlyrIndex){
         System.out.println("Choose a card to Discard: ");
