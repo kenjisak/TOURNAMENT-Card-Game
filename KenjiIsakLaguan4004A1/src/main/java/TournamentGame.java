@@ -260,6 +260,13 @@ public class TournamentGame {
                     System.out.println("The Suit Set for this Melee is: " + currSuit);
                     return cardIndexSelected;
                 }
+                if(Objects.equals(chosenCard.getType(), "Alchemy")){
+                    boolean nonAlFound = checkNonAlPlayableCards(currPlyrIndex);
+                    if (!nonAlFound){//no NON Alchemy found, is forced to play it
+                        return cardIndexSelected;
+                    }
+                    System.out.println("You cannot start with an Alchemy card, with other type of cards left in hand.");
+                }
             }
         }
         output.println("Invalid card Index Selected.");
