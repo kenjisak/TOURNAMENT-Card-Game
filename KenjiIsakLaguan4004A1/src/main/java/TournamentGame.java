@@ -256,6 +256,13 @@ public class TournamentGame {
         return "";
     }
     public int processValueInput(Scanner valueInput, PrintWriter output) {
+        System.out.println("Please choose a value (1-15) for your " + chosenCard.getType() + " card: ");
+        int valueChosen = valueInput.nextInt();
+        if(valueChosen > 0 && valueChosen <= 15){
+            chosenCard.setValue(valueChosen);
+            return valueChosen;
+        }
+        output.println("Invalid Value Entered.");
         return -1;
     }
     public void playMelee() {
