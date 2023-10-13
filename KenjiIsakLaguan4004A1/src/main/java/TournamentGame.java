@@ -270,6 +270,15 @@ public class TournamentGame {
             }else{//not the Leader,check if card matches curr Suit
                 //if no suit dont bother checking the type/playable cards
                 if (Objects.equals(currSuit, "No Suit") || Objects.equals(chosenCard.getSuit(), currSuit)){ return cardIndexSelected; }
+                if(Objects.equals(chosenCard.getType(), "Merlin") || Objects.equals(chosenCard.getType(), "Apprentice")){
+                    chosenCard.setSuit(currSuit);
+                    //ask for a valid Value
+                    int valueChosen = -1;
+                    while (valueChosen == -1){
+                        valueChosen = processValueInput(cardInput,output);
+                    }
+                    return cardIndexSelected;
+                }
             }
         }
         output.println("Invalid card Index Selected.");
