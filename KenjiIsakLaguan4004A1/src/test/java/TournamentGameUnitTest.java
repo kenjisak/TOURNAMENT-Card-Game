@@ -603,7 +603,7 @@ class TournamentGameUnitTest {
         assertEquals(1,testGame.processCardInput(new Scanner("1\n15"), new PrintWriter(System.out), 0, 1));//make sure matches no suit too
     }
     @Test
-    @DisplayName("U-TEST-044: Test if a following Player has Suit matching Playable cards properly.")
+    @DisplayName("U-TEST-044: Test if a following Player has Suit matching/Merlin/Apprentice Playable cards properly.")
     void testSuitMatchPlayableCards() {
         String[] testPlayersNames = {"1", "2", "3"};
         TournamentGame testGame = new TournamentGame(3, testPlayersNames, 50);
@@ -616,5 +616,23 @@ class TournamentGameUnitTest {
         testGame.players[0].addToHand(new Card("Merlin"));
         testGame.players[0].addToHand(new Card("Basic", "Arrows", 1));
         assertTrue(testGame.checkSuitPlayableCards(0));//does have other Suit Matching Playable Cards
+    }
+    @Test
+    @DisplayName("U-TEST-045: Test if a following Player inputted Alchemy Card Matches the Suit properly.")
+    void testAlSuitMatches(){
+        String[] testPlayersNames = {"1","2","3"};
+        TournamentGame testGame = new TournamentGame(3, testPlayersNames,50);
+
+        testGame.players[0].addToHand(new Card("Alchemy",1));
+        testGame.players[0].addToHand(new Card("Basic","Arrows",1));
+
+        testGame.currSuit = "Arrows";
+        assertEquals(-1,testGame.processCardInput(new Scanner("0"), new PrintWriter(System.out), 0, 1));//Has other Suit matching/MeAp Playable cards, and cant play an alchemy card
+
+        testGame.players[0].playCard(1);//remove Arrows Card
+        assertEquals(0,testGame.processCardInput(new Scanner("0"), new PrintWriter(System.out), 0, 1));//No other Suit matching/MeAp Playable cards, and has to play an alchemy card
+
+        testGame.currSuit = "No Suit";
+        assertEquals(0,testGame.processCardInput(new Scanner("0"), new PrintWriter(System.out), 0, 1));//Make sure Alchemy works for No Suit
     }
 }
