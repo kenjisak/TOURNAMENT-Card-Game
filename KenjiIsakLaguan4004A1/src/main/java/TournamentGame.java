@@ -231,6 +231,15 @@ public class TournamentGame {
                     System.out.println("The Suit Set for this Melee is: " + currSuit);
                     return cardIndexSelected;
                 }
+                if (Objects.equals(chosenCard.getType(), "Merlin") || Objects.equals(chosenCard.getType(), "Apprentice")) {
+                    while (Objects.equals(currSuit, "")){//ask input again to choose the suit
+                        currSuit = processSuitInput(cardInput,output);//Use same scanner for ease
+                        output.flush();
+                    }
+
+                    System.out.println("The Suit Set for this Melee is: " + currSuit);
+                    return cardIndexSelected;
+                }
             }
         }
         output.println("Invalid card Index Selected.");

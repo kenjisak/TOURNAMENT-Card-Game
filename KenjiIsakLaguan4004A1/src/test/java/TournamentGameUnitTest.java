@@ -519,7 +519,7 @@ class TournamentGameUnitTest {
         assertEquals("Arrows",testGame.chosenCard.getSuit());
     }
     @Test
-    @DisplayName("U-TEST-038: Test if Leader choosing a Basic Card will set the melee suit by input and works properly.")
+    @DisplayName("U-TEST-038: Test if Leader choosing a Merlin/Apprentice Card will set the melee suit by input and works properly.")
     void testCardInputMeApLeader(){
         String[] testPlayersNames = {"1","2","3"};
         TournamentGame testGame = new TournamentGame(3, testPlayersNames,50);
