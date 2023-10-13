@@ -555,4 +555,19 @@ class TournamentGameUnitTest {
         testGame.players[0].addToHand(new Card("Basic","Swords",1));
         assertTrue(testGame.checkNonAlPlayableCards(0));//does have other Non Alchemy Cards
     }
+    @Test
+    @DisplayName("U-TEST-041: Test if Leader choosing an Alchemy Card will set the melee suit by input and works properly.")
+    void testCardInputAlLeader(){
+        String[] testPlayersNames = {"1","2","3"};
+        TournamentGame testGame = new TournamentGame(3, testPlayersNames,50);
+        testGame.players[0].addToHand(new Card("Alchemy",1));
+
+        testGame.players[0].addToHand(new Card("Merlin"));
+        assertEquals(-1,testGame.processCardInput(new Scanner("0"),new PrintWriter(System.out),0,0));//has other Non Alchemy Playable cards
+        assertEquals("",testGame.currSuit);
+
+        testGame.players[0].playCard(1);//removes Merlin to simulate only having Alchemy
+        assertEquals(0,testGame.processCardInput(new Scanner("0"), new PrintWriter(System.out), 0, 0));//doesn't have any other Non Alchemy Playable cards
+        assertEquals("No Suit",testGame.currSuit);
+    }
 }
