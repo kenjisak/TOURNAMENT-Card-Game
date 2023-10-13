@@ -602,4 +602,19 @@ class TournamentGameUnitTest {
         testGame.currSuit = "No Suit";
         assertEquals(1,testGame.processCardInput(new Scanner("1\n15"), new PrintWriter(System.out), 0, 1));//make sure matches no suit too
     }
+    @Test
+    @DisplayName("U-TEST-044: Test if a following Player has Suit matching Playable cards properly.")
+    void testSuitMatchPlayableCards() {
+        String[] testPlayersNames = {"1", "2", "3"};
+        TournamentGame testGame = new TournamentGame(3, testPlayersNames, 50);
+
+        testGame.players[0].addToHand(new Card("Alchemy", 1));
+        assertFalse(testGame.checkSuitPlayableCards(0));//doesn't have any other Suit Matching Playable Cards
+
+        testGame.currSuit = "Arrows";//simulates curr Melee Suit set to Arrows
+
+        testGame.players[0].addToHand(new Card("Merlin"));
+        testGame.players[0].addToHand(new Card("Basic", "Arrows", 1));
+        assertTrue(testGame.checkSuitPlayableCards(0));//does have other Suit Matching Playable Cards
+    }
 }

@@ -218,6 +218,9 @@ public class TournamentGame {
         }
         return nonAlFound;
     }
+    public boolean checkSuitPlayableCards(int currPlyrIndex){
+        return false;
+    }
     public int processDiscardInput(Scanner cardInput, PrintWriter output,int currPlyrIndex){
         System.out.println("Choose a card to Discard: ");
         int cardIndexSelected = cardInput.nextInt();
@@ -269,7 +272,7 @@ public class TournamentGame {
                 }
             }else{//not the Leader,check if card matches curr Suit
                 //if no suit dont bother checking the type/playable cards
-                if (Objects.equals(currSuit, "No Suit") || Objects.equals(chosenCard.getSuit(), currSuit)){ return cardIndexSelected; }
+                if(Objects.equals(currSuit, "No Suit") || Objects.equals(chosenCard.getSuit(), currSuit)){ return cardIndexSelected; }
                 if(Objects.equals(chosenCard.getType(), "Merlin") || Objects.equals(chosenCard.getType(), "Apprentice")){
                     chosenCard.setSuit(currSuit);
                     //ask for a valid Value
