@@ -203,7 +203,7 @@ public class TournamentGame {
         return returnthis;
     }
     public int processDiscardInput(Scanner cardInput, PrintWriter output,int currPlyrIndex){
-        System.out.print("Choose a card to Discard: ");
+        System.out.println("Choose a card to Discard: ");
         int cardIndexSelected = cardInput.nextInt();
         if (cardIndexSelected >= 0 && cardIndexSelected < players[currPlyrIndex].getDeckInHand().size()){//stop asking for input, game hasn't ended){//if var = true/within index then break and stop asking input
             boolean shamedPlayerisAlive = shamePlayer(currPlyrIndex,cardIndexSelected);
@@ -219,7 +219,7 @@ public class TournamentGame {
     public int processCardInput(Scanner cardInput, PrintWriter output,int currPlyrIndex,int turnIndex){
         //display players hand
         System.out.println("\n" + players[currPlyrIndex].displayHand());
-        System.out.print("Player " + players[currPlyrIndex].getName() + " Select a VALID Card Index: ");
+        System.out.println("Player " + players[currPlyrIndex].getName() + " Select a VALID Card Index: ");
         int cardIndexSelected = cardInput.nextInt();
         if (cardIndexSelected >= 0 && cardIndexSelected < players[currPlyrIndex].getDeckInHand().size()){
             chosenCard = players[currPlyrIndex].getDeckInHand().get(cardIndexSelected);
@@ -237,7 +237,7 @@ public class TournamentGame {
         return -1;
     }
     public String processSuitInput(Scanner suitInput, PrintWriter output) {
-        System.out.print("Please choose a VALID Suit(Swords, Arrows, Sorcery, Deception): ");
+        System.out.println("Please choose a VALID Suit(Swords, Arrows, Sorcery, Deception): ");
         currSuit = suitInput.nextLine();
         if (Objects.equals(currSuit, "Swords") || Objects.equals(currSuit, "Arrows") || Objects.equals(currSuit, "Sorcery") || Objects.equals(currSuit, "Deception")){
             chosenCard.setSuit(currSuit);

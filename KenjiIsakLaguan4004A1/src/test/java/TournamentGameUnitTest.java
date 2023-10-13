@@ -518,4 +518,16 @@ class TournamentGameUnitTest {
         assertEquals("Arrows",testGame.currSuit);
         assertEquals("Arrows",testGame.chosenCard.getSuit());
     }
+    @Test
+    @DisplayName("U-TEST-038: Test if Leader choosing a Basic Card will set the melee suit by input and works properly.")
+    void testCardInputMeApLeader(){
+        String[] testPlayersNames = {"1","2","3"};
+        TournamentGame testGame = new TournamentGame(3, testPlayersNames,50);
+        testGame.players[2].addToHand(new Card("Merlin"));
+
+        assertEquals(-1,testGame.processCardInput(new Scanner("6"), new PrintWriter(System.out), 2, 0));//out of bounds
+        assertEquals("",testGame.currSuit);
+        assertEquals(0,testGame.processCardInput(new Scanner("0\nSwords"),new PrintWriter(System.out),2,0));//inbounds
+        assertEquals("Swords",testGame.currSuit);
+    }
 }
