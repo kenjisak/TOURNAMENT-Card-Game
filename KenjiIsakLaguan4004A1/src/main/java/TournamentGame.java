@@ -241,7 +241,7 @@ public class TournamentGame {
         System.out.println("\nCurrent Melee Cards Played: ");//display melee deck
         System.out.println(printMeleeDeck(currMeleeCardsPlayed));
         //determine loser
-        loser = findLoser();
+
     }
     public Map<Player,Card> feintStep(){//return a Map List of Unique Played Cards, after feint step
         //feint step, remove all cards in meleeDeck that have matching values
@@ -277,11 +277,9 @@ public class TournamentGame {
         System.out.println(printMeleeDeck(uniquePlayerCard));
         return uniquePlayerCard;
     }
+    public Player findLowestCard(Map<Player, Card> uniquePlayerCard){
 
-    public Player findLoser(){
-        //feint step, remove all cards in meleeDeck that have matching values
-        Map<Player, Card> uniquePlayerCard = feintStep();
-        return null;
+        return null;//if empty then no losers, keep currLeader.
     }
     public static void main(String[] args) {
         System.out.println("Welcome to the TOURNAMENT Game.");
