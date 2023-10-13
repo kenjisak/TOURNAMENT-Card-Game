@@ -88,20 +88,12 @@ class TournamentGameUnitTest {
         assertNotEquals(beforeShuffle,afterShuffle);
     }
     @Test
-    @DisplayName("U-TEST-010: Test Game Stores Players inputted names properly.")
+    @DisplayName("U-TEST-010: Test user input for Names of players is validated properly.")
     void testPlayersNameInput(){
-//        int testPlayerNum = 3;
-//        String[] testPlayersNames = {"1", "2", "3"};
-//
-//        if(TournamentGame.checkInputNumPlayers(testPlayerNum)){//if valid Number of Players
-//            TournamentGame testGame = new TournamentGame(testPlayerNum, testPlayersNames,50);
-//
-//            for (int i = 0; i < testPlayerNum; i++) {//test if names were stored correctly
-//                assertEquals(testPlayersNames[i],testGame.players[i].getName());
-//            }
-//        }else{//should return false to ask input for Valid Player Num Again
-//            assertFalse(TournamentGame.checkInputNumPlayers(testPlayerNum));
-//        }
+        for (int i = 0; i < 3; i++) {
+            assertNull(TournamentGame.processNamePlyrInput(new Scanner("\n"), new PrintWriter(System.out), i));//Empty Name is invalid
+            assertEquals(Integer.toString(i + 1),TournamentGame.processNamePlyrInput(new Scanner(Integer.toString(i + 1)),new PrintWriter(System.out),i));//Valid Non Empty Name: 1,2,3
+        }
     }
     @Test
     @DisplayName("U-TEST-011: Test Rounds start with an Initial Leader based on Order of Players Inputted Names.")

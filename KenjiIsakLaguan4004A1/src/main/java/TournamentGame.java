@@ -459,8 +459,10 @@ public class TournamentGame {
 
         String[] playersNames = new String[numPlayers];
         for (int i = 0; i < numPlayers; i++){
-            System.out.print("Enter (" + (i + 1) + ") Player's name: ");
-            playersNames[i] = scanner.nextLine();
+            while (Objects.equals(playersNames[i], null)){
+                playersNames[i] = processNamePlyrInput(scanner,output,i);
+                output.flush();//check if melee suit input still works fine
+            }
         }
 
         TournamentGame tournamentGame = new TournamentGame(numPlayers, playersNames, 100);
@@ -477,5 +479,14 @@ public class TournamentGame {
         }
         output.println("Invalid Number Entered.");
         return -1;
+    }
+    public static String processNamePlyrInput(Scanner namePlyrInput, PrintWriter output, int plyrIndex) {
+        System.out.print("Enter (" + (plyrIndex + 1) + ") Player's name: ");
+        String playersName = namePlyrInput.nextLine();
+        if (!Objects.equals(playersName, "")){
+            return playersName;//Valid Non Empty Name
+        }
+        output.println("Empty Name Entered.");
+        return null;
     }
 }
