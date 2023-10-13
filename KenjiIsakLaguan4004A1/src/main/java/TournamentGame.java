@@ -293,6 +293,14 @@ public class TournamentGame {
                     }
                     return cardIndexSelected;
                 }
+                if(Objects.equals(chosenCard.getType(), "Alchemy")){
+                    boolean playableCardsFound = checkSuitPlayableCards(currPlyrIndex);
+                    if (!playableCardsFound){//else looped through and couldn't find any
+                        chosenCard.setSuit(currSuit);
+                        return cardIndexSelected;
+                    }
+                    System.out.println("You cannot play an Alchemy card, with other playable cards in your hand.");
+                }
             }
         }
         output.println("Invalid card Index Selected.");
