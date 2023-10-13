@@ -492,4 +492,17 @@ class TournamentGameUnitTest {
 
         assertEquals(new ArrayList<>(testGame.currMeleeCardsPlayed.values()),testGame.players[2].getInjuryDeck());
     }
+    @Test
+    @DisplayName("U-TEST-036: Test if input is validated correctly when Player is choosing a Card.")
+    void testCardInputBasicLeader(){
+        String[] testPlayersNames = {"1","2","3"};
+        TournamentGame testGame = new TournamentGame(3, testPlayersNames,50);
+        testGame.players[2].addToHand(new Card("Basic","Swords",1));
+
+        assertNull(testGame.processCardInput(new Scanner("6"), new PrintWriter(System.out), 2, 0));//out of bounds
+        assertEquals("",testGame.currSuit);
+        assertEquals(testGame.players[2].getDeckInHand().get(0),testGame.processCardInput(new Scanner("0"),new PrintWriter(System.out),2,0));//inbounds
+        assertEquals("Basic",testGame.currSuit);
+
+    }
 }

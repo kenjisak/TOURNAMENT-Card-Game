@@ -9,6 +9,7 @@ public class TournamentGame {
     public int roundNum;
     public String currSuit;
     public Player loser;
+    public Card chosenCard;
 
     public TournamentGame(int numPlayers, String[] namesOfPlayers, int initHealthPoints){
         players = new Player[numPlayers];
@@ -21,6 +22,7 @@ public class TournamentGame {
         currMeleeCardsPlayed = new HashMap<>();//empty list init
         roundNum = 1;
         currSuit = "";//if we want to set to no suit then well set it to "No Suit"
+        chosenCard = null;
         recreateDeck();
     }
     public void recreateDeck(){//when shuffling, the card is edited and not reverted back for Merlin and Apprentice
@@ -214,6 +216,10 @@ public class TournamentGame {
         output.println("Invalid card Index Selected.");
         return -1;
     }
+    public Card processCardInput(Scanner cardInput, PrintWriter output,int currPlyrIndex,int turnIndex){
+
+        return null;
+    }
     public void playMelee() {
         System.out.println("Leader " + currLeader + " starts this Melee...");
         int meleeLeaderIndex = findMeleeLeaderIndex();
@@ -239,8 +245,12 @@ public class TournamentGame {
                     continue;//skip while loop below, not gonna ask player to play a card
                 }
             }
-            cardIndexSelected = cardInput.nextInt();
-            Card chosenCard = players[currPlyrIndex].getDeckInHand().get(cardIndexSelected);
+
+            chosenCard = null;
+            while (chosenCard == null){
+                chosenCard = processCardInput(cardInput,output,currPlyrIndex,i);
+                output.flush();
+            }
             addChosenCard(currPlyrIndex,cardIndexSelected,chosenCard);
         }
         System.out.println("\nCurrent Melee Cards Played: ");//display melee deck
