@@ -237,7 +237,13 @@ public class TournamentGame {
         return -1;
     }
     public String processSuitInput(Scanner suitInput, PrintWriter output) {
-
+        System.out.print("Please choose a VALID Suit(Swords, Arrows, Sorcery, Deception): ");
+        currSuit = suitInput.nextLine();
+        if (Objects.equals(currSuit, "Swords") || Objects.equals(currSuit, "Arrows") || Objects.equals(currSuit, "Sorcery") || Objects.equals(currSuit, "Deception")){
+            chosenCard.setSuit(currSuit);
+            return currSuit;//valid suit
+        }
+        output.println("Invalid Suit Entered.");
         return "";
     }
     public void playMelee() {
