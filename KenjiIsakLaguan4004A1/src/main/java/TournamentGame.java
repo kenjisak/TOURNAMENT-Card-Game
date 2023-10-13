@@ -303,7 +303,11 @@ public class TournamentGame {
         return loser;
     }
     public void meleeLoserUpdate(){
-
+        if(loser != null){
+            currLeader = loser.getName();//set loser to currLeader
+        }else{
+            System.out.println("There are no losers for this melee.");
+        }
     }
     public static void main(String[] args) {
         System.out.println("Welcome to the TOURNAMENT Game.");
