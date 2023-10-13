@@ -203,7 +203,20 @@ public class TournamentGame {
         return returnthis;
     }
     public boolean checkNonAlPlayableCards(int currPlyrIndex){
-        return false;
+        boolean nonAlFound = false;
+        for (Card checkCard: players[currPlyrIndex].getDeckInHand()){
+            if (!Objects.equals(checkCard.getType(), "Alchemy")) {
+                //loop through all cards and check if theres any non Al
+                nonAlFound = true;
+                break;
+            }
+        }
+
+        if (!nonAlFound){//else looped through and couldn't find any
+            currSuit = "No Suit";
+            System.out.println("There is No Suit set for this Melee.");
+        }
+        return nonAlFound;
     }
     public int processDiscardInput(Scanner cardInput, PrintWriter output,int currPlyrIndex){
         System.out.println("Choose a card to Discard: ");
