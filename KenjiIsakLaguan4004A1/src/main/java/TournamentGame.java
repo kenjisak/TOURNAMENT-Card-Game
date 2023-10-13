@@ -1,3 +1,4 @@
+import java.io.PrintWriter;
 import java.util.*;
 
 public class TournamentGame {
@@ -183,9 +184,6 @@ public class TournamentGame {
         }
         return anyPlayableCardsFound;
     }
-    public boolean checkCardInput(int currPlyrIndex, int cardIndexSelected){
-        return cardIndexSelected >= 0 && cardIndexSelected < players[currPlyrIndex].getDeckInHand().size();//stop asking for input, game hasn't ended
-    }
     public boolean shamePlayer(int currPlyrIndex, int cardIndexSelected){
         return players[currPlyrIndex].shamed(cardIndexSelected);//remove card from players hand
     }
@@ -202,16 +200,31 @@ public class TournamentGame {
         }
         return returnthis;
     }
+    public int processDiscardInput(Scanner cardInput, PrintWriter output,int currPlyrIndex){
+        System.out.print("Choose a card to Discard: ");
+        int cardIndexSelected = cardInput.nextInt();
+        if (cardIndexSelected >= 0 && cardIndexSelected < players[currPlyrIndex].getDeckInHand().size()){//stop asking for input, game hasn't ended){//if var = true/within index then break and stop asking input
+            boolean shamedPlayerisAlive = shamePlayer(currPlyrIndex,cardIndexSelected);
+            if(!shamedPlayerisAlive){//if the player died then end the game
+                System.out.println(endGame());
+                System.exit(0);
+            }
+            return cardIndexSelected;
+        }
+        output.println("Invalid card Index Selected.");
+        return -1;
+    }
     public void playMelee() {
         System.out.println("Leader " + currLeader + " starts this Melee...");
         int meleeLeaderIndex = findMeleeLeaderIndex();
 
         currSuit = "";//if we want to set to no suit then well set it to "No Suit"
         Scanner cardInput = new Scanner(System.in);
+        PrintWriter output = new PrintWriter(System.out);
 
         for (int i = 0; i < players.length; i++) {//goes through each player's turns
             int currPlyrIndex = (meleeLeaderIndex + i) % players.length;
-            int cardIndexSelected;
+            int cardIndexSelected = -1;
             boolean anyPlayableCardsFound = false;
 
             if (i > 0){//not possible for leader to be SHAMED
@@ -219,17 +232,9 @@ public class TournamentGame {
                 if (!anyPlayableCardsFound){//if no Playable Cards then force player to discard
                     System.out.println("\nPlayer " + players[currPlyrIndex].getName() + " has No Playable Cards this Melee, and is SHAMED.");
                     System.out.println("\n" + players[currPlyrIndex].displayHand());
-                    while(true){
-                        System.out.print("Choose a card to Discard: ");
-                        cardIndexSelected = cardInput.nextInt();
-                        if (checkCardInput(currPlyrIndex,cardIndexSelected)){//if var = true/within index then break and stop asking input
-                            boolean shamedPlayerisAlive = shamePlayer(currPlyrIndex,cardIndexSelected);
-                            if(!shamedPlayerisAlive){//if the player died then end the game
-                                System.out.println(endGame());
-                                System.exit(0);
-                            }
-                            break;
-                        }
+                    while(cardIndexSelected == -1){//while chosen card is invalid
+                        cardIndexSelected = processDiscardInput(cardInput,output,currPlyrIndex);
+                        output.flush();
                     }
                     continue;//skip while loop below, not gonna ask player to play a card
                 }

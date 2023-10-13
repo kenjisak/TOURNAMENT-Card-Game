@@ -1,6 +1,7 @@
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.io.PrintWriter;
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -286,14 +287,10 @@ class TournamentGameUnitTest {
     void testValidateCardInput(){
         String[] testPlayersNames = {"1","2","3"};
         TournamentGame testGame = new TournamentGame(3, testPlayersNames,50);
-
         testGame.players[2].addToHand(new Card("Basic","Swords",1));
 
-        int testPlayerCardInputValid = 0;//Simulates Input saved into cardIndexSelected
-        assertTrue(testGame.checkCardInput(2,testPlayerCardInputValid));
-
-        int testPlayerCardInputInValid = 1;//Out of Bounds simulation, causing while loop restart and ask input again
-        assertFalse(testGame.checkCardInput(2,testPlayerCardInputInValid));
+        assertEquals(0,testGame.processDiscardInput(new Scanner("0"),new PrintWriter(System.out),2));//inbounds
+        assertEquals(-1,testGame.processDiscardInput(new Scanner("6"),new PrintWriter(System.out),2));//out of bounds
     }
     @Test
     @DisplayName("U-TEST-027: Test if a Shamed Player ends or does not end a game properly.")
@@ -390,7 +387,6 @@ class TournamentGameUnitTest {
         expectedReturn.put(testGame.players[2],uniqueCard);
         assertEquals(expectedReturn,testGame.feintStep());
     }
-
     @Test
     @DisplayName("U-TEST-032: Test if the lowest card was found properly.")
     void testFindLowestCard() {
