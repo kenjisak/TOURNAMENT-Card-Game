@@ -283,7 +283,7 @@ class TournamentGameUnitTest {
         assertTrue(testGame.checkAnyPlayableCards(3,"Deception"));
     }
     @Test
-    @DisplayName("U-TEST-024: Test if input is validated correctly when Player is choosing a Card.")
+    @DisplayName("U-TEST-024: Test if input is validated correctly when Player is choosing a Card to Discard.")
     void testValidateCardInput(){
         String[] testPlayersNames = {"1","2","3"};
         TournamentGame testGame = new TournamentGame(3, testPlayersNames,50);
@@ -493,7 +493,7 @@ class TournamentGameUnitTest {
         assertEquals(new ArrayList<>(testGame.currMeleeCardsPlayed.values()),testGame.players[2].getInjuryDeck());
     }
     @Test
-    @DisplayName("U-TEST-036: Test if input is validated correctly when Player is choosing a Card.")
+    @DisplayName("U-TEST-036: Test if Leader choosing a Basic Card will set the melee suit by input and works properly.")
     void testCardInputBasicLeader(){
         String[] testPlayersNames = {"1","2","3"};
         TournamentGame testGame = new TournamentGame(3, testPlayersNames,50);
