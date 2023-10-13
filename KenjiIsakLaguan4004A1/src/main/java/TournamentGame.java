@@ -144,11 +144,11 @@ public class TournamentGame {
         System.out.println(displayAllPlayersHandsHP());
 
         //playMelee in 12 time loop
-//        for (int i = 1; i <= 12; i++) {
-//        System.out.println("\nRound " + roundNum + ", Melee " + i + " Starting...");
-        playMelee();
-//        System.out.println("Round " + roundNum + ", Melee " + i + " over...");
-//        }
+        for (int i = 1; i <= 12; i++) {
+            System.out.println("\nRound " + roundNum + ", Melee " + i + " Starting...");
+            playMelee();
+            System.out.println("Round " + roundNum + ", Melee " + i + " over...");
+        }
 
         playersTakeDmg();
         System.out.println(displayAllPlayersHP());
@@ -233,7 +233,7 @@ public class TournamentGame {
         return playableCardsFound;
     }
     public int processDiscardInput(Scanner cardInput, PrintWriter output,int currPlyrIndex){
-        System.out.println("Choose a card to Discard: ");
+        System.out.print("Choose a card to Discard: ");
         int cardIndexSelected = cardInput.nextInt();
         if (cardIndexSelected >= 0 && cardIndexSelected < players[currPlyrIndex].getDeckInHand().size()){//stop asking for input, game hasn't ended){//if var = true/within index then break and stop asking input
             boolean shamedPlayerisAlive = shamePlayer(currPlyrIndex,cardIndexSelected);
@@ -249,7 +249,7 @@ public class TournamentGame {
     public int processCardInput(Scanner cardInput, PrintWriter output,int currPlyrIndex,int turnIndex){
         //display players hand
         System.out.println("\n" + players[currPlyrIndex].displayHand());
-        System.out.println("Player " + players[currPlyrIndex].getName() + " Select a VALID Card Index: ");
+        System.out.print("Player " + players[currPlyrIndex].getName() + " Select a VALID Card Index: ");
         int cardIndexSelected = cardInput.nextInt();
         if (cardIndexSelected >= 0 && cardIndexSelected < players[currPlyrIndex].getDeckInHand().size()){
             chosenCard = players[currPlyrIndex].getDeckInHand().get(cardIndexSelected);
@@ -262,6 +262,7 @@ public class TournamentGame {
                     return cardIndexSelected;
                 }
                 if (Objects.equals(chosenCard.getType(), "Merlin") || Objects.equals(chosenCard.getType(), "Apprentice")) {
+                    cardInput.nextLine();//clear buffer,theres some \n hiding somewhere
                     while (Objects.equals(currSuit, "")){//ask input again to choose the suit
                         currSuit = processSuitInput(cardInput,output);//Use same scanner for ease
                         output.flush();
@@ -270,6 +271,7 @@ public class TournamentGame {
                     int valueChosen = -1;
                     while (valueChosen == -1){
                         valueChosen = processValueInput(cardInput,output);
+                        output.flush();
                     }
                     System.out.println("The Suit Set for this Melee is: " + currSuit);
                     return cardIndexSelected;
@@ -284,12 +286,17 @@ public class TournamentGame {
             }else{//not the Leader,check if card matches curr Suit
                 //if no suit dont bother checking the type/playable cards
                 if(Objects.equals(currSuit, "No Suit") || Objects.equals(chosenCard.getSuit(), currSuit)){ return cardIndexSelected; }
+                if(Objects.equals(chosenCard.getType(), "Basic")){//error message for only Basic Type
+                    System.out.println("This Card doesn't match the Suit of this Melee: " + currSuit);
+//                    System.out.println("Card Played: " + chosenCard.getSuit() + "(" + chosenCard.getValue()+ ")");
+                }
                 if(Objects.equals(chosenCard.getType(), "Merlin") || Objects.equals(chosenCard.getType(), "Apprentice")){
                     chosenCard.setSuit(currSuit);
                     //ask for a valid Value
                     int valueChosen = -1;
                     while (valueChosen == -1){
                         valueChosen = processValueInput(cardInput,output);
+                        output.flush();
                     }
                     return cardIndexSelected;
                 }
@@ -302,12 +309,15 @@ public class TournamentGame {
                     System.out.println("You cannot play an Alchemy card, with other playable cards in your hand.");
                 }
             }
+
+        }else{
+            output.println("Invalid card Index Selected.");
+            return -1;
         }
-        output.println("Invalid card Index Selected.");
-        return -1;
+        return -1;//valid index but card cant be played so ask again
     }
     public String processSuitInput(Scanner suitInput, PrintWriter output) {
-        System.out.println("Please choose a VALID Suit(Swords, Arrows, Sorcery, Deception): ");
+        System.out.print("Please choose a VALID Suit(Swords, Arrows, Sorcery, Deception): ");
         currSuit = suitInput.nextLine();
         if (Objects.equals(currSuit, "Swords") || Objects.equals(currSuit, "Arrows") || Objects.equals(currSuit, "Sorcery") || Objects.equals(currSuit, "Deception")){
             chosenCard.setSuit(currSuit);
@@ -317,7 +327,7 @@ public class TournamentGame {
         return "";
     }
     public int processValueInput(Scanner valueInput, PrintWriter output) {
-        System.out.println("Please choose a value (1-15) for your " + chosenCard.getType() + " card: ");
+        System.out.print("Please choose a value (1-15) for your " + chosenCard.getType() + " card: ");
         int valueChosen = valueInput.nextInt();
         if(valueChosen > 0 && valueChosen <= 15){
             chosenCard.setValue(valueChosen);
@@ -459,9 +469,9 @@ public class TournamentGame {
 
         TournamentGame tournamentGame = new TournamentGame(numPlayers, playersNames, 100);
 
-//        while (true) {//disable loop to play 1 round at a time
-        tournamentGame.playRound();
-//        }
+        while (true) {//disable loop to play 1 round at a time
+            tournamentGame.playRound();
+        }
     }
     public static boolean checkInputNumPlayers(int input){
         return input >= 3 && input <= 5;//if true then valid, else not
