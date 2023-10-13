@@ -305,6 +305,10 @@ public class TournamentGame {
     public void meleeLoserUpdate(){
         if(loser != null){
             currLeader = loser.getName();//set loser to currLeader
+            //adds all meleeCards losers injury deck, doesnt include discarded as its not added to meleeDeck
+            List<Card> meleeDeck = new ArrayList<>(currMeleeCardsPlayed.values());
+            int dmgThisMelee = loser.addToInjuryDeck(meleeDeck);
+            System.out.println(loser.getName() + " is the loser for this melee and accumulated " + dmgThisMelee + " injury points this melee.");
         }else{
             System.out.println("There are no losers for this melee.");
         }
