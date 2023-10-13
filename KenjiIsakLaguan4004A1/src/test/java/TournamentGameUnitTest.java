@@ -542,4 +542,17 @@ class TournamentGameUnitTest {
         assertEquals(1,testGame.processValueInput(new Scanner("1"),new PrintWriter(System.out)));//Valid Value Input
         assertEquals(1,testGame.chosenCard.getValue());
     }
+    @Test
+    @DisplayName("U-TEST-040: Test if Melee Leader has Non Alchemy Playable Cards properly when attempting to start with an Alchemy.")
+    void testNonAlPlayableCards(){
+        String[] testPlayersNames = {"1","2","3"};
+        TournamentGame testGame = new TournamentGame(3, testPlayersNames,50);
+
+        testGame.players[0].addToHand(new Card("Alchemy",1));
+        assertFalse(testGame.checkNonAlPlayableCards(0));//doesn't have any other Non Alchemy Cards
+
+        testGame.players[0].addToHand(new Card("Merlin"));
+        testGame.players[0].addToHand(new Card("Basic","Swords",1));
+        assertTrue(testGame.checkNonAlPlayableCards(0));//does have other Non Alchemy Cards
+    }
 }

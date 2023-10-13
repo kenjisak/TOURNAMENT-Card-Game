@@ -202,6 +202,9 @@ public class TournamentGame {
         }
         return returnthis;
     }
+    public boolean checkNonAlPlayableCards(int currPlyrIndex){
+        return false;
+    }
     public int processDiscardInput(Scanner cardInput, PrintWriter output,int currPlyrIndex){
         System.out.println("Choose a card to Discard: ");
         int cardIndexSelected = cardInput.nextInt();
