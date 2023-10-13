@@ -586,4 +586,20 @@ class TournamentGameUnitTest {
         testGame.currSuit = "No Suit";
         assertEquals(0,testGame.processCardInput(new Scanner("0"), new PrintWriter(System.out), 0, 1));//Now Matches the suit
     }
+    @Test
+    @DisplayName("U-TEST-043: Test if a following Player inputted Merlin/Apprentice Card Matches the Suit and validates the value asked properly.")
+    void testMeApSuitMatches(){
+        String[] testPlayersNames = {"1","2","3"};
+        TournamentGame testGame = new TournamentGame(3, testPlayersNames,50);
+
+        testGame.players[0].addToHand(new Card("Merlin"));
+        testGame.players[0].addToHand(new Card("Apprentice"));
+
+        testGame.currSuit = "Sorcery";//Me/Ap Will Always Match the Suit
+        assertEquals(0,testGame.processCardInput(new Scanner("0\n0\n1"), new PrintWriter(System.out), 0, 1));//Invalid Value input, followed by valid to end the while loop
+        assertEquals(0,testGame.processCardInput(new Scanner("0\n16\n1"), new PrintWriter(System.out), 0, 1));//Invalid Value input, followed by valid
+
+        testGame.currSuit = "No Suit";
+        assertEquals(1,testGame.processCardInput(new Scanner("1\n15"), new PrintWriter(System.out), 0, 1));//make sure matches no suit too
+    }
 }
