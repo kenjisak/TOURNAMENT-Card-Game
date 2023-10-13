@@ -255,6 +255,9 @@ public class TournamentGame {
         output.println("Invalid Suit Entered.");
         return "";
     }
+    public int processValueInput(Scanner valueInput, PrintWriter output) {
+        return -1;
+    }
     public void playMelee() {
         System.out.println("Leader " + currLeader + " starts this Melee...");
         int meleeLeaderIndex = findMeleeLeaderIndex();

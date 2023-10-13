@@ -527,7 +527,19 @@ class TournamentGameUnitTest {
 
         assertEquals(-1,testGame.processCardInput(new Scanner("6"), new PrintWriter(System.out), 2, 0));//out of bounds
         assertEquals("",testGame.currSuit);
-        assertEquals(0,testGame.processCardInput(new Scanner("0\nSwords"),new PrintWriter(System.out),2,0));//inbounds
+        assertEquals(0,testGame.processCardInput(new Scanner("0\nBlahhh\nSwords\n0\n16\n1"),new PrintWriter(System.out),2,0));//tests both invalid and valid suit + value inputs
         assertEquals("Swords",testGame.currSuit);
+    }
+    @Test
+    @DisplayName("U-TEST-039: Test it validates the Value input correctly.")
+    void testValueInputMeAp(){
+        String[] testPlayersNames = {"1","2","3"};
+        TournamentGame testGame = new TournamentGame(3, testPlayersNames,50);
+        testGame.players[2].addToHand(new Card("Apprentice"));
+
+        testGame.chosenCard = testGame.players[2].getDeckInHand().get(0);//rig to be able to set the value
+        assertEquals(-1,testGame.processValueInput(new Scanner("0"), new PrintWriter(System.out)));//Non Valid Value Input
+        assertEquals(1,testGame.processValueInput(new Scanner("1"),new PrintWriter(System.out)));//Valid Value Input
+        assertEquals(1,testGame.chosenCard.getValue());
     }
 }
