@@ -216,7 +216,7 @@ public class TournamentGame {
         output.println("Invalid card Index Selected.");
         return -1;
     }
-    public Card processCardInput(Scanner cardInput, PrintWriter output,int currPlyrIndex,int turnIndex){
+    public int processCardInput(Scanner cardInput, PrintWriter output,int currPlyrIndex,int turnIndex){
         //display players hand
         System.out.println("\n" + players[currPlyrIndex].displayHand());
         System.out.print("Player " + players[currPlyrIndex].getName() + " Select a VALID Card Index: ");
@@ -229,12 +229,12 @@ public class TournamentGame {
                 if (Objects.equals(chosenCard.getType(), "Basic")) {
                     currSuit = chosenCard.getSuit();
                     System.out.println("The Suit Set for this Melee is: " + currSuit);
-                    return chosenCard;
+                    return cardIndexSelected;
                 }
             }
         }
         output.println("Invalid card Index Selected.");
-        return null;
+        return -1;
     }
     public void playMelee() {
         System.out.println("Leader " + currLeader + " starts this Melee...");
@@ -263,8 +263,8 @@ public class TournamentGame {
             }
 
             chosenCard = null;
-            while (chosenCard == null){
-                chosenCard = processCardInput(cardInput,output,currPlyrIndex,i);
+            while (cardIndexSelected == -1){
+                cardIndexSelected = processCardInput(cardInput,output,currPlyrIndex,i);
                 output.flush();
             }
             addChosenCard(currPlyrIndex,cardIndexSelected,chosenCard);

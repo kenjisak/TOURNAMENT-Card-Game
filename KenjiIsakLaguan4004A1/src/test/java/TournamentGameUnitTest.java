@@ -499,9 +499,9 @@ class TournamentGameUnitTest {
         TournamentGame testGame = new TournamentGame(3, testPlayersNames,50);
         testGame.players[2].addToHand(new Card("Basic","Swords",1));
 
-        assertNull(testGame.processCardInput(new Scanner("6"), new PrintWriter(System.out), 2, 0));//out of bounds
+        assertEquals(-1,testGame.processCardInput(new Scanner("6"), new PrintWriter(System.out), 2, 0));//out of bounds
         assertEquals("",testGame.currSuit);
-        assertEquals(testGame.players[2].getDeckInHand().get(0),testGame.processCardInput(new Scanner("0"),new PrintWriter(System.out),2,0));//inbounds
+        assertEquals(0,testGame.processCardInput(new Scanner("0"),new PrintWriter(System.out),2,0));//inbounds
         assertEquals("Swords",testGame.currSuit);
 
     }
