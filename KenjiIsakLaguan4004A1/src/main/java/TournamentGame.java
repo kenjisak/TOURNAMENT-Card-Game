@@ -296,7 +296,10 @@ public class TournamentGame {
         return null;//if empty then no losers, keep currLeader.
     }
     public Player findLoser(){
-        return null;
+        Map<Player, Card> uniquePlayerCard = feintStep();
+        Player loser = findLowestCard(uniquePlayerCard);
+
+        return loser;
     }
     public static void main(String[] args) {
         System.out.println("Welcome to the TOURNAMENT Game.");
