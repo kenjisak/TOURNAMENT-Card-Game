@@ -376,7 +376,7 @@ public class TournamentGame {
         System.out.println(printMeleeDeck(currMeleeCardsPlayed));
         //determine loser
         loser = findLoser();
-        meleeLoserUpdate();//if theres a loser then update as leader, remove their hp and display their name
+        meleeLoserUpdate();//if theres a loser then update as leader, and display their name with dmg accumulated
     }
 
     public Map<Player,Card> feintStep(){//return a Map List of Unique Played Cards, after feint step

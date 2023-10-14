@@ -3,9 +3,12 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestClassOrder;
 
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class GameAcceptanceTest {
     /*
@@ -52,7 +55,8 @@ public class GameAcceptanceTest {
                 Player 3's Hand: [Al(3)] Health Points: 50""";
 
         assertEquals(expectedOutput, testGame.displayAllPlayersHandsHP());
-    }/*
+    }
+    /*
      * A-TEST 003:
      * > Round 1 Leader = 1st Player
      * > Round 2 Leader = 2nd Player
@@ -80,5 +84,52 @@ public class GameAcceptanceTest {
             assertEquals(testPlayersNames4[i % testPlayerNum4],testGame.currLeader);
             testGame.updateRoundLeader();
         }
+    }
+    /*
+     * A-TEST 004:
+     * > Leader Plays Sword 2
+     * > 2nd Plays Merlin and inputs 3
+     * > 3rd Plays Matching Sword 1
+     * > Loser will be the Player 3 as it's the lowest card
+     * > Player 3 will accumulate 35 points from that melee, and be the next Melee Leader
+     * > Round is also Over Since 1 melee,
+     * > Plays One after the Other
+     */
+    @Test
+    @DisplayName("A-TEST-004: Scenario 4 Leader sets the Suit with a Basic Card, following players, play a Merlin and Basic Card that matches a suit. All valid inputs")
+    void ATEST_004(){
+        int testPlayerNum = 3;
+        String[] testPlayersNames = {"1", "2", "3"};
+        TournamentGame testGame = new TournamentGame(testPlayerNum, testPlayersNames,50);
+        Card ply1Card = new Card("Basic","Swords",2);
+        Card ply2Card = new Card("Merlin");
+        Card lowestCard = new Card("Basic","Swords",1);
+
+        testGame.players[0].addToHand(ply1Card);
+        testGame.players[1].addToHand(ply2Card);
+        testGame.players[2].addToHand(lowestCard);
+
+        testGame.playMelee(new Scanner("0\n0\n3\n0\n"),new PrintWriter(System.out));
+
+        assertEquals("Basic",testGame.currMeleeCardsPlayed.get(testGame.players[0]).getType());//check Leader card is basic
+        assertEquals("Swords", testGame.currSuit);//check check currSuit set to Swords
+
+        assertEquals(3,testGame.currMeleeCardsPlayed.get(testGame.players[1]).getValue());//check merlin value set to 3
+        assertEquals("Swords",testGame.currMeleeCardsPlayed.get(testGame.players[1]).getSuit());//check merlin suit set to swords/currsuit
+
+        assertEquals(testGame.currSuit,testGame.currMeleeCardsPlayed.get(testGame.players[2]).getSuit());//check card matched currsuit
+
+        assertEquals(testGame.players[2],testGame.findLowestCard(testGame.currMeleeCardsPlayed));//check player 3 had the lowest card
+        assertEquals(testGame.loser, testGame.players[2]);//check player 3 is the loser
+        assertEquals(testGame.currLeader, testGame.players[2].getName());//check player 3 is the next melee leader
+
+        assertEquals(3,testGame.players[2].getInjuryDeck().size());//check player 3 added melee cards to their injury deck
+        assertTrue(testGame.players[2].getInjuryDeck().contains(ply1Card));
+        assertTrue(testGame.players[2].getInjuryDeck().contains(ply2Card));
+        assertTrue(testGame.players[2].getInjuryDeck().contains(lowestCard));
+
+        testGame.playersTakeDmg();
+        assertEquals(15,testGame.players[2].getHealthPoints());//1 melee only in 1 round to test, verify damage taken at end of round
+        assertEquals(35,testGame.players[2].addToInjuryDeck(new ArrayList<>(testGame.currMeleeCardsPlayed.values())));//check accumulated dmg points was correct
     }
 }
