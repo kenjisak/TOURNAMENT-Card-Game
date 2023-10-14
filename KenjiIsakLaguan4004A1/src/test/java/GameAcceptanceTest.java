@@ -138,6 +138,12 @@ public class GameAcceptanceTest {
         testGame.playersTakeDmg();
         assertEquals(15,testGame.players[2].getHealthPoints());//1 melee only in 1 round to test, verify damage taken at end of round
         assertEquals(35,testGame.players[2].addToInjuryDeck(new ArrayList<>(testGame.currMeleeCardsPlayed.values())));//check accumulated dmg points was correct
+        String expectedOutput = """
+
+                Player 1 HP: 50
+                Player 2 HP: 50
+                Player 3 HP: 15""";
+        assertEquals(expectedOutput, testGame.displayAllPlayersHP());
     }
     /*
      * A-TEST 005:
