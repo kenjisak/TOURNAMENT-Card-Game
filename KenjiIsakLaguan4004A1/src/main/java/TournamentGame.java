@@ -1,7 +1,11 @@
 import java.io.PrintWriter;
 import java.util.*;
 
+
 public class TournamentGame {
+    public static String[] playersNames;
+    public static int numPlayers;
+    //////////////////////////////////////////
     public Player[] players;//keeps track of turns as well by creating players in order of input
     public String currLeader;
     public List<Card> gameDeck;
@@ -450,25 +454,28 @@ public class TournamentGame {
         Scanner scanner = new Scanner(System.in);
         PrintWriter output = new PrintWriter(System.out);
 
-        int numPlayers = -1;
+        getInitInfo(scanner,output);
+
+        TournamentGame tournamentGame = new TournamentGame(numPlayers, playersNames, 100);
+
+        while (true) {//disable loop to play 1 round at a time
+            tournamentGame.playRound();
+        }
+    }
+    public static void getInitInfo(Scanner scanner, PrintWriter output){
+        numPlayers = -1;
         while (numPlayers == -1){
             numPlayers = processNumPlyrInput(scanner,output);
             output.flush();
         }
         scanner.nextLine();//clear input buffer
 
-        String[] playersNames = new String[numPlayers];
+        playersNames = new String[numPlayers];
         for (int i = 0; i < numPlayers; i++){
             while (Objects.equals(playersNames[i], null)){
                 playersNames[i] = processNamePlyrInput(scanner,output,i);
                 output.flush();//check if melee suit input still works fine
             }
-        }
-
-        TournamentGame tournamentGame = new TournamentGame(numPlayers, playersNames, 100);
-
-        while (true) {//disable loop to play 1 round at a time
-            tournamentGame.playRound();
         }
     }
     public static int processNumPlyrInput(Scanner numPlyrInput, PrintWriter output) {
