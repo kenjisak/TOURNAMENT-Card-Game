@@ -1,14 +1,10 @@
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestClassOrder;
 
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class GameAcceptanceTest {
     /*
@@ -92,11 +88,10 @@ public class GameAcceptanceTest {
      * > 3rd Plays Matching Sword 1
      * > Loser will be the Player 3 as it's the lowest card
      * > Player 3 will accumulate 35 points from that melee, and be the next Melee Leader
-     * > Round is also Over Since 1 melee,
-     * > Plays One after the Other
+     * > Round is also Over Since 1 melee only
      */
     @Test
-    @DisplayName("A-TEST-004: Scenario 4 Leader sets the Suit with a Basic Card, following players, play a Merlin and Basic Card that matches a suit. All valid inputs")
+    @DisplayName("A-TEST-004: Scenario 4 Leader sets the Suit with a Basic Card, following players, play a Merlin and Basic Card that matches a suit. All valid inputs, No matching values, and loser is determined with just lowest card")
     void ATEST_004(){
         int testPlayerNum = 3;
         String[] testPlayersNames = {"1", "2", "3"};
@@ -115,7 +110,7 @@ public class GameAcceptanceTest {
         assertEquals("Swords", testGame.currSuit);//check check currSuit set to Swords
 
         assertEquals(3,testGame.currMeleeCardsPlayed.get(testGame.players[1]).getValue());//check merlin value set to 3
-        assertEquals("Swords",testGame.currMeleeCardsPlayed.get(testGame.players[1]).getSuit());//check merlin suit set to swords/currsuit
+        assertEquals(testGame.currSuit,testGame.currMeleeCardsPlayed.get(testGame.players[1]).getSuit());//check merlin suit set to swords/currsuit
 
         assertEquals(testGame.currSuit,testGame.currMeleeCardsPlayed.get(testGame.players[2]).getSuit());//check card matched currsuit
 
@@ -131,5 +126,52 @@ public class GameAcceptanceTest {
         testGame.playersTakeDmg();
         assertEquals(15,testGame.players[2].getHealthPoints());//1 melee only in 1 round to test, verify damage taken at end of round
         assertEquals(35,testGame.players[2].addToInjuryDeck(new ArrayList<>(testGame.currMeleeCardsPlayed.values())));//check accumulated dmg points was correct
+    }
+    /*
+     * A-TEST 005:
+     * > Leader Plays Merlin 1 and inputs Sorcery 1
+     * > 2nd Plays Apprentice and inputs 1
+     * > 3rd forced to Play Alchemy 2
+     * > Loser will be the Player 3 with feint step
+     * > No health removed at end of melee
+     */
+    @Test
+    @DisplayName("A-TEST-005: Scenario 5 Leader sets the Suit with a Merlin, following players, play a Apprentice and Alchemy. Merlin and Apprentice have matching values. Loser is determined with feint step and lowest card.")
+    void ATEST_005(){
+        int testPlayerNum = 3;
+        String[] testPlayersNames = {"1", "2", "3"};
+        TournamentGame testGame = new TournamentGame(testPlayerNum, testPlayersNames,50);
+        Card ply1Card = new Card("Merlin");
+        Card ply2Card = new Card("Apprentice");
+        Card feintStepCard = new Card("Alchemy",2);
+
+        testGame.players[0].addToHand(ply1Card);
+        testGame.players[1].addToHand(ply2Card);
+        testGame.players[2].addToHand(feintStepCard);
+
+        testGame.playMelee(new Scanner("0\nSorcery\n1\n0\n1\n0"),new PrintWriter(System.out));
+
+        assertEquals("Merlin",testGame.currMeleeCardsPlayed.get(testGame.players[0]).getType());//check Leader card is merlin
+        assertEquals("Sorcery", testGame.currSuit);//check curr suit is set to input Sorcery
+        assertEquals(1,testGame.currMeleeCardsPlayed.get(testGame.players[0]).getValue());//check merlin value set to 1
+
+        assertEquals("Apprentice",testGame.currMeleeCardsPlayed.get(testGame.players[1]).getType());//check nextplyr card is Apprentice
+        assertEquals(1,testGame.currMeleeCardsPlayed.get(testGame.players[1]).getValue());//check apprentice value set to 1
+        assertEquals(testGame.currSuit,testGame.currMeleeCardsPlayed.get(testGame.players[1]).getSuit());//check apprentice suit set to sorcery/currsuit
+
+        assertEquals("Alchemy",testGame.currMeleeCardsPlayed.get(testGame.players[2]).getType());//check nextplyr card is Alchemy
+        assertFalse(testGame.checkSuitPlayableCards(2));//check if no other playable cards and is forced to
+        assertEquals(testGame.currSuit,testGame.currMeleeCardsPlayed.get(testGame.players[1]).getSuit());//check alchemy suit set to sorcery/currsuit
+
+        Map<Player,Card> expectedReturn = new HashMap<>();
+        expectedReturn.put(testGame.players[2],feintStepCard);
+        assertEquals(expectedReturn,testGame.feintStep());//check alchemy is the only one left after feint step
+
+        assertEquals(3,testGame.players[2].getInjuryDeck().size());//check all melee cards is added to player 3 injury deck
+        assertTrue(testGame.players[2].getInjuryDeck().contains(ply1Card));
+        assertTrue(testGame.players[2].getInjuryDeck().contains(ply2Card));
+        assertTrue(testGame.players[2].getInjuryDeck().contains(feintStepCard));
+
+        assertEquals(50,testGame.players[2].getHealthPoints());//check health isnt deducted at end of melee
     }
 }
