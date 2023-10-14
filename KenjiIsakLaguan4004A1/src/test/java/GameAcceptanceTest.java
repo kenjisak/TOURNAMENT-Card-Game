@@ -52,5 +52,33 @@ public class GameAcceptanceTest {
                 Player 3's Hand: [Al(3)] Health Points: 50""";
 
         assertEquals(expectedOutput, testGame.displayAllPlayersHandsHP());
+    }/*
+     * A-TEST 003:
+     * > Round 1 Leader = 1st Player
+     * > Round 2 Leader = 2nd Player
+     * > Round 3 Leader = 3rd Player
+     * > Round 4 Leader = 1st Player(Loop back inorder)
+     * > ....... so on
+     */
+    @Test
+    @DisplayName("A-TEST-003: Scenario 3 When Round number exceeds Number of Players, the initial leader will be loop back through the players.")
+    void ATEST_003(){
+        int testPlayerNum3 = 3;
+        String[] testPlayersNames3 = {"1", "2", "3"};
+        TournamentGame testGame = new TournamentGame(testPlayerNum3, testPlayersNames3,50);
+
+        for (int i = 0; i < testPlayerNum3 * testPlayerNum3; i++) {//tests for 9 rounds passing, for when Round Leader should loop back to the 1st Player
+            assertEquals(testPlayersNames3[i % testPlayerNum3],testGame.currLeader);
+            testGame.updateRoundLeader();
+        }
+
+        int testPlayerNum4 = 4;
+        String[] testPlayersNames4 = {"1", "2", "3", "4"};
+        testGame = new TournamentGame(testPlayerNum4, testPlayersNames4,50);
+
+        for (int i = 0; i < testPlayerNum4 * testPlayerNum4; i++) {//tests for 16 rounds passing, for when Round Leader should loop back to the 1st Player
+            assertEquals(testPlayersNames4[i % testPlayerNum4],testGame.currLeader);
+            testGame.updateRoundLeader();
+        }
     }
 }
