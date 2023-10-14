@@ -23,6 +23,14 @@ public class GameAcceptanceTest {
         assertEquals("A",TournamentGame.tournamentGame.players[0].getName());
         assertEquals("B",TournamentGame.tournamentGame.players[1].getName());
         assertEquals("C",TournamentGame.tournamentGame.players[2].getName());
+        for (int i = 0; i < TournamentGame.tournamentGame.players.length; i++) {
+            assertEquals(100,TournamentGame.tournamentGame.players[i].getHealthPoints());
+        }
+        assertEquals(3,TournamentGame.tournamentGame.players.length);
+        assertEquals("A",TournamentGame.tournamentGame.currLeader);
+        assertEquals(0,TournamentGame.tournamentGame.currMeleeCardsPlayed.size());
+        assertEquals(1,TournamentGame.tournamentGame.roundNum);
+        assertEquals(80,TournamentGame.tournamentGame.gameDeck.size());
     }
     @Test
     @DisplayName("A-TEST-002: Scenario 2 Round shuffles and deals to the Players and displays their initial hand and health.")
