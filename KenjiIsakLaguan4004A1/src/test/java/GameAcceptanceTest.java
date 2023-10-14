@@ -188,4 +188,41 @@ public class GameAcceptanceTest {
 
         assertEquals(50,testGame.players[2].getHealthPoints());//check health isnt deducted at end of melee
     }
+    /*
+     * A-TEST 006:
+     * > Leader Plays Alchemy 1 with no other playable cards in hand
+     * > 2nd Plays Merlin and inputs 1
+     * > 3rd Plays Apprentice and inputs 1
+     * > No losers this round with all cards have the same value
+     */
+    @Test
+    @DisplayName("A-TEST-006: Scenario 6 Leader sets the Suit with an Alchemy, following players, play Merlin and Apprentice. All cards have matching values. No losers for this melee.")
+    void ATEST_006(){
+        int testPlayerNum = 3;
+        String[] testPlayersNames = {"1", "2", "3"};
+        TournamentGame testGame = new TournamentGame(testPlayerNum, testPlayersNames,50);
+        Card ply1Card = new Card("Alchemy",1);
+        Card ply2Card = new Card("Merlin");
+        Card ply3Card = new Card("Apprentice");
+
+        testGame.players[0].addToHand(ply1Card);
+        testGame.players[1].addToHand(ply2Card);
+        testGame.players[2].addToHand(ply3Card);
+
+        assertEquals(0,testGame.processCardInput(new Scanner("0"), new PrintWriter(System.out), 0, 0));//input for index of alchemy card tested
+
+        testGame.playMelee(new Scanner("0\n0\n1\n0\n1"),new PrintWriter(System.out));
+        assertFalse(testGame.checkNonAlPlayableCards(0));//Leader has no other playable cards other than alchemy
+        assertEquals("No Suit",testGame.currSuit);//test alchemy leader sets No Suit for melee
+
+        assertNull(testGame.loser);//check no players since all card values matched
+        assertEquals("1", testGame.currLeader);//test leader stays the same
+
+        String expectedOutput1 = "Player: 1, Card: Al(1)";//tests the melee deck displays properly
+        String expectedOutput2 = "Player: 2, Card: Me(1)";
+        String expectedOutput3 = "Player: 3, Card: Ap(1)";
+        assertTrue(testGame.printMeleeDeck(testGame.currMeleeCardsPlayed).contains(expectedOutput1));
+        assertTrue(testGame.printMeleeDeck(testGame.currMeleeCardsPlayed).contains(expectedOutput2));
+        assertTrue(testGame.printMeleeDeck(testGame.currMeleeCardsPlayed).contains(expectedOutput3));
+    }
 }
