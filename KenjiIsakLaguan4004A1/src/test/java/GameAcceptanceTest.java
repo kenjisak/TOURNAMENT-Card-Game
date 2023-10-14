@@ -38,7 +38,11 @@ public class GameAcceptanceTest {
         String[] testPlayersNames = {"1","2","3"};
         TournamentGame testGame = new TournamentGame(3, testPlayersNames,50);
 
+        String beforeShuffle = testGame.gameDeck.toString();
         testGame.distributePlayersHands();
+        String afterShuffle = testGame.gameDeck.toString();
+        assertEquals(80,testGame.gameDeck.size());
+        assertNotEquals(beforeShuffle,afterShuffle);
 
         assertEquals(80,testGame.gameDeck.size());
         for (Player currPlayer: testGame.players) {//check each player handed 12 cards
