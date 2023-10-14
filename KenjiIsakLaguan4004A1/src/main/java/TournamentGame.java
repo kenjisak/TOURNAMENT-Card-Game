@@ -142,7 +142,7 @@ public class TournamentGame {
         }
         return winnersName;
     }
-    public void playRound(){
+    public void playRound(Scanner input, PrintWriter output){
         System.out.println("\nRound " + roundNum + " Starting... Initial Leader of this round is " + currLeader);
         distributePlayersHands();
         //display each player's initial hands
@@ -151,7 +151,7 @@ public class TournamentGame {
         //playMelee in 12 time loop
         for (int i = 1; i <= 12; i++) {
             System.out.println("\nRound " + roundNum + ", Melee " + i + " Starting...");
-            playMelee();
+            playMelee(input,output);
             System.out.println("Round " + roundNum + ", Melee " + i + " over...");
         }
 
@@ -340,13 +340,11 @@ public class TournamentGame {
         output.println("Invalid Value Entered.");
         return -1;
     }
-    public void playMelee() {
+    public void playMelee(Scanner cardInput, PrintWriter output) {
         System.out.println("Leader " + currLeader + " starts this Melee...");
         int meleeLeaderIndex = findMeleeLeaderIndex();
 
         currSuit = "";//if we want to set to no suit then well set it to "No Suit"
-        Scanner cardInput = new Scanner(System.in);
-        PrintWriter output = new PrintWriter(System.out);
 
         for (int i = 0; i < players.length; i++) {//goes through each player's turns
             int currPlyrIndex = (meleeLeaderIndex + i) % players.length;
@@ -458,9 +456,10 @@ public class TournamentGame {
         getInitInfo(scanner,output);
 
         tournamentGame = new TournamentGame(numPlayers, playersNames, 100);
-
+        Scanner inputPlay = new Scanner(System.in);
+        PrintWriter outputPlay = new PrintWriter(System.out);
         while (true) {//disable loop to play 1 round at a time
-            tournamentGame.playRound();
+            tournamentGame.playRound(inputPlay,outputPlay);
         }
     }
     public static void getInitInfo(Scanner scanner, PrintWriter output){
