@@ -5,6 +5,7 @@ import java.util.*;
 public class TournamentGame {
     public static String[] playersNames;
     public static int numPlayers;
+    public static TournamentGame tournamentGame;
     //////////////////////////////////////////
     public Player[] players;//keeps track of turns as well by creating players in order of input
     public String currLeader;
@@ -456,7 +457,7 @@ public class TournamentGame {
 
         getInitInfo(scanner,output);
 
-        TournamentGame tournamentGame = new TournamentGame(numPlayers, playersNames, 100);
+        tournamentGame = new TournamentGame(numPlayers, playersNames, 100);
 
         while (true) {//disable loop to play 1 round at a time
             tournamentGame.playRound();
@@ -474,9 +475,10 @@ public class TournamentGame {
         for (int i = 0; i < numPlayers; i++){
             while (Objects.equals(playersNames[i], null)){
                 playersNames[i] = processNamePlyrInput(scanner,output,i);
-                output.flush();//check if melee suit input still works fine
+                output.flush();
             }
         }
+        tournamentGame = new TournamentGame(numPlayers, playersNames, 100);
     }
     public static int processNumPlyrInput(Scanner numPlyrInput, PrintWriter output) {
         System.out.print("Please enter an ACCEPTABLE number of players (3-5 is acceptable): ");
