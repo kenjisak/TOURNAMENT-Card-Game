@@ -2,6 +2,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -18,7 +19,10 @@ public class GameAcceptanceTest {
     @Test
     @DisplayName("A-TEST-001: Scenario 1 Initialize the Game with given Number of Players and Player Names.")
     void ATEST_001(){
-        TournamentGame.getInitInfo(new Scanner("2\n6\n3\n\nA\nB\nC"),new PrintWriter(System.out));
+        StringWriter output = new StringWriter();
+        TournamentGame.getInitInfo(new Scanner("2\n6\n3\n\nA\nB\nC"),new PrintWriter(output));
+        assertTrue(output.toString().contains("Invalid Number Entered."));
+        assertTrue(output.toString().contains("Empty Name Entered."));
         assertEquals(3,TournamentGame.tournamentGame.players.length);
         assertEquals("A",TournamentGame.tournamentGame.players[0].getName());
         assertEquals("B",TournamentGame.tournamentGame.players[1].getName());
@@ -224,5 +228,37 @@ public class GameAcceptanceTest {
         assertTrue(testGame.printMeleeDeck(testGame.currMeleeCardsPlayed).contains(expectedOutput1));
         assertTrue(testGame.printMeleeDeck(testGame.currMeleeCardsPlayed).contains(expectedOutput2));
         assertTrue(testGame.printMeleeDeck(testGame.currMeleeCardsPlayed).contains(expectedOutput3));
+    }
+    /*
+     * A-TEST 007:
+     * > Leader Plays Arrow 1
+     * > 2nd has Deception 1 so is forced to discard
+     * > 3rd has Sorcery 1 so is forced to discard
+     * > No Players died after being shamed, Game Continues
+     */
+    @Test
+    @DisplayName("A-TEST-007: Scenario 7 Leader plays Arrows. Following players don't have any playable cards and are shamed and have to discard.")
+    void ATEST_007(){
+        StringWriter output = new StringWriter();
+        int testPlayerNum = 3;
+        String[] testPlayersNames = {"1", "2", "3"};
+        TournamentGame testGame = new TournamentGame(testPlayerNum, testPlayersNames,50);
+        Card ply1Card = new Card("Basic", "Arrows",1);
+        Card ply2Card = new Card("Basic", "Deception",1);
+        Card ply3Card = new Card("Basic","Sorcery",1);
+
+        testGame.players[0].addToHand(ply1Card);
+        testGame.players[1].addToHand(ply2Card);
+        testGame.players[2].addToHand(ply3Card);
+
+        assertFalse(testGame.checkAnyPlayableCards(1,"Arrows"));//test player doesn't have any playable cards that match the suit
+        testGame.playMelee(new Scanner("0\n0\n-1\n0"),new PrintWriter(output));
+
+        assertTrue(output.toString().contains("Invalid card Index Selected."));//tests for invalid index chosen to discard
+        assertFalse(testGame.players[1].getDeckInHand().contains(ply2Card));//test players card is discarded from their hand
+        assertEquals(45,testGame.players[1].getHealthPoints());//test players hp was deducted 5 hp after shame
+        for (int i = 0; i < testGame.players.length; i++) {//tests all players are alive and will not end the game
+            assertTrue(testGame.players[i].isAlive());
+        }
     }
 }
