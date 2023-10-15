@@ -70,12 +70,7 @@ public class GameAcceptanceTest {
         testGame.players[1].addToHand(new Card("Basic","Sorcery",6));
         testGame.players[2].addToHand(new Card("Alchemy",3));
 
-        String expectedOutput = """
-
-                Player 1's Hand: [De(12)] Health Points: 50
-                Player 2's Hand: [So(6)] Health Points: 50
-                Player 3's Hand: [Al(3)] Health Points: 50""";
-
+        String expectedOutput = "\n" + "Player 1's Hand: [De(12)] Health Points: 50\n" + "Player 2's Hand: [So(6)] Health Points: 50\n" + "Player 3's Hand: [Al(3)] Health Points: 50";
         assertEquals(expectedOutput, testGame.displayAllPlayersHandsHP());
     }
     /*
@@ -149,11 +144,7 @@ public class GameAcceptanceTest {
         testGame.playersTakeDmg();
         assertEquals(15,testGame.players[2].getHealthPoints());//1 melee only in 1 round to test, verify damage taken at end of round
         assertEquals(35,testGame.players[2].addToInjuryDeck(new ArrayList<>(testGame.currMeleeCardsPlayed.values())));//check accumulated dmg points was correct
-        String expectedOutput = """
-
-                Player 1 HP: 50
-                Player 2 HP: 50
-                Player 3 HP: 15""";
+        String expectedOutput = "\n" + "Player 1 HP: 50\n" + "Player 2 HP: 50\n" + "Player 3 HP: 15";
         assertEquals(expectedOutput, testGame.displayAllPlayersHP());
     }
     /*
@@ -291,6 +282,7 @@ public class GameAcceptanceTest {
      * > Round ends and Player 1 reduces to 0 hp and ends the game
      * > Winner is Player 3
      * > Also tests if a shamed player will end the game when they reach 0
+     * > Also tests for several winners, after artificially shaming a player to match hp
      */
     @Test
     @DisplayName("A-TEST-009: Scenario 9 Leader tries to play an alchemy but cant and input a invalid suit for apprentice, next player is shamed, next player plays Deception 2 and is the only winner of the game.")
@@ -311,13 +303,12 @@ public class GameAcceptanceTest {
         testGame.playersTakeDmg();
         assertTrue(testGame.checkDeadPlayers());//tests if at the end of a round if a player died, the games end
 
-        String expectedOutput = """
-
-                Player 1 HP: 0
-                Player 2 HP: 5
-                Player 3 HP: 10
-                The winner(s) of the Tournament is: 3""";
+        String expectedOutput = "\n" + "Player 1 HP: 0\n" + "Player 2 HP: 5\n" + "Player 3 HP: 10\n" + "The winner(s) of the Tournament is: 3";
         assertEquals(expectedOutput, testGame.endGame());//tests the game finds the correct winner and displays them with the all players ending hp
+        testGame.shamePlayer(2,0);
+        String severalWinners = "\n" + "Player 1 HP: 0\n" + "Player 2 HP: 5\n" + "Player 3 HP: 5\n" + "The winner(s) of the Tournament is: 2 3";
+        System.out.println(testGame.endGame());
+        assertEquals(severalWinners, testGame.endGame());//tests the game finds the correct winner and displays them with the all players ending hp
         assertFalse(testGame.shamePlayer(1,0));//tests if shaming this player makes their health 0 or below, it ends the game.
     }
 }
