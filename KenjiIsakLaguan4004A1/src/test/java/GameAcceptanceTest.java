@@ -303,12 +303,51 @@ public class GameAcceptanceTest {
         testGame.playersTakeDmg();
         assertTrue(testGame.checkDeadPlayers());//tests if at the end of a round if a player died, the games end
 
-        String expectedOutput = "\n" + "Player 1 HP: 0\n" + "Player 2 HP: 5\n" + "Player 3 HP: 10\n" + "The winner(s) of the Tournament is: 3";
-        assertEquals(expectedOutput, testGame.endGame());//tests the game finds the correct winner and displays them with the all players ending hp
+        String oneWinner = "\n" + "Player 1 HP: 0\n" + "Player 2 HP: 5\n" + "Player 3 HP: 10\n" + "The winner(s) of the Tournament is: 3";
+        assertEquals(oneWinner, testGame.endGame());//tests the game finds the correct winner and displays them with the all players ending hp
         testGame.shamePlayer(2,0);
         String severalWinners = "\n" + "Player 1 HP: 0\n" + "Player 2 HP: 5\n" + "Player 3 HP: 5\n" + "The winner(s) of the Tournament is: 2 3";
-        System.out.println(testGame.endGame());
+        System.out.println(testGame.endGame());//tests the game finds several winners
         assertEquals(severalWinners, testGame.endGame());//tests the game finds the correct winner and displays them with the all players ending hp
         assertFalse(testGame.shamePlayer(1,0));//tests if shaming this player makes their health 0 or below, it ends the game.
+    }
+    /*
+     * A-TEST 010:
+     * > Leader loses 1st melee with the lowest card
+     * > 2nd loses the next melee with the lowest card
+     * > 3rd loses the last melee with the lowest card
+     * > All Players take damage at the end of this 3 melee round.
+     * > All are below 0 hp and end the game.
+     * > No winners for this tournament
+     */
+    @Test
+    @DisplayName("A-TEST-010: Scenario 10 Leader loses the 1st melee, 2nd player loses the next melee, 3rd player loses the last melee. Round ends and All take damage and are all below 0 HP. There are No Winners.")
+    void ATEST_010(){
+        testGame = new TournamentGame(testPlayerNum, testPlayersNames,10);
+        testGame.players[0].addToHand(new Card("Alchemy",1));
+        testGame.players[0].addToHand(new Card("Alchemy",3));
+        testGame.players[0].addToHand(new Card("Alchemy",2));
+        testGame.players[1].addToHand(new Card("Alchemy",2));
+        testGame.players[1].addToHand(new Card("Alchemy",1));
+        testGame.players[1].addToHand(new Card("Alchemy",3));
+        testGame.players[2].addToHand(new Card("Alchemy",3));
+        testGame.players[2].addToHand(new Card("Alchemy",2));
+        testGame.players[2].addToHand(new Card("Alchemy",1));
+
+        testGame.playMelee(new Scanner("0\n0\n0"),new PrintWriter(output));
+        testGame.playersTakeDmg();
+        testGame.playMelee(new Scanner("0\n0\n0"),new PrintWriter(output));
+        testGame.playersTakeDmg();
+        testGame.playMelee(new Scanner("0\n0\n0"),new PrintWriter(output));
+        testGame.playersTakeDmg();
+        for (int i = 0; i < testPlayerNum; i++) {
+            assertEquals(-5,testGame.players[i].getHealthPoints());//tests all players take damage at end of round, and all are below 0
+        }
+
+        String allBelowZeroHp = "\n" + "Player 1 HP: -5\n" + "Player 2 HP: -5\n" + "Player 3 HP: -5";
+        assertEquals(allBelowZeroHp, testGame.displayAllPlayersHP());//tests all players HP updated and displayed after the round ends
+
+        String noWinners = "\n" + "Player 1 HP: -5\n" + "Player 2 HP: -5\n" + "Player 3 HP: -5\n" + "There are no winners of the Tournament.";
+        assertEquals(noWinners, testGame.endGame());//tests the game finds no winners
     }
 }
