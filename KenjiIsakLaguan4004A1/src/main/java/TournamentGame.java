@@ -344,7 +344,7 @@ public class TournamentGame {
     public void playMelee(Scanner cardInput, PrintWriter output) {
         System.out.println("Leader " + currLeader + " starts this Melee...");
         int meleeLeaderIndex = findMeleeLeaderIndex();
-
+        currMeleeCardsPlayed = new HashMap<>();
         currSuit = "";//if we want to set to no suit then well set it to "No Suit"
 
         for (int i = 0; i < players.length; i++) {//goes through each player's turns
