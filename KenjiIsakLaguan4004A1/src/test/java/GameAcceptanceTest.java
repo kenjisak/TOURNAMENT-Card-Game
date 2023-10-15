@@ -1,3 +1,4 @@
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -8,6 +9,18 @@ import java.util.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class GameAcceptanceTest {
+    public StringWriter output;
+    public int testPlayerNum;
+    public String[] testPlayersNames;
+    public TournamentGame testGame;
+    @BeforeEach
+    public void setUp(){
+        output = new StringWriter();
+        testPlayerNum = 3;
+        testPlayersNames = new String[]{"1", "2", "3"};
+        testGame = new TournamentGame(testPlayerNum, testPlayersNames,50);
+    }
+
     /*
      * A-TEST 001:
      * > User enters invalid inputs for num players: 2, 6
@@ -39,9 +52,6 @@ public class GameAcceptanceTest {
     @Test
     @DisplayName("A-TEST-002: Scenario 2 Round shuffles and deals to the Players and displays their initial hand and health.")
     void ATEST_002(){
-        String[] testPlayersNames = {"1","2","3"};
-        TournamentGame testGame = new TournamentGame(3, testPlayersNames,50);
-
         String beforeShuffle = testGame.gameDeck.toString();
         testGame.distributePlayersHands();
         String afterShuffle = testGame.gameDeck.toString();
@@ -109,9 +119,6 @@ public class GameAcceptanceTest {
     @Test
     @DisplayName("A-TEST-004: Scenario 4 Leader sets the Suit with a Basic Card, following players, play a Merlin and Basic Card that matches a suit. All valid inputs, No matching values, and loser is determined with just lowest card")
     void ATEST_004(){
-        int testPlayerNum = 3;
-        String[] testPlayersNames = {"1", "2", "3"};
-        TournamentGame testGame = new TournamentGame(testPlayerNum, testPlayersNames,50);
         Card ply1Card = new Card("Basic","Swords",2);
         Card ply2Card = new Card("Merlin");
         Card lowestCard = new Card("Basic","Swords",1);
@@ -160,9 +167,6 @@ public class GameAcceptanceTest {
     @Test
     @DisplayName("A-TEST-005: Scenario 5 Leader sets the Suit with a Merlin, following players, play a Apprentice and Alchemy. Merlin and Apprentice have matching values. Loser is determined with feint step and lowest card.")
     void ATEST_005(){
-        int testPlayerNum = 3;
-        String[] testPlayersNames = {"1", "2", "3"};
-        TournamentGame testGame = new TournamentGame(testPlayerNum, testPlayersNames,50);
         Card ply1Card = new Card("Merlin");
         Card ply2Card = new Card("Apprentice");
         Card feintStepCard = new Card("Alchemy",2);
@@ -202,9 +206,6 @@ public class GameAcceptanceTest {
     @Test
     @DisplayName("A-TEST-006: Scenario 6 Leader sets the Suit with an Alchemy, following players, play Merlin and Apprentice. All cards have matching values. No losers for this melee.")
     void ATEST_006(){
-        int testPlayerNum = 3;
-        String[] testPlayersNames = {"1", "2", "3"};
-        TournamentGame testGame = new TournamentGame(testPlayerNum, testPlayersNames,50);
         Card ply1Card = new Card("Alchemy",1);
         Card ply2Card = new Card("Merlin");
         Card ply3Card = new Card("Apprentice");
@@ -239,10 +240,6 @@ public class GameAcceptanceTest {
     @Test
     @DisplayName("A-TEST-007: Scenario 7 Leader plays Arrows. Following players don't have any playable cards and are shamed and have to discard.")
     void ATEST_007(){
-        StringWriter output = new StringWriter();
-        int testPlayerNum = 3;
-        String[] testPlayersNames = {"1", "2", "3"};
-        TournamentGame testGame = new TournamentGame(testPlayerNum, testPlayersNames,50);
         Card ply1Card = new Card("Basic", "Arrows",1);
         Card ply2Card = new Card("Basic", "Deception",1);
         Card ply3Card = new Card("Basic","Sorcery",1);
@@ -270,11 +267,6 @@ public class GameAcceptanceTest {
     @Test
     @DisplayName("A-TEST-008: Scenario 8 Leader inputs an invalid index, next player tries to play an alchemy but cant and input a invalid value for apprentice, next tries to play a non matching suit basic weapon card.")
     void ATEST_008(){
-        StringWriter output = new StringWriter();
-        int testPlayerNum = 3;
-        String[] testPlayersNames = {"1", "2", "3"};
-        TournamentGame testGame = new TournamentGame(testPlayerNum, testPlayersNames,50);
-
         testGame.players[0].addToHand(new Card("Basic", "Arrows",1));
         testGame.players[0].addToHand(new Card("Basic", "Swords",1));
         testGame.players[1].addToHand(new Card("Alchemy",1));
