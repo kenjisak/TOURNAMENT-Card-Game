@@ -173,22 +173,22 @@ public class GameAcceptanceTest {
 
         testGame.playMelee(new Scanner("0\nSorcery\n1\n0\n1\n0"),new PrintWriter(System.out));
 
-        assertEquals("Merlin",testGame.currMeleeCardsPlayed.get(testGame.players[0]).getType());//check Leader card is merlin///////////////////
-        assertEquals("Sorcery", testGame.currSuit);//check curr suit is set to input Sorcery////////////////////////////////
+        assertEquals("Merlin",testGame.currMeleeCardsPlayed.get(testGame.players[0]).getType());//check Leader card is merlin
+        assertEquals("Sorcery", testGame.currSuit);//check curr suit is set to input Sorcery
 
-        assertEquals("Apprentice",testGame.currMeleeCardsPlayed.get(testGame.players[1]).getType());//check nextplyr card is Apprentice////////////
+        assertEquals("Apprentice",testGame.currMeleeCardsPlayed.get(testGame.players[1]).getType());//check nextplyr card is Apprentice
 
-        assertEquals("Alchemy",testGame.currMeleeCardsPlayed.get(testGame.players[2]).getType());//check nextplyr card is Alchemy//////////////
-        assertFalse(testGame.checkSuitPlayableCards(2));//check if no other playable cards and is forced to//////////////
-        assertEquals(testGame.currSuit,testGame.currMeleeCardsPlayed.get(testGame.players[1]).getSuit());//check alchemy suit set to sorcery/currsuit/////////////
+        assertEquals("Alchemy",testGame.currMeleeCardsPlayed.get(testGame.players[2]).getType());//check nextplyr card is Alchemy
+        assertFalse(testGame.checkSuitPlayableCards(2));//check if no other playable cards and is forced to
+        assertEquals(testGame.currSuit,testGame.currMeleeCardsPlayed.get(testGame.players[1]).getSuit());//check alchemy suit set to sorcery/currsuit
 
-        assertTrue(testGame.currMeleeCardsPlayed.containsKey(testGame.players[0]));//tests played card was added to melee deck//////////////////////////
-        assertEquals(ply1Card, testGame.currMeleeCardsPlayed.get(testGame.players[0]));//////////////////////////////
-        assertFalse(testGame.players[0].getDeckInHand().contains(ply1Card));//tests players hand no longer has played card/////////////////////////
+        assertTrue(testGame.currMeleeCardsPlayed.containsKey(testGame.players[0]));//tests played card was added to melee deck
+        assertEquals(ply1Card, testGame.currMeleeCardsPlayed.get(testGame.players[0]));
+        assertFalse(testGame.players[0].getDeckInHand().contains(ply1Card));//tests players hand no longer has played card
 
-        Map<Player,Card> expectedReturn = new HashMap<>();////////////////////////
-        expectedReturn.put(testGame.players[2],feintStepCard);/////////////////
-        assertEquals(expectedReturn,testGame.feintStep());//check alchemy is the only one left after feint step//////////////////////
+        Map<Player,Card> expectedReturn = new HashMap<>();
+        expectedReturn.put(testGame.players[2],feintStepCard);
+        assertEquals(expectedReturn,testGame.feintStep());//check alchemy is the only one left after feint step
 
         assertEquals(50,testGame.players[2].getHealthPoints());//check health isnt deducted at end of melee
     }

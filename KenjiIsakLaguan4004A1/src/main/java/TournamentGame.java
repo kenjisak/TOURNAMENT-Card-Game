@@ -293,7 +293,7 @@ public class TournamentGame {
                 //if no suit and MeAp card chosen, ask for input return card index
                 if((Objects.equals(currSuit, "No Suit") && Objects.equals(chosenCard.getType(), "Basic")) || Objects.equals(chosenCard.getSuit(), currSuit)){ return cardIndexSelected; }
                 if(Objects.equals(chosenCard.getType(), "Basic")){//error message for only Basic Type
-                    System.out.println("This Card doesn't match the Suit of this Melee: " + currSuit);
+                    output.println("This Card doesn't match the Suit of this Melee: " + currSuit);
                 }
                 if(Objects.equals(chosenCard.getType(), "Merlin") || Objects.equals(chosenCard.getType(), "Apprentice")){
                     chosenCard.setSuit(currSuit);
@@ -311,7 +311,7 @@ public class TournamentGame {
                         chosenCard.setSuit(currSuit);
                         return cardIndexSelected;
                     }
-                    System.out.println("You cannot play an Alchemy card, with other playable cards in your hand.");
+                    output.println("You cannot play an Alchemy card, with other playable cards in your hand.");
                 }
             }
 
