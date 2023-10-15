@@ -261,4 +261,39 @@ public class GameAcceptanceTest {
             assertTrue(testGame.players[i].isAlive());
         }
     }
+    /*
+     * A-TEST 008:
+     * > Leader inputs an invalid index, then Plays Arrow 1
+     * > 2nd tries to play Alchemy, but has other playable cards, then Plays Apprentice, inputs an invalid value, then
+     * > 3rd tries to play Sorcery 1, but doesnt match the suit, then plays Arrows 2
+     */
+    @Test
+    @DisplayName("A-TEST-008: Scenario 8 Leader inputs an invalid index, next player tries to play an alchemy but cant and input a invalid value for apprentice, next tries to play a non matching suit basic weapon card.")
+    void ATEST_008(){
+        StringWriter output = new StringWriter();
+        int testPlayerNum = 3;
+        String[] testPlayersNames = {"1", "2", "3"};
+        TournamentGame testGame = new TournamentGame(testPlayerNum, testPlayersNames,50);
+        Card ply1Card = new Card("Basic", "Arrows",1);
+        Card ply1Card2 = new Card("Basic", "Swords",1);
+        Card ply2Card = new Card("Alchemy",1);
+        Card ply2Card2 = new Card("Apprentice");
+        Card ply3Card = new Card("Basic","Sorcery",1);
+        Card ply3Card2 = new Card("Basic","Arrows",2);
+
+        testGame.players[0].addToHand(ply1Card);
+        testGame.players[0].addToHand(ply1Card2);
+        testGame.players[1].addToHand(ply2Card);
+        testGame.players[1].addToHand(ply2Card2);
+        testGame.players[2].addToHand(ply3Card);
+        testGame.players[2].addToHand(ply3Card2);
+
+        assertTrue(testGame.checkSuitPlayableCards(1));//tests they have other playable cards that match the suit, apprentice or arrows
+        testGame.playMelee(new Scanner("-1\n0\n0\n1\n-1\n2\n0\n1"),new PrintWriter(output));
+
+        assertTrue(output.toString().contains("Invalid card Index Selected."));//tests for invalid index chosen to play a basic card
+        assertTrue(output.toString().contains("This Card doesn't match the Suit of this Melee: " + testGame.currSuit));//tests for card played doesn't match the suit
+        assertTrue(output.toString().contains("Invalid Value Entered."));//tests for invalid value entered when playing a Me/Ap card
+        assertTrue(output.toString().contains("You cannot play an Alchemy card, with other playable cards in your hand."));//tests has other playable non alchemy cards and asks input again
+    }
 }
