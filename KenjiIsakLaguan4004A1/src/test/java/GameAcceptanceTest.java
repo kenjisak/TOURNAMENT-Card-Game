@@ -282,4 +282,42 @@ public class GameAcceptanceTest {
         assertTrue(output.toString().contains("Invalid Value Entered."));//tests for invalid value entered when playing a Me/Ap card
         assertTrue(output.toString().contains("You cannot play an Alchemy card, with other playable cards in your hand."));//tests has other playable non alchemy cards and asks input again
     }
+    /*
+     * A-TEST 009:
+     * > Leader tries to play alchemy but has other playable cards, then plays Apprentice, inputs an invalid suit then Deception 1
+     * > 2nd is shamed
+     * > 3rd plays Deception 2
+     * > Loser is Player 1,
+     * > Round ends and Player 1 reduces to 0 hp and ends the game
+     * > Winner is Player 3
+     * > Also tests if a shamed player will end the game when they reach 0
+     */
+    @Test
+    @DisplayName("A-TEST-009: Scenario 9 Leader tries to play an alchemy but cant and input a invalid suit for apprentice, next player is shamed, next player plays Deception 2 and is the only winner of the game.")
+    void ATEST_009(){
+        testGame = new TournamentGame(testPlayerNum, testPlayersNames,10);
+        testGame.players[0].addToHand(new Card("Alchemy",1));
+        testGame.players[0].addToHand(new Card("Apprentice"));
+        testGame.players[1].addToHand(new Card("Basic","Swords",1));
+        testGame.players[1].addToHand(new Card("Basic","Arrows",1));
+        testGame.players[2].addToHand(new Card("Basic","Deception",2));
+        testGame.players[2].addToHand(new Card("Basic","Sorcery",1));
+
+        assertTrue(testGame.checkNonAlPlayableCards(0));//Leader has other playable cards other than alchemy
+        testGame.playMelee(new Scanner("0\n1\nBlahhh\nDeception\n1\n0\n0"),new PrintWriter(output));
+
+        assertTrue(output.toString().contains("You cannot start with an Alchemy card, with other type of cards left in hand."));//tests for not allowing player to start with alchemy with other playable cards in hand
+        assertTrue(output.toString().contains("Invalid Suit Entered."));//tests for suit inputted was invalid
+        testGame.playersTakeDmg();
+        assertTrue(testGame.checkDeadPlayers());//tests if at the end of a round if a player died, the games end
+
+        String expectedOutput = """
+
+                Player 1 HP: 0
+                Player 2 HP: 5
+                Player 3 HP: 10
+                The winner(s) of the Tournament is: 3""";
+        assertEquals(expectedOutput, testGame.endGame());//tests the game finds the correct winner and displays them with the all players ending hp
+        assertFalse(testGame.shamePlayer(1,0));//tests if shaming this player makes their health 0 or below, it ends the game.
+    }
 }

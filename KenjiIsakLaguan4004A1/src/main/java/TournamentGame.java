@@ -286,7 +286,7 @@ public class TournamentGame {
                     if (!nonAlFound){//no NON Alchemy found, is forced to play it
                         return cardIndexSelected;
                     }
-                    System.out.println("You cannot start with an Alchemy card, with other type of cards left in hand.");
+                    output.println("You cannot start with an Alchemy card, with other type of cards left in hand.");
                 }
             }else{//not the Leader,check if card matches curr Suit
                 //if no suit and basic card chosen, return card index
