@@ -274,19 +274,13 @@ public class GameAcceptanceTest {
         int testPlayerNum = 3;
         String[] testPlayersNames = {"1", "2", "3"};
         TournamentGame testGame = new TournamentGame(testPlayerNum, testPlayersNames,50);
-        Card ply1Card = new Card("Basic", "Arrows",1);
-        Card ply1Card2 = new Card("Basic", "Swords",1);
-        Card ply2Card = new Card("Alchemy",1);
-        Card ply2Card2 = new Card("Apprentice");
-        Card ply3Card = new Card("Basic","Sorcery",1);
-        Card ply3Card2 = new Card("Basic","Arrows",2);
 
-        testGame.players[0].addToHand(ply1Card);
-        testGame.players[0].addToHand(ply1Card2);
-        testGame.players[1].addToHand(ply2Card);
-        testGame.players[1].addToHand(ply2Card2);
-        testGame.players[2].addToHand(ply3Card);
-        testGame.players[2].addToHand(ply3Card2);
+        testGame.players[0].addToHand(new Card("Basic", "Arrows",1));
+        testGame.players[0].addToHand(new Card("Basic", "Swords",1));
+        testGame.players[1].addToHand(new Card("Alchemy",1));
+        testGame.players[1].addToHand(new Card("Apprentice"));
+        testGame.players[2].addToHand(new Card("Basic","Sorcery",1));
+        testGame.players[2].addToHand(new Card("Basic","Arrows",2));
 
         assertTrue(testGame.checkSuitPlayableCards(1));//tests they have other playable cards that match the suit, apprentice or arrows
         testGame.playMelee(new Scanner("-1\n0\n0\n1\n-1\n2\n0\n1"),new PrintWriter(output));
