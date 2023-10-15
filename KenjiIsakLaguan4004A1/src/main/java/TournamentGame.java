@@ -456,7 +456,6 @@ public class TournamentGame {
 
         getInitInfo(scanner,output);
 
-        tournamentGame = new TournamentGame(numPlayers, playersNames, 100);
         Scanner inputPlay = new Scanner(System.in);
         PrintWriter outputPlay = new PrintWriter(System.out);
         while (true) {//disable loop to play 1 round at a time
