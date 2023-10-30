@@ -32,7 +32,7 @@ public class Player {
         }
         if(playersHand.length() > 1){ playersHand = playersHand.substring(0,playersHand.length() - 1);}
         playersHand += "]";
-        return "game.Player " + name + "'s Hand: " + playersHand;
+        return "Player " + name + "'s Hand: " + playersHand;
     }
     public int addToInjuryDeck(List<Card> meleeDeck){
         injuryDeck.addAll(meleeDeck);
@@ -40,6 +40,7 @@ public class Player {
         for (Card currCard: meleeDeck){
             dmgPtsThisMelee += currCard.getInjuryPoints();
         }
+        totalInjuryPoints += dmgPtsThisMelee;
         return dmgPtsThisMelee;
     }
     public void takeDmg(){
@@ -53,8 +54,9 @@ public class Player {
         deckInHand.remove(cardIndex);
         healthPoints -= 5;
         //print updated dmg
-        System.out.println("game.Player " + name + " Shamed Health Points: " + healthPoints);
+        System.out.println("Player " + name + " Shamed Health Points: " + healthPoints);
         return isAlive();
     }
     public void playCard(int cardIndex){ deckInHand.remove(cardIndex); }
+    public void rigDelHand(){ deckInHand = new ArrayList<>();}//removes all
 }
