@@ -1,3 +1,5 @@
+package game;
+
 import java.io.PrintWriter;
 import java.util.*;
 
@@ -86,7 +88,7 @@ public class TournamentGame {
     public String displayAllPlayersHP(){
         String returnthis = "";
         for (Player currPlayer: players){//print round over with players hp
-            returnthis += "\nPlayer " + currPlayer.getName() + " HP: " + currPlayer.getHealthPoints();
+            returnthis += "\ngame.Player " + currPlayer.getName() + " HP: " + currPlayer.getHealthPoints();
         }
         return returnthis;
     }
@@ -102,7 +104,7 @@ public class TournamentGame {
         //print out hp
         String returnthis = "";
         for (Player currPlayer: players){
-            returnthis += "\nPlayer " + currPlayer.getName() + " HP: " + currPlayer.getHealthPoints();
+            returnthis += "\ngame.Player " + currPlayer.getName() + " HP: " + currPlayer.getHealthPoints();
         }
         String winners = findWinners();
         if(Objects.equals(winners, "")){
@@ -203,7 +205,7 @@ public class TournamentGame {
         for (Map.Entry<Player, Card> entry : deckGiven.entrySet()) {
             Player player = entry.getKey();
             Card card = entry.getValue();
-            returnthis += "\nPlayer: " + player.getName() + ", Card: " + card.displayCard();
+            returnthis += "\ngame.Player: " + player.getName() + ", game.Card: " + card.displayCard();
         }
         return returnthis;
     }
@@ -254,7 +256,7 @@ public class TournamentGame {
     public int processCardInput(Scanner cardInput, PrintWriter output,int currPlyrIndex,int turnIndex){
         //display players hand
         System.out.println("\n" + players[currPlyrIndex].displayHand());
-        System.out.print("Player " + players[currPlyrIndex].getName() + " Select a VALID Card Index: ");
+        System.out.print("game.Player " + players[currPlyrIndex].getName() + " Select a VALID game.Card Index: ");
         int cardIndexSelected = cardInput.nextInt();
         if (cardIndexSelected >= 0 && cardIndexSelected < players[currPlyrIndex].getDeckInHand().size()){
             chosenCard = players[currPlyrIndex].getDeckInHand().get(cardIndexSelected);
@@ -293,7 +295,7 @@ public class TournamentGame {
                 //if no suit and MeAp card chosen, ask for input return card index
                 if((Objects.equals(currSuit, "No Suit") && Objects.equals(chosenCard.getType(), "Basic")) || Objects.equals(chosenCard.getSuit(), currSuit)){ return cardIndexSelected; }
                 if(Objects.equals(chosenCard.getType(), "Basic")){//error message for only Basic Type
-                    output.println("This Card doesn't match the Suit of this Melee: " + currSuit);
+                    output.println("This game.Card doesn't match the Suit of this Melee: " + currSuit);
                 }
                 if(Objects.equals(chosenCard.getType(), "Merlin") || Objects.equals(chosenCard.getType(), "Apprentice")){
                     chosenCard.setSuit(currSuit);
@@ -355,7 +357,7 @@ public class TournamentGame {
             if (i > 0){//not possible for leader to be SHAMED
                 anyPlayableCardsFound = checkAnyPlayableCards(currPlyrIndex,currSuit);
                 if (!anyPlayableCardsFound){//if no Playable Cards then force player to discard
-                    System.out.println("\nPlayer " + players[currPlyrIndex].getName() + " has No Playable Cards this Melee, and is SHAMED.");
+                    System.out.println("\ngame.Player " + players[currPlyrIndex].getName() + " has No Playable Cards this Melee, and is SHAMED.");
                     System.out.println("\n" + players[currPlyrIndex].displayHand());
                     while(cardIndexSelected == -1){//while chosen card is invalid
                         cardIndexSelected = processDiscardInput(cardInput,output,currPlyrIndex);
@@ -370,7 +372,7 @@ public class TournamentGame {
                 cardIndexSelected = processCardInput(cardInput,output,currPlyrIndex,i);
                 output.flush();
             }
-            System.out.println("Card Played: " + chosenCard.displayCard());
+            System.out.println("game.Card Played: " + chosenCard.displayCard());
             addChosenCard(currPlyrIndex,cardIndexSelected,chosenCard);
         }
         System.out.println("\nCurrent Melee Cards Played: ");//display melee deck
@@ -489,7 +491,7 @@ public class TournamentGame {
         return -1;
     }
     public static String processNamePlyrInput(Scanner namePlyrInput, PrintWriter output, int plyrIndex) {
-        System.out.print("Enter (" + (plyrIndex + 1) + ") Player's name: ");
+        System.out.print("Enter (" + (plyrIndex + 1) + ") game.Player's name: ");
         String playersName = namePlyrInput.nextLine();
         if (!Objects.equals(playersName, "")){
             return playersName;//Valid Non Empty Name

@@ -1,3 +1,8 @@
+package gameJunit;
+
+import game.Card;
+import game.Player;
+import game.TournamentGame;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -25,19 +30,19 @@ public class GameAcceptanceTest {
      * A-TEST 001:
      * > User enters invalid inputs for num players: 2, 6
      * > then valid for num players: 3
-     * > First Player empty input for name : \n
+     * > First game.Player empty input for name : \n
      * > then valid for names : A, B, C
      * > Tournament game is initialized with 3 players named A, B, C
      */
     @Test
-    @DisplayName("A-TEST-001: Scenario 1 Initialize the Game with given Number of Players and Player Names.")
+    @DisplayName("A-TEST-001: Scenario 1 Initialize the Game with given Number of Players and game.Player Names.")
     void ATEST_001(){
         StringWriter output = new StringWriter();
         TournamentGame.getInitInfo(new Scanner("2\n6\n3\n\nA\nB\nC"),new PrintWriter(output));
         assertTrue(output.toString().contains("Invalid Number Entered."));
         assertTrue(output.toString().contains("Empty Name Entered."));
         assertEquals(3,TournamentGame.tournamentGame.players.length);
-        assertEquals("A",TournamentGame.tournamentGame.players[0].getName());
+        assertEquals("A", TournamentGame.tournamentGame.players[0].getName());
         assertEquals("B",TournamentGame.tournamentGame.players[1].getName());
         assertEquals("C",TournamentGame.tournamentGame.players[2].getName());
         for (int i = 0; i < TournamentGame.tournamentGame.players.length; i++) {
@@ -70,15 +75,15 @@ public class GameAcceptanceTest {
         testGame.players[1].addToHand(new Card("Basic","Sorcery",6));
         testGame.players[2].addToHand(new Card("Alchemy",3));
 
-        String expectedOutput = "\n" + "Player 1's Hand: [De(12)] Health Points: 50\n" + "Player 2's Hand: [So(6)] Health Points: 50\n" + "Player 3's Hand: [Al(3)] Health Points: 50";
+        String expectedOutput = "\n" + "game.Player 1's Hand: [De(12)] Health Points: 50\n" + "game.Player 2's Hand: [So(6)] Health Points: 50\n" + "game.Player 3's Hand: [Al(3)] Health Points: 50";
         assertEquals(expectedOutput, testGame.displayAllPlayersHandsHP());
     }
     /*
      * A-TEST 003:
-     * > Round 1 Leader = 1st Player
-     * > Round 2 Leader = 2nd Player
-     * > Round 3 Leader = 3rd Player
-     * > Round 4 Leader = 1st Player(Loop back inorder)
+     * > Round 1 Leader = 1st game.Player
+     * > Round 2 Leader = 2nd game.Player
+     * > Round 3 Leader = 3rd game.Player
+     * > Round 4 Leader = 1st game.Player(Loop back inorder)
      * > ....... so on
      */
     @Test
@@ -88,7 +93,7 @@ public class GameAcceptanceTest {
         String[] testPlayersNames3 = {"1", "2", "3"};
         TournamentGame testGame = new TournamentGame(testPlayerNum3, testPlayersNames3,50);
 
-        for (int i = 0; i < testPlayerNum3 * testPlayerNum3; i++) {//tests for 9 rounds passing, for when Round Leader should loop back to the 1st Player
+        for (int i = 0; i < testPlayerNum3 * testPlayerNum3; i++) {//tests for 9 rounds passing, for when Round Leader should loop back to the 1st game.Player
             assertEquals(testPlayersNames3[i % testPlayerNum3],testGame.currLeader);
             testGame.updateRoundLeader();
         }
@@ -97,7 +102,7 @@ public class GameAcceptanceTest {
         String[] testPlayersNames4 = {"1", "2", "3", "4"};
         testGame = new TournamentGame(testPlayerNum4, testPlayersNames4,50);
 
-        for (int i = 0; i < testPlayerNum4 * testPlayerNum4; i++) {//tests for 16 rounds passing, for when Round Leader should loop back to the 1st Player
+        for (int i = 0; i < testPlayerNum4 * testPlayerNum4; i++) {//tests for 16 rounds passing, for when Round Leader should loop back to the 1st game.Player
             assertEquals(testPlayersNames4[i % testPlayerNum4],testGame.currLeader);
             testGame.updateRoundLeader();
         }
@@ -107,12 +112,12 @@ public class GameAcceptanceTest {
      * > Leader Plays Sword 2
      * > 2nd Plays Merlin and inputs 3
      * > 3rd Plays Matching Sword 1
-     * > Loser will be the Player 3 as it's the lowest card
-     * > Player 3 will accumulate 35 points from that melee, and be the next Melee Leader
+     * > Loser will be the game.Player 3 as it's the lowest card
+     * > game.Player 3 will accumulate 35 points from that melee, and be the next Melee Leader
      * > Round is also Over Since 1 melee only
      */
     @Test
-    @DisplayName("A-TEST-004: Scenario 4 Leader sets the Suit with a Basic Card, following players, play a Merlin and Basic Card that matches a suit. All valid inputs, No matching values, and loser is determined with just lowest card")
+    @DisplayName("A-TEST-004: Scenario 4 Leader sets the Suit with a Basic game.Card, following players, play a Merlin and Basic game.Card that matches a suit. All valid inputs, No matching values, and loser is determined with just lowest card")
     void ATEST_004(){
         Card ply1Card = new Card("Basic","Swords",2);
         Card ply2Card = new Card("Merlin");
@@ -144,7 +149,7 @@ public class GameAcceptanceTest {
         testGame.playersTakeDmg();
         assertEquals(15,testGame.players[2].getHealthPoints());//1 melee only in 1 round to test, verify damage taken at end of round
         assertEquals(35,testGame.players[2].addToInjuryDeck(new ArrayList<>(testGame.currMeleeCardsPlayed.values())));//check accumulated dmg points was correct
-        String expectedOutput = "\n" + "Player 1 HP: 50\n" + "Player 2 HP: 50\n" + "Player 3 HP: 15";
+        String expectedOutput = "\n" + "game.Player 1 HP: 50\n" + "game.Player 2 HP: 50\n" + "game.Player 3 HP: 15";
         assertEquals(expectedOutput, testGame.displayAllPlayersHP());
     }
     /*
@@ -152,7 +157,7 @@ public class GameAcceptanceTest {
      * > Leader Plays Merlin 1 and inputs Sorcery 1
      * > 2nd Plays Apprentice and inputs 1
      * > 3rd forced to Play Alchemy 2
-     * > Loser will be the Player 3 with feint step
+     * > Loser will be the game.Player 3 with feint step
      * > No health removed at end of melee
      */
     @Test
@@ -181,7 +186,7 @@ public class GameAcceptanceTest {
         assertEquals(ply1Card, testGame.currMeleeCardsPlayed.get(testGame.players[0]));
         assertFalse(testGame.players[0].getDeckInHand().contains(ply1Card));//tests players hand no longer has played card
 
-        Map<Player,Card> expectedReturn = new HashMap<>();
+        Map<Player, Card> expectedReturn = new HashMap<>();
         expectedReturn.put(testGame.players[2],feintStepCard);
         assertEquals(expectedReturn,testGame.feintStep());//check alchemy is the only one left after feint step
 
@@ -214,9 +219,9 @@ public class GameAcceptanceTest {
         assertNull(testGame.loser);//check no players since all card values matched
         assertEquals("1", testGame.currLeader);//test leader stays the same
 
-        String expectedOutput1 = "Player: 1, Card: Al(1)";//tests the melee deck displays properly
-        String expectedOutput2 = "Player: 2, Card: Me(1)";
-        String expectedOutput3 = "Player: 3, Card: Ap(1)";
+        String expectedOutput1 = "game.Player: 1, game.Card: Al(1)";//tests the melee deck displays properly
+        String expectedOutput2 = "game.Player: 2, game.Card: Me(1)";
+        String expectedOutput3 = "game.Player: 3, game.Card: Ap(1)";
         assertTrue(testGame.printMeleeDeck(testGame.currMeleeCardsPlayed).contains(expectedOutput1));
         assertTrue(testGame.printMeleeDeck(testGame.currMeleeCardsPlayed).contains(expectedOutput2));
         assertTrue(testGame.printMeleeDeck(testGame.currMeleeCardsPlayed).contains(expectedOutput3));
@@ -269,7 +274,7 @@ public class GameAcceptanceTest {
         testGame.playMelee(new Scanner("-1\n0\n0\n1\n-1\n2\n0\n1"),new PrintWriter(output));
 
         assertTrue(output.toString().contains("Invalid card Index Selected."));//tests for invalid index chosen to play a basic card
-        assertTrue(output.toString().contains("This Card doesn't match the Suit of this Melee: " + testGame.currSuit));//tests for card played doesn't match the suit
+        assertTrue(output.toString().contains("This game.Card doesn't match the Suit of this Melee: " + testGame.currSuit));//tests for card played doesn't match the suit
         assertTrue(output.toString().contains("Invalid Value Entered."));//tests for invalid value entered when playing a Me/Ap card
         assertTrue(output.toString().contains("You cannot play an Alchemy card, with other playable cards in your hand."));//tests has other playable non alchemy cards and asks input again
     }
@@ -278,9 +283,9 @@ public class GameAcceptanceTest {
      * > Leader tries to play alchemy but has other playable cards, then plays Apprentice, inputs an invalid suit then Deception 1
      * > 2nd is shamed
      * > 3rd plays Deception 2
-     * > Loser is Player 1,
-     * > Round ends and Player 1 reduces to 0 hp and ends the game
-     * > Winner is Player 3
+     * > Loser is game.Player 1,
+     * > Round ends and game.Player 1 reduces to 0 hp and ends the game
+     * > Winner is game.Player 3
      * > Also tests if a shamed player will end the game when they reach 0
      * > Also tests for several winners, after artificially shaming a player to match hp
      */
@@ -303,10 +308,10 @@ public class GameAcceptanceTest {
         testGame.playersTakeDmg();
         assertTrue(testGame.checkDeadPlayers());//tests if at the end of a round if a player died, the games end
 
-        String oneWinner = "\n" + "Player 1 HP: 0\n" + "Player 2 HP: 5\n" + "Player 3 HP: 10\n" + "The winner(s) of the Tournament is: 3";
+        String oneWinner = "\n" + "game.Player 1 HP: 0\n" + "game.Player 2 HP: 5\n" + "game.Player 3 HP: 10\n" + "The winner(s) of the Tournament is: 3";
         assertEquals(oneWinner, testGame.endGame());//tests the game finds the correct winner and displays them with the all players ending hp
         testGame.shamePlayer(2,0);
-        String severalWinners = "\n" + "Player 1 HP: 0\n" + "Player 2 HP: 5\n" + "Player 3 HP: 5\n" + "The winner(s) of the Tournament is: 2 3";
+        String severalWinners = "\n" + "game.Player 1 HP: 0\n" + "game.Player 2 HP: 5\n" + "game.Player 3 HP: 5\n" + "The winner(s) of the Tournament is: 2 3";
         System.out.println(testGame.endGame());//tests the game finds several winners
         assertEquals(severalWinners, testGame.endGame());//tests the game finds the correct winner and displays them with the all players ending hp
         assertFalse(testGame.shamePlayer(1,0));//tests if shaming this player makes their health 0 or below, it ends the game.
@@ -344,10 +349,10 @@ public class GameAcceptanceTest {
             assertEquals(-5,testGame.players[i].getHealthPoints());//tests all players take damage at end of round, and all are below 0
         }
 
-        String allBelowZeroHp = "\n" + "Player 1 HP: -5\n" + "Player 2 HP: -5\n" + "Player 3 HP: -5";
+        String allBelowZeroHp = "\n" + "game.Player 1 HP: -5\n" + "game.Player 2 HP: -5\n" + "game.Player 3 HP: -5";
         assertEquals(allBelowZeroHp, testGame.displayAllPlayersHP());//tests all players HP updated and displayed after the round ends
 
-        String noWinners = "\n" + "Player 1 HP: -5\n" + "Player 2 HP: -5\n" + "Player 3 HP: -5\n" + "There are no winners of the Tournament.";
+        String noWinners = "\n" + "game.Player 1 HP: -5\n" + "game.Player 2 HP: -5\n" + "game.Player 3 HP: -5\n" + "There are no winners of the Tournament.";
         assertEquals(noWinners, testGame.endGame());//tests the game finds no winners
     }
 }

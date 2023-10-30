@@ -1,3 +1,5 @@
+package game;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +32,7 @@ public class Player {
         }
         if(playersHand.length() > 1){ playersHand = playersHand.substring(0,playersHand.length() - 1);}
         playersHand += "]";
-        return "Player " + name + "'s Hand: " + playersHand;
+        return "game.Player " + name + "'s Hand: " + playersHand;
     }
     public int addToInjuryDeck(List<Card> meleeDeck){
         injuryDeck.addAll(meleeDeck);
@@ -51,7 +53,7 @@ public class Player {
         deckInHand.remove(cardIndex);
         healthPoints -= 5;
         //print updated dmg
-        System.out.println("Player " + name + " Shamed Health Points: " + healthPoints);
+        System.out.println("game.Player " + name + " Shamed Health Points: " + healthPoints);
         return isAlive();
     }
     public void playCard(int cardIndex){ deckInHand.remove(cardIndex); }

@@ -1,3 +1,8 @@
+package gameJunit;
+
+import game.Card;
+import game.Player;
+import game.TournamentGame;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -102,7 +107,7 @@ class TournamentGameUnitTest {
         String[] testPlayersNames = {"1", "2", "3"};
         TournamentGame testGame = new TournamentGame(testPlayerNum, testPlayersNames,50);
 
-        for (int i = 0; i < testPlayerNum * 3; i++) {//tests for 9 rounds passing, for when Round Leader should loop back to the 1st Player
+        for (int i = 0; i < testPlayerNum * 3; i++) {//tests for 9 rounds passing, for when Round Leader should loop back to the 1st game.Player
             assertEquals(testPlayersNames[i % 3],testGame.currLeader);
             testGame.updateRoundLeader();
         }
@@ -133,9 +138,9 @@ class TournamentGameUnitTest {
 
         String expectedOutput = """
 
-                Player 1's Hand: [De(12)] Health Points: 50
-                Player 2's Hand: [So(6)] Health Points: 50
-                Player 3's Hand: [Al(3)] Health Points: 50""";
+                game.Player 1's Hand: [De(12)] Health Points: 50
+                game.Player 2's Hand: [So(6)] Health Points: 50
+                game.Player 3's Hand: [Al(3)] Health Points: 50""";
 
         assertEquals(expectedOutput, testGame.displayAllPlayersHandsHP());
     }
@@ -184,13 +189,13 @@ class TournamentGameUnitTest {
 
         String expectedOutput = """
 
-                Player 1 HP: 25
-                Player 2 HP: 40
-                Player 3 HP: 45""";
+                game.Player 1 HP: 25
+                game.Player 2 HP: 40
+                game.Player 3 HP: 45""";
         assertEquals(expectedOutput, testGame.displayAllPlayersHP());
     }
     @Test
-    @DisplayName("U-TEST-020: Test if a Player is 0 or below HP that it ends the game.")
+    @DisplayName("U-TEST-020: Test if a game.Player is 0 or below HP that it ends the game.")
     void testCheckDeadPlayers(){
         int testPlayerNum = 3;
         String[] testPlayersNames = {"1", "2", "3"};
@@ -219,9 +224,9 @@ class TournamentGameUnitTest {
 
         String expectedOutput = """
 
-                Player 1 HP: 25
-                Player 2 HP: 25
-                Player 3 HP: 0
+                game.Player 1 HP: 25
+                game.Player 2 HP: 25
+                game.Player 3 HP: 0
                 The winner(s) of the Tournament is: 1 2""";
         assertEquals(expectedOutput, testGame.endGame());//tests several winners, 1 winner
 
@@ -229,9 +234,9 @@ class TournamentGameUnitTest {
         testGame.playersTakeDmg();
         String expectedOutput2 = """
 
-                Player 1 HP: 25
-                Player 2 HP: 0
-                Player 3 HP: 0
+                game.Player 1 HP: 25
+                game.Player 2 HP: 0
+                game.Player 3 HP: 0
                 The winner(s) of the Tournament is: 1""";
         assertEquals(expectedOutput2, testGame.endGame());
 
@@ -239,9 +244,9 @@ class TournamentGameUnitTest {
         testGame.playersTakeDmg();
         String expectedOutput3 = """
 
-                Player 1 HP: 0
-                Player 2 HP: 0
-                Player 3 HP: 0
+                game.Player 1 HP: 0
+                game.Player 2 HP: 0
+                game.Player 3 HP: 0
                 There are no winners of the Tournament.""";
         assertEquals(expectedOutput3, testGame.endGame());
     }
@@ -258,7 +263,7 @@ class TournamentGameUnitTest {
         }
     }
     @Test
-    @DisplayName("U-TEST-023: Test if Melee can find Player(that's not the leader) if has Any Playable Cards properly.")
+    @DisplayName("U-TEST-023: Test if Melee can find game.Player(that's not the leader) if has Any Playable Cards properly.")
     void testAnyPlayableCards(){
         String[] testPlayersNames = {"1","2","3","4"};
         TournamentGame testGame = new TournamentGame(4, testPlayersNames,50);
@@ -273,7 +278,7 @@ class TournamentGameUnitTest {
         assertTrue(testGame.checkAnyPlayableCards(3,"Deception"));
     }
     @Test
-    @DisplayName("U-TEST-024: Test if input is validated correctly when Player is choosing a Card to Discard.")
+    @DisplayName("U-TEST-024: Test if input is validated correctly when game.Player is choosing a game.Card to Discard.")
     void testValidateCardInput(){
         String[] testPlayersNames = {"1","2","3"};
         TournamentGame testGame = new TournamentGame(3, testPlayersNames,50);
@@ -283,7 +288,7 @@ class TournamentGameUnitTest {
         assertEquals(-1,testGame.processDiscardInput(new Scanner("6"),new PrintWriter(System.out),2));//out of bounds
     }
     @Test
-    @DisplayName("U-TEST-027: Test if a Shamed Player ends or does not end a game properly.")
+    @DisplayName("U-TEST-027: Test if a Shamed game.Player ends or does not end a game properly.")
     void testShamedPlayerEndGame(){
         String[] testPlayersNames = {"1","2","3"};
         TournamentGame testNotEndGame = new TournamentGame(3, testPlayersNames,50);
@@ -346,9 +351,9 @@ class TournamentGameUnitTest {
         testGame.addChosenCard(1,0,chosenCard1);
         testGame.addChosenCard(2,0,chosenCard2);
         //change output to just contains
-        String expectedOutput1 = "Player: 1, Card: Al(1)";
-        String expectedOutput2 = "Player: 2, Card: Ar(1)";
-        String expectedOutput3 = "Player: 3, Card: Me(0)";
+        String expectedOutput1 = "game.Player: 1, game.Card: Al(1)";
+        String expectedOutput2 = "game.Player: 2, game.Card: Ar(1)";
+        String expectedOutput3 = "game.Player: 3, game.Card: Me(0)";
         assertTrue(testGame.printMeleeDeck(testGame.currMeleeCardsPlayed).contains(expectedOutput1));
         assertTrue(testGame.printMeleeDeck(testGame.currMeleeCardsPlayed).contains(expectedOutput2));
         assertTrue(testGame.printMeleeDeck(testGame.currMeleeCardsPlayed).contains(expectedOutput3));
@@ -483,7 +488,7 @@ class TournamentGameUnitTest {
         assertEquals(new ArrayList<>(testGame.currMeleeCardsPlayed.values()),testGame.players[2].getInjuryDeck());
     }
     @Test
-    @DisplayName("U-TEST-036: Test if Leader choosing a Basic Card will set the melee suit by input and works properly.")
+    @DisplayName("U-TEST-036: Test if Leader choosing a Basic game.Card will set the melee suit by input and works properly.")
     void testCardInputBasicLeader(){
         String[] testPlayersNames = {"1","2","3"};
         TournamentGame testGame = new TournamentGame(3, testPlayersNames,50);
@@ -509,7 +514,7 @@ class TournamentGameUnitTest {
         assertEquals("Arrows",testGame.chosenCard.getSuit());
     }
     @Test
-    @DisplayName("U-TEST-038: Test if Leader choosing a Merlin/Apprentice Card will set the melee suit by input and works properly.")
+    @DisplayName("U-TEST-038: Test if Leader choosing a Merlin/Apprentice game.Card will set the melee suit by input and works properly.")
     void testCardInputMeApLeader(){
         String[] testPlayersNames = {"1","2","3"};
         TournamentGame testGame = new TournamentGame(3, testPlayersNames,50);
@@ -546,7 +551,7 @@ class TournamentGameUnitTest {
         assertTrue(testGame.checkNonAlPlayableCards(0));//does have other Non Alchemy Cards
     }
     @Test
-    @DisplayName("U-TEST-041: Test if Leader choosing an Alchemy Card will set the melee suit by input and works properly.")
+    @DisplayName("U-TEST-041: Test if Leader choosing an Alchemy game.Card will set the melee suit by input and works properly.")
     void testCardInputAlLeader(){
         String[] testPlayersNames = {"1","2","3"};
         TournamentGame testGame = new TournamentGame(3, testPlayersNames,50);
@@ -561,7 +566,7 @@ class TournamentGameUnitTest {
         assertEquals("No Suit",testGame.currSuit);
     }
     @Test
-    @DisplayName("U-TEST-042: Test if a following Player inputted Basic Weapon Card Matches the Suit.")
+    @DisplayName("U-TEST-042: Test if a following game.Player inputted Basic Weapon game.Card Matches the Suit.")
     void testSuitMatches(){
         String[] testPlayersNames = {"1","2","3"};
         TournamentGame testGame = new TournamentGame(3, testPlayersNames,50);
@@ -577,7 +582,7 @@ class TournamentGameUnitTest {
         assertEquals(0,testGame.processCardInput(new Scanner("0"), new PrintWriter(System.out), 0, 1));//Now Matches the suit
     }
     @Test
-    @DisplayName("U-TEST-043: Test if a following Player inputted Merlin/Apprentice Card Matches the Suit and validates the value asked properly.")
+    @DisplayName("U-TEST-043: Test if a following game.Player inputted Merlin/Apprentice game.Card Matches the Suit and validates the value asked properly.")
     void testMeApSuitMatches(){
         String[] testPlayersNames = {"1","2","3"};
         TournamentGame testGame = new TournamentGame(3, testPlayersNames,50);
@@ -593,7 +598,7 @@ class TournamentGameUnitTest {
         assertEquals(1,testGame.processCardInput(new Scanner("1\n15"), new PrintWriter(System.out), 0, 1));//make sure matches no suit too
     }
     @Test
-    @DisplayName("U-TEST-044: Test if a following Player has Suit matching/Merlin/Apprentice Playable cards properly.")
+    @DisplayName("U-TEST-044: Test if a following game.Player has Suit matching/Merlin/Apprentice Playable cards properly.")
     void testSuitMatchPlayableCards() {
         String[] testPlayersNames = {"1", "2", "3"};
         TournamentGame testGame = new TournamentGame(3, testPlayersNames, 50);
@@ -608,7 +613,7 @@ class TournamentGameUnitTest {
         assertTrue(testGame.checkSuitPlayableCards(0));//does have other Suit Matching Playable Cards
     }
     @Test
-    @DisplayName("U-TEST-045: Test if a following Player inputted Alchemy Card Matches the Suit properly.")
+    @DisplayName("U-TEST-045: Test if a following game.Player inputted Alchemy game.Card Matches the Suit properly.")
     void testAlSuitMatches(){
         String[] testPlayersNames = {"1","2","3"};
         TournamentGame testGame = new TournamentGame(3, testPlayersNames,50);
@@ -619,7 +624,7 @@ class TournamentGameUnitTest {
         testGame.currSuit = "Arrows";
         assertEquals(-1,testGame.processCardInput(new Scanner("0"), new PrintWriter(System.out), 0, 1));//Has other Suit matching/MeAp Playable cards, and cant play an alchemy card
 
-        testGame.players[0].playCard(1);//remove Arrows Card
+        testGame.players[0].playCard(1);//remove Arrows game.Card
         assertEquals(0,testGame.processCardInput(new Scanner("0"), new PrintWriter(System.out), 0, 1));//No other Suit matching/MeAp Playable cards, and has to play an alchemy card
 
         testGame.currSuit = "No Suit";

@@ -1,3 +1,6 @@
+package gameJunit;
+
+import game.Card;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -6,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class CardUnitTest {
 
     @Test
-    @DisplayName("U-TEST-001: Test if a Basic Weapon Card initializes correctly, poison and none poisoned.")
+    @DisplayName("U-TEST-001: Test if a Basic Weapon game.Card initializes correctly, poison and none poisoned.")
     void testCardCreation(){
         Card testBasicNonPoisoned = new Card("Basic", "Swords", 1);
         assertEquals("Basic", testBasicNonPoisoned.getType());
@@ -23,7 +26,7 @@ public class CardUnitTest {
         assertEquals(10,testBasicPoisoned.getInjuryPoints());
     }
     @Test
-    @DisplayName("U-TEST-002: Test if a Merlin or Apprentice Card initializes correctly.")
+    @DisplayName("U-TEST-002: Test if a Merlin or Apprentice game.Card initializes correctly.")
     void testCardCreationMeAp(){
         Card testMeAp = new Card("Merlin");
         assertEquals("Merlin", testMeAp.getType());
@@ -33,7 +36,7 @@ public class CardUnitTest {
         assertEquals(25,testMeAp.getInjuryPoints());
     }
     @Test
-    @DisplayName("U-TEST-003: Test if an Alchemy Card initializes correctly.")
+    @DisplayName("U-TEST-003: Test if an Alchemy game.Card initializes correctly.")
     void testCardCreationAl(){
         Card testAl = new Card("Alchemy", 1);
         assertEquals("Alchemy", testAl.getType());
@@ -43,7 +46,7 @@ public class CardUnitTest {
         assertEquals(5,testAl.getInjuryPoints());
     }
     @Test
-    @DisplayName("U-TEST-013: Test if a Card Displays Properly.")
+    @DisplayName("U-TEST-013: Test if a game.Card Displays Properly.")
     void testCardDisplay(){
         Card testCardBasic = new Card("Basic","Swords", 1);
         assertEquals("Sw(1)", testCardBasic.displayCard());
