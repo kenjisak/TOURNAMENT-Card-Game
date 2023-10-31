@@ -18,17 +18,20 @@ public class Part1 {
     public StringWriter output;
     public String plyrsInput;
 
-    @Given("there are {int} players in a game and players hands were handed out")
-    public void thereAreFourPlayersInAGame(int numofPlyrs) {
+    @Given("there are {int} players in a game with {int} hp each and players hands were handed out")
+    public void thereAreFourPlayersInAGame(int numofPlyrs,int HP) {
         String numPlyrs = numofPlyrs + "\n";//user input for num of players
 
         String plyrNames = "";
         for (int i = 0; i < numofPlyrs; i++) {//user input for names of players
             plyrNames += (i + 1) + "\n";
         }
+
+        String initHP = HP + "\n";//user input for initHP of players
+
         //initializes the game with simulated user input
         output = new StringWriter();
-        TournamentGame.getInitInfo(new Scanner(numPlyrs + plyrNames), new PrintWriter(output));
+        TournamentGame.getInitInfo(new Scanner(numPlyrs + plyrNames + initHP), new PrintWriter(output));
         testGame = TournamentGame.tournamentGame;
         System.out.println();
 

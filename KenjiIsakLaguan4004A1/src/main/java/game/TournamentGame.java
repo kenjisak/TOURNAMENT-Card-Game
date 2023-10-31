@@ -7,6 +7,7 @@ import java.util.*;
 public class TournamentGame {
     public static String[] playersNames;
     public static int numPlayers;
+    public static int initHP;
     public static TournamentGame tournamentGame;
     //////////////////////////////////////////
     public Player[] players;//keeps track of turns as well by creating players in order of input
@@ -479,7 +480,13 @@ public class TournamentGame {
                 output.flush();
             }
         }
-        tournamentGame = new TournamentGame(numPlayers, playersNames, 100);
+
+        initHP = -1;
+        while (initHP == -1){
+            initHP = processHPInput(scanner,output);
+            output.flush();
+        }
+        tournamentGame = new TournamentGame(numPlayers, playersNames, initHP);
     }
     public static int processNumPlyrInput(Scanner numPlyrInput, PrintWriter output) {
         System.out.print("Please enter an ACCEPTABLE number of players (3-5 is acceptable): ");
@@ -498,5 +505,14 @@ public class TournamentGame {
         }
         output.println("Empty Name Entered.");
         return null;
+    }
+    public static int processHPInput(Scanner initHPInput, PrintWriter output) {
+        System.out.print("Please enter an initial HP number ABOVE 0: ");
+        int initHP = initHPInput.nextInt();
+        if(initHP > 0){
+            return initHP;
+        }
+        output.println("Invalid HP Number Entered.");
+        return -1;
     }
 }

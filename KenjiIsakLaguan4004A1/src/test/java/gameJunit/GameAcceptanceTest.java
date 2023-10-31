@@ -38,7 +38,7 @@ public class GameAcceptanceTest {
     @DisplayName("A-TEST-001: Scenario 1 Initialize the Game with given Number of Players and Player Names.")
     void ATEST_001(){
         StringWriter output = new StringWriter();
-        TournamentGame.getInitInfo(new Scanner("2\n6\n3\n\nA\nB\nC"),new PrintWriter(output));
+        TournamentGame.getInitInfo(new Scanner("2\n6\n3\n\nA\nB\nC\n100\n"),new PrintWriter(output));
         assertTrue(output.toString().contains("Invalid Number Entered."));
         assertTrue(output.toString().contains("Empty Name Entered."));
         assertEquals(3,TournamentGame.tournamentGame.players.length);
