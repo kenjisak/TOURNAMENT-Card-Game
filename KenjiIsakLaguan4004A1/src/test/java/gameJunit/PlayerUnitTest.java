@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class PlayerUnitTest {
     @Test
-    @DisplayName("U-TEST-004: Test if game.Player initializes correctly.")
+    @DisplayName("U-TEST-004: Test if Player initializes correctly.")
     void testPlayerCreation(){
         Player testPlayer = new Player("Test",50);
 
@@ -35,10 +35,10 @@ public class PlayerUnitTest {
         testPlayer.addToHand(testCardAp0);
         testPlayer.addToHand(testCardAl1);
 
-        assertEquals("game.Player Test's Hand: [Sw(2),Ap(0),Al(1)]", testPlayer.displayHand());
+        assertEquals("Player Test's Hand: [Sw(2),Ap(0),Al(1)]", testPlayer.displayHand());
     }
     @Test
-    @DisplayName("U-TEST-016: Test if a game.Player properly adds the melee deck to their injury deck and returns the right number of damage accumulated for that melee.")
+    @DisplayName("U-TEST-016: Test if a Player properly adds the melee deck to their injury deck and returns the right number of damage accumulated for that melee.")
     void testInjuryDeckReceive(){
         //5 dmg
         Card testCardBasic = new Card("Basic","Swords", 1);
@@ -60,7 +60,7 @@ public class PlayerUnitTest {
         assertEquals(35,dmgForCurrMelee);
     }
     @Test
-    @DisplayName("U-TEST-017: Test if a game.Player properly takes damage.")
+    @DisplayName("U-TEST-017: Test if a Player properly takes damage.")
     void testPlayerTakeDmg(){
         List<Card> testMeleeDeck = new ArrayList<>();//only add 3 cards ease of testing
         testMeleeDeck.add(new Card("Basic","Swords", 1));//5 dmg
@@ -75,7 +75,7 @@ public class PlayerUnitTest {
         assertEquals(85,testPlayer.getHealthPoints());
     }
     @Test
-    @DisplayName("U-TEST-025: Test if game.Player's card is discarded from their deck properly when shamed.")
+    @DisplayName("U-TEST-025: Test if Player's card is discarded from their deck properly when shamed.")
     void testShamePlayerDiscard(){
         Player testPlayer = new Player("Test",50);
 
@@ -91,7 +91,7 @@ public class PlayerUnitTest {
         assertTrue(testPlayer.getDeckInHand().contains(stayCard));
     }
     @Test
-    @DisplayName("U-TEST-026: Test if game.Player's Health is subtracted properly when shamed.")
+    @DisplayName("U-TEST-026: Test if Player's Health is subtracted properly when shamed.")
     void testShamePlayerHealth(){
         Player testPlayer = new Player("Test",50);
 
@@ -106,7 +106,7 @@ public class PlayerUnitTest {
         assertEquals(45,testPlayer.getHealthPoints());
     }
     @Test
-    @DisplayName("U-TEST-028: Test if game.Player's Hand is updated correctly when playing a card.")
+    @DisplayName("U-TEST-028: Test if Player's Hand is updated correctly when playing a card.")
     void testPlayCard(){
         Player testPlayer = new Player("Test",50);
         testPlayer.addToHand(new Card("Merlin"));

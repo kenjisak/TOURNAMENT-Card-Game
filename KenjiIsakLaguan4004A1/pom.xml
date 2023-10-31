@@ -38,12 +38,12 @@
             <scope>test</scope>
         </dependency>
 <!--        this dependency causes issues and wont run Junit tests-->
-        <dependency>
-            <groupId>io.cucumber</groupId>
-            <artifactId>cucumber-junit-platform-engine</artifactId>
-            <version>7.3.4</version>
-            <scope>test</scope>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>io.cucumber</groupId>-->
+<!--            <artifactId>cucumber-junit-platform-engine</artifactId>-->
+<!--            <version>7.3.4</version>-->
+<!--            <scope>test</scope>-->
+<!--        </dependency>-->
 <!--        this dependency causes issues and wont run Junit tests-->
 <!--        <dependency>-->
 <!--            <groupId>junit</groupId>-->
