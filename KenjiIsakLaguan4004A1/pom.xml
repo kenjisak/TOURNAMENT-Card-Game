@@ -28,13 +28,13 @@
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-java</artifactId>
-            <version>7.3.4</version>
+            <version>7.13.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-junit</artifactId>
-            <version>7.3.4</version>
+            <version>7.13.0</version>
             <scope>test</scope>
         </dependency>
 <!--        this dependency causes issues and wont run Junit tests-->

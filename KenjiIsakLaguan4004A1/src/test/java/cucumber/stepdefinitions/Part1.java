@@ -1,7 +1,6 @@
 package cucumber.stepdefinitions;
 
 import game.*;
-import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -18,7 +17,7 @@ public class Part1 {
     public StringWriter output;
     public String plyrsInput;
 
-    @Given("there are {int} players in a game")
+    @Given("there are {int} players in a game and players hands were handed out")
     public void thereAreFourPlayersInAGame(int numofPlyrs) {
         String[] plyrNames = new String[numofPlyrs];
         for (int i = 0; i < numofPlyrs; i++) {
@@ -59,7 +58,14 @@ public class Part1 {
     @Then("the loser will be {string} and receives {int} injury points")
     public void loserWillBeCorrectAndReceivesInjuryPoints(String loser, int injPts) {
         testGame.playMelee(new Scanner(plyrsInput), new PrintWriter(output));
-        assertEquals(loser, testGame.loser.getName());
-        assertEquals(injPts, testGame.loser.getTotalInjuryPoints());
+        if(Objects.equals(loser, "null")){//loser is set to null if no losers
+            assertNull(testGame.loser);
+            for (int i = 0; i < testGame.players.length; i++) {//checks that nobody received any injury points
+                assertEquals(injPts, testGame.players[i].getTotalInjuryPoints());
+            }
+        }else{//there is a loser for this case
+            assertEquals(loser, testGame.loser.getName());
+            assertEquals(injPts, testGame.loser.getTotalInjuryPoints());
+        }
     }
 }
