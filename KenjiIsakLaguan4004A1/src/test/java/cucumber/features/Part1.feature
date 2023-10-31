@@ -3,6 +3,10 @@ Feature: Melee loser and injury points
 
   Scenario Outline: Every player in a 4 player game plays a card and a loser is determined
     Given there are 4 players in a game and players hands were handed out
+    And player 1 hand is rigged with just <first>
+    And player 2 hand is rigged with just <second>
+    And player 3 hand is rigged with just <third>
+    And player 4 hand is rigged with just <forth>
     When player 1 plays <first> card
     When player 2 plays <second> card
     When player 3 plays <third> card
