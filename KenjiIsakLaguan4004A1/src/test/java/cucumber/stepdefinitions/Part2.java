@@ -93,7 +93,7 @@ public class Part2 {
 
         int playersIndex = findPlayerIndex(name);
 
-        testGame.players[playersIndex].rigAddAllHand(riggedHand);
+        testGame.players[playersIndex].rigHand(riggedHand);
         System.out.println("RIGGED: " + testGame.players[playersIndex].displayHand());
     }
 

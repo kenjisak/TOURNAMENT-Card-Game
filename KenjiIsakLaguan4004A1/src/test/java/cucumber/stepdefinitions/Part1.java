@@ -10,8 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.Objects;
-import java.util.Scanner;
+import java.util.*;
 
 public class Part1 {
     public TournamentGame testGame;
@@ -41,34 +40,31 @@ public class Part1 {
 
     @And("player {int} hand is rigged with just {string}")
     public void playerHandRigged(int plyrNum, String plyrCard) {
-        Card card = null;
-        if (plyrCard.contains("Basic")) {
-            String[] strPlyrcard = plyrCard.split("_");
-            card = new Card(strPlyrcard[0], strPlyrcard[1], Integer.parseInt(strPlyrcard[2]));
-        } else if (plyrCard.contains("Merlin") || plyrCard.contains("Apprentice")) {
+        Card card;
+        if (plyrCard.contains("Merlin") || plyrCard.contains("Apprentice")) {
             String[] strPlyrcard = plyrCard.split("_");
             card = new Card(strPlyrcard[0]);
         } else if (plyrCard.contains("Alchemy")) {
             String[] strPlyrcard = plyrCard.split("_");
             card = new Card(strPlyrcard[0], Integer.parseInt(strPlyrcard[1]));
+        } else {//is a basic card
+            String[] strPlyrcard = plyrCard.split("_");
+            card = new Card("Basic", strPlyrcard[0], Integer.parseInt(strPlyrcard[1]));
         }
 
-        testGame.players[plyrNum - 1].rigDelHand();
-        testGame.players[plyrNum - 1].addToHand(card);
+        testGame.players[plyrNum - 1].rigHand(Collections.singletonList(card));
     }
 
     @When("player {int} plays {string} card")
     public void playerPlaysACard(int plyrNum, String plyrCard) {
-        if (plyrCard.contains("Basic")) {
-            plyrsInput += "0\n";
-        } else if (plyrCard.contains("Merlin") || plyrCard.contains("Apprentice")) {
+        if (plyrCard.contains("Merlin") || plyrCard.contains("Apprentice")) {
             String[] strPlyrcard = plyrCard.split("_");
             if (Objects.equals(testGame.currLeader, testGame.players[plyrNum - 1].getName())) {//if player is the Leader and playing MeAp
                 plyrsInput += "0\n" + strPlyrcard[1] + "\n" + strPlyrcard[2] + "\n";//Suit of MeAp card, then value
             } else {
                 plyrsInput += "0\n" + strPlyrcard[1] + "\n";//value of MeAp card
             }
-        } else if (plyrCard.contains("Alchemy")) {
+        } else {//basic and alchemy cards, no input needed just index
             plyrsInput += "0\n";
         }
     }
