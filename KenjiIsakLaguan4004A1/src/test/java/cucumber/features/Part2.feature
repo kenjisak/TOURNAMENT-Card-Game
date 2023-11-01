@@ -70,3 +70,16 @@ Feature: Robustness
     When "Player" "Paul" plays "Swords_7"
     And "Player" "Fred" plays "Swords_3"
     Then "Fred" is the loser with 25 injury points for this melee, total round injury points is 25
+
+    Given Melee 4 starts
+    And "Fred" hand is rigged with "Deception_9"
+    And "Joe" hand is rigged with "Alchemy_2,Deception_6"
+    And "Paul" hand is rigged with "Deception_1"
+    When "Leader" "Fred" plays "Deception_9"
+    And "Player" "Joe" plays "Alchemy_2"
+    Then "Joe" receives invalid "You cannot play an Alchemy card, with other playable cards in your hand." card message
+    When "Player" "Joe" plays "Deception_6"
+    And "Player" "Paul" plays "Deception_1"
+#    The Game doesn't shame a player if they have playable cards, so Paul isn't able to be shamed since he has a Deception in his Deck
+#    "Tries" to shame isn't possible, while being able to still play a card
+    Then "Paul" is the loser with 25 injury points for this melee, total round injury points is 25
