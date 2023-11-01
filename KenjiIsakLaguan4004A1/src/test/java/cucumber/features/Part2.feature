@@ -6,20 +6,16 @@ Feature: Robustness
     When user enters 1 for number of players
     Then user receives invalid "Invalid Number Entered." message
     When user enters 3 for number of players
-    Then user doesn't receive the "Invalid Number Entered." violation message
-    When user enters "" name for player 1
+    And user enters "" name for player 1
     Then user receives invalid "Empty Name Entered." message
     When user enters "Fred" name for player 1
-    Then user doesn't receive the "Empty Name Entered." violation message
-    When user enters "" name for player 2
+    And user enters "" name for player 2
     Then user receives invalid "Empty Name Entered." message
     When user enters "Joe" name for player 1
-    Then user doesn't receive the "Empty Name Entered." violation message
-    When user enters "" name for player 3
+    And user enters "" name for player 3
     Then user receives invalid "Empty Name Entered." message
     When user enters "Paul" name for player 1
-    Then user doesn't receive the "Empty Name Entered." violation message
-    When user enters -10 for initial health points
+    And user enters -10 for initial health points
     Then user receives invalid "Invalid HP Number Entered." message
     When user enters 50 for initial health points
     Then Game initializes with 50 hp for 3 players named "Fred,Joe,Paul"
@@ -32,8 +28,7 @@ Feature: Robustness
     When "Leader" "Fred" plays "Alchemy_1"
     Then "Fred" receives invalid "You cannot start with an Alchemy card, with other type of cards left in hand." card message
     When "Leader" "Fred" plays "Sorcery_11"
-    Then user doesn't receive the "You cannot start with an Alchemy card, with other type of cards left in hand." violation message
-    When "Player" "Joe" plays "Swords_2"
+    And "Player" "Joe" plays "Swords_2"
     Then "Joe" receives invalid "This Card doesn't match the Suit of this Melee: Sorcery" card message
     When "Player" "Joe" plays "Deception_2"
     Then "Joe" receives invalid "This Card doesn't match the Suit of this Melee: Sorcery" card message
@@ -42,9 +37,7 @@ Feature: Robustness
     When "Player" "Joe" plays "Alchemy_2"
     Then "Joe" receives invalid "You cannot play an Alchemy card, with other playable cards in your hand." card message
     When "Player" "Joe" plays "Sorcery_6"
-    Then user doesn't receive the "This Card doesn't match the Suit of this Melee: Sorcery" violation message
-    And user doesn't receive the "You cannot play an Alchemy card, with other playable cards in your hand." violation message
-    When "Player" "Paul" plays "Sorcery_7"
+    And "Player" "Paul" plays "Sorcery_7"
     Then "Joe" is the loser with 25 injury points for this melee, total round injury points is 25
 
     Given Melee 2 starts

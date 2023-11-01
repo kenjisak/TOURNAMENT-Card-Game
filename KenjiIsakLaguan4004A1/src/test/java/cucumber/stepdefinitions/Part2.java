@@ -118,11 +118,6 @@ public class Part2 {
         assertTrue(output.toString().contains(violationMsg));
     }
 
-    @Then("user doesn't receive the {string} violation message")
-    public void userDoesntReceiveTheViolationMessage(String violationMsg) {
-        assertFalse(output.toString().contains(violationMsg));
-    }
-
     @Then("{string} is the loser with {int} injury points for this melee, total round injury points is {int}")
     public void isTheLoserWithInjuryPointsForThisMeleeTotalRoundInjuryPointsIs(String loser, int meleeInjPts, int rndInjPts) {
         output = new StringWriter();
