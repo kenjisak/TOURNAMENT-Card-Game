@@ -74,9 +74,12 @@ public class Part2 {
         assertEquals(numPlyrs,testGame.players.length);
     }
 
-    @Given("the round starts and distributes each players cards")
+    @Given("Round 1 starts and distributes each players cards")
     public void theRoundStartsAndDistributesEachPlayersCards() {
+        //simulates beginning of round, since we cant call play round directly.
+        System.out.println("\nRound " + testGame.roundNum + " Starting... Initial Leader of this round is " + testGame.currLeader);
         testGame.distributePlayersHands();
+        System.out.println(testGame.displayAllPlayersHandsHP());//display each player's initial hands
     }
 
     @And("{string} hand is rigged with {string}")
@@ -91,7 +94,7 @@ public class Part2 {
         int playersIndex = findPlayerIndex(name);
 
         testGame.players[playersIndex].rigAddAllHand(riggedHand);
-        System.out.println(testGame.players[playersIndex].displayHand());
+        System.out.println("RIGGED: " + testGame.players[playersIndex].displayHand());
     }
 
     @When("{string} {string} plays {string}")
@@ -107,8 +110,44 @@ public class Part2 {
 
         testGame.processCardInput(new Scanner(chosenCardInput),new PrintWriter(output),findPlayerIndex(name),turnIndex);
         System.out.println(output);
-
         meleeInput += chosenCardInput;
+    }
+
+    @Then("{string} receives invalid {string} card message")
+    public void receivesInvalidCardMessage(String name, String violationMsg) {
+        assertTrue(output.toString().contains(violationMsg));
+    }
+
+    @Then("user doesn't receive the {string} violation message")
+    public void userDoesntReceiveTheViolationMessage(String violationMsg) {
+        assertFalse(output.toString().contains(violationMsg));
+    }
+
+    @Then("{string} is the loser with {int} injury points for this melee, total round injury points is {int}")
+    public void isTheLoserWithInjuryPointsForThisMeleeTotalRoundInjuryPointsIs(String loser, int meleeInjPts, int rndInjPts) {
+        output = new StringWriter();
+
+        int loserInjPtsB4Melee = testGame.players[1].getTotalInjuryPoints();
+        testGame.playMelee(new Scanner(meleeInput), new PrintWriter(output));
+        int loserInjPtsAfterMelee = testGame.players[1].getTotalInjuryPoints();
+
+        assertEquals(loser, testGame.loser.getName());
+        assertEquals(meleeInjPts, loserInjPtsAfterMelee - loserInjPtsB4Melee);
+        assertEquals(rndInjPts, loserInjPtsAfterMelee);
+        meleeInput = "";//reset melee input
+    }
+
+    @Given("Melee {int} starts")
+    public void meleeStarts(int meleeNum) {
+        System.out.println("\nRound " + testGame.roundNum + ", Melee " + meleeNum + " Starting...");
+    }
+    @When("{string} {string} inputs {int} as the value to his {string} card")
+    public void inputsAsTheValueToHisCard(String isLeader, String name, int value, String meApType) {
+//        String inputValue = chosenCard.split("_")[1];
+//        if(Objects.equals(findCard.getType(), "Merlin") || Objects.equals(findCard.getType(), "Apprentice")){
+//            return testGame.players[plyrIndex].getDeckInHand().indexOf(findCard) + "\n" + inputValue + "\n";
+//        }
+        return ;
     }
 
     /////////////HELPER FUNCTIONS/////////////
@@ -130,35 +169,12 @@ public class Part2 {
             int cardValue = Integer.parseInt(givenCard.split("_")[1]);
             return new Card("Alchemy",cardValue);
         } else if (givenCard.contains("Merlin") || givenCard.contains("Apprentice")) {
-            return new Card(givenCard);
+            String meApType = givenCard.split("_")[0];
+            return new Card(meApType);
         }else{//is a basic weapon card
             String cardSuit = givenCard.split("_")[0];
             int cardValue = Integer.parseInt(givenCard.split("_")[1]);
             return new Card("Basic",cardSuit,cardValue);
         }
-    }
-
-    @Then("{string} receives invalid {string} card message")
-    public void receivesInvalidCardMessage(String name, String violationMsg) {
-        assertTrue(output.toString().contains(violationMsg));
-    }
-
-    @Then("{string} is the loser with {int} injury points for this melee, total round injury points is {int}")
-    public void isTheLoserWithInjuryPointsForThisMeleeTotalRoundInjuryPointsIs(String loser, int meleeInjPts, int rndInjPts) {
-        output = new StringWriter();
-
-        int loserInjPtsB4Melee = testGame.players[1].getTotalInjuryPoints();
-        testGame.playMelee(new Scanner(meleeInput), new PrintWriter(output));
-        int loserInjPtsAfterMelee = testGame.players[1].getTotalInjuryPoints();
-
-        assertEquals(loser, testGame.loser.getName());
-        assertEquals(meleeInjPts, loserInjPtsAfterMelee - loserInjPtsB4Melee);
-        assertEquals(rndInjPts, loserInjPtsAfterMelee);
-        meleeInput = "";//reset melee input
-    }
-
-    @Then("user doesn't receive the {string} violation message")
-    public void userDoesntReceiveTheViolationMessage(String violationMsg) {
-        assertFalse(output.toString().contains(violationMsg));
     }
 }

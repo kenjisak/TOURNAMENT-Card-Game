@@ -24,7 +24,8 @@ Feature: Robustness
     When user enters 50 for initial health points
     Then Game initializes with 50 hp for 3 players named "Fred,Joe,Paul"
 
-    Given the round starts and distributes each players cards
+    Given Round 1 starts and distributes each players cards
+    And Melee 1 starts
     And "Fred" hand is rigged with "Alchemy_1,Sorcery_11,Merlin,Apprentice"
     And "Joe" hand is rigged with "Swords_2,Deception_2,Arrows_2,Alchemy_2,Sorcery_6"
     And "Paul" hand is rigged with "Sorcery_7"
@@ -45,3 +46,11 @@ Feature: Robustness
     And user doesn't receive the "You cannot play an Alchemy card, with other playable cards in your hand." violation message
     When "Player" "Paul" plays "Sorcery_7"
     Then "Joe" is the loser with 25 injury points for this melee, total round injury points is 25
+
+    Given Melee 2 starts
+    And "Joe" hand is rigged with "Arrows_8"
+    And "Paul" hand is rigged with "Merlin"
+    And "Fred" hand is rigged with "Apprentice"
+    When "Leader" "Joe" plays "Arrows_8"
+#    When "Player" "Paul" plays "Merlin_16"
+#    When "Player" "Paul" inputs 9 as the value to his "Merlin" card
