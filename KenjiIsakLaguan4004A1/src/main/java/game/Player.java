@@ -59,4 +59,8 @@ public class Player {
     }
     public void playCard(int cardIndex){ deckInHand.remove(cardIndex); }
     public void rigDelHand(){ deckInHand = new ArrayList<>();}//removes all
+    public void rigAddAllHand(List<Card> riggedHand){
+        deckInHand = new ArrayList<>();
+        deckInHand.addAll(riggedHand);
+    }
 }

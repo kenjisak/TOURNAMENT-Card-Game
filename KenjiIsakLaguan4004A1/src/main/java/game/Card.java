@@ -58,4 +58,9 @@ public class Card {
     }
     public void setSuit(String givenSuit){ this.suit = givenSuit; }
     public void setValue(int givenValue){ this.value = givenValue; }
+    @Override
+    public boolean equals(Object card) {
+        Card c = (Card) card;
+        return this.type.equalsIgnoreCase(c.type) && this.suit.equalsIgnoreCase(c.suit) && this.value == c.value;
+    }
 }
