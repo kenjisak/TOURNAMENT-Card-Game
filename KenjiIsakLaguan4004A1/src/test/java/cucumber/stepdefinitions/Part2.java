@@ -60,11 +60,22 @@ public class Part2 {
         assertTrue(output.toString().contains(invalidMessage));
     }
 
-    @Given("the round starts and distributes each players cards")
-    public void theRoundStartsAndDistributesEachPlayersCards() {
+    @Then("Game initializes with {int} hp for {int} players named {string}")
+    public void gameInitializesWithHpForPlayersNamed(int initHP, int numPlyrs, String plyrsNames) {
         TournamentGame.getInitInfo(new Scanner(setUpInput), new PrintWriter(output));
         testGame = TournamentGame.tournamentGame;
         System.out.println();
+
+        String[] names = plyrsNames.split(",");
+        for (int i = 0; i < numPlyrs; i++) {
+            assertEquals(initHP, testGame.players[i].getHealthPoints());
+            assertEquals(names[i],testGame.players[i].getName());
+        }
+        assertEquals(numPlyrs,testGame.players.length);
+    }
+
+    @Given("the round starts and distributes each players cards")
+    public void theRoundStartsAndDistributesEachPlayersCards() {
         testGame.distributePlayersHands();
     }
 
@@ -144,5 +155,10 @@ public class Part2 {
         assertEquals(meleeInjPts, loserInjPtsAfterMelee - loserInjPtsB4Melee);
         assertEquals(rndInjPts, loserInjPtsAfterMelee);
         meleeInput = "";//reset melee input
+    }
+
+    @Then("user doesn't receive the {string} violation message")
+    public void userDoesntReceiveTheViolationMessage(String violationMsg) {
+        assertFalse(output.toString().contains(violationMsg));
     }
 }
