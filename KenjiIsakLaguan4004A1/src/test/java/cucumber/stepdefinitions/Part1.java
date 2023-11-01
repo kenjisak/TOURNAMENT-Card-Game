@@ -69,17 +69,24 @@ public class Part1 {
         }
     }
 
-    @Then("the loser will be {string} and receives {int} injury points")
-    public void loserWillBeCorrectAndReceivesInjuryPoints(String loser, int injPts) {
+    @Then("the loser will be {string}")
+    public void loserWillBeCorrectAndReceivesInjuryPoints(String loserName) {
         testGame.playMelee(new Scanner(plyrsInput), new PrintWriter(output));
 
-        if (Objects.equals(loser, "null")) {//loser is set to null if no losers in a melee
+        if (Objects.equals(loserName, "null")) {//loser is set to null if no losers in a melee
             assertNull(testGame.loser);
+        } else {//there is a loser for this case from the table
+            assertEquals(loserName, testGame.loser.getName());
+        }
+    }
+
+    @Then("{string} receives {int} injury points")
+    public void loserReceivesInjuryPointsInjuryPoints(String loserName, int injPts) {
+        if (Objects.equals(loserName, "null")) {//loser is set to null if no losers in a melee
             for (int i = 0; i < testGame.players.length; i++) {//checks that nobody received any injury points
                 assertEquals(injPts, testGame.players[i].getTotalInjuryPoints());
             }
         } else {//there is a loser for this case from the table
-            assertEquals(loser, testGame.loser.getName());
             assertEquals(injPts, testGame.loser.getTotalInjuryPoints());
         }
     }

@@ -3,18 +3,18 @@ Feature: Melee loser and injury points
 
   Scenario Outline: Every player in a 4 player game plays a card and a loser is determined
     Given there are 4 players in a game with 50 hp each and players hands were handed out
-    And player 1 hand is rigged with just <first>
-    And player 2 hand is rigged with just <second>
-    And player 3 hand is rigged with just <third>
-    And player 4 hand is rigged with just <forth>
-    When player 1 plays <first> card
-    When player 2 plays <second> card
-    When player 3 plays <third> card
-    When player 4 plays <forth> card
-    Then the loser will be <loser> and receives <injury points> injury points
-
+    And player 1 hand is rigged with just <P1>
+    And player 2 hand is rigged with just <P2>
+    And player 3 hand is rigged with just <P3>
+    And player 4 hand is rigged with just <P4>
+    When player 1 plays <P1> card
+    And player 2 plays <P2> card
+    And player 3 plays <P3> card
+    And player 4 plays <P4> card
+    Then the loser will be <loser>
+    And <loser> receives <injury points> injury points
     Examples:
-      | first                  | second          | third           | forth           | loser  | injury points |
+      | P1                     | P2              | P3              | P4              | loser  | injury points |
       #1 Testing All arrows – none poisoned
       | "Arrows_13"            | "Arrows_5"      | "Arrows_12"     | "Arrows_7"      | "2"    | 20            |
       #2 Testing All swords – two poisoned
