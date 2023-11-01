@@ -127,9 +127,10 @@ public class Part2 {
     public void isTheLoserWithInjuryPointsForThisMeleeTotalRoundInjuryPointsIs(String loser, int meleeInjPts, int rndInjPts) {
         output = new StringWriter();
 
-        int loserInjPtsB4Melee = testGame.players[1].getTotalInjuryPoints();
+        int loserInjPtsB4Melee = testGame.players[findPlayerIndex(loser)].getTotalInjuryPoints();
         testGame.playMelee(new Scanner(meleeInput), new PrintWriter(output));
-        int loserInjPtsAfterMelee = testGame.players[1].getTotalInjuryPoints();
+        int loserInjPtsAfterMelee = testGame.players[findPlayerIndex(loser)].getTotalInjuryPoints();
+
 
         assertEquals(loser, testGame.loser.getName());
         assertEquals(meleeInjPts, loserInjPtsAfterMelee - loserInjPtsB4Melee);
@@ -140,14 +141,6 @@ public class Part2 {
     @Given("Melee {int} starts")
     public void meleeStarts(int meleeNum) {
         System.out.println("\nRound " + testGame.roundNum + ", Melee " + meleeNum + " Starting...");
-    }
-    @When("{string} {string} inputs {int} as the value to his {string} card")
-    public void inputsAsTheValueToHisCard(String isLeader, String name, int value, String meApType) {
-//        String inputValue = chosenCard.split("_")[1];
-//        if(Objects.equals(findCard.getType(), "Merlin") || Objects.equals(findCard.getType(), "Apprentice")){
-//            return testGame.players[plyrIndex].getDeckInHand().indexOf(findCard) + "\n" + inputValue + "\n";
-//        }
-        return ;
     }
 
     /////////////HELPER FUNCTIONS/////////////
@@ -161,6 +154,12 @@ public class Part2 {
     }
     public String findCardIndex(int plyrIndex, String chosenCard){//find chosen card index
         Card findCard = createCard(chosenCard);
+
+        if(Objects.equals(findCard.getType(), "Merlin") || Objects.equals(findCard.getType(), "Apprentice")){
+            String invalidInputValue = chosenCard.split("_")[1];
+            String validInputValue = chosenCard.split("_")[2];
+            return testGame.players[plyrIndex].getDeckInHand().indexOf(findCard) + "\n" + invalidInputValue + "\n" + validInputValue + "\n";
+        }
 
         return testGame.players[plyrIndex].getDeckInHand().indexOf(findCard) + "\n";
     }

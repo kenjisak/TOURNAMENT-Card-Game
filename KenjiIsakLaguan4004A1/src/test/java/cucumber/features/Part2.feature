@@ -52,5 +52,21 @@ Feature: Robustness
     And "Paul" hand is rigged with "Merlin"
     And "Fred" hand is rigged with "Apprentice"
     When "Leader" "Joe" plays "Arrows_8"
-#    When "Player" "Paul" plays "Merlin_16"
-#    When "Player" "Paul" inputs 9 as the value to his "Merlin" card
+    And "Player" "Paul" plays "Merlin_16_9"
+#    Need to combine invalid and valid input as it needs to be done in one step bc of the while loop for asking of the value
+    Then "Paul" receives invalid "Invalid Value Entered." card message
+    When "Player" "Fred" plays "Apprentice_20_10"
+#    Need to combine invalid and valid input as it needs to be done in one step bc of the while loop for asking of the value
+    Then "Fred" receives invalid "Invalid Value Entered." card message
+    And "Joe" is the loser with 40 injury points for this melee, total round injury points is 65
+
+    Given Melee 3 starts
+    And "Joe" hand is rigged with "Swords_9"
+    And "Paul" hand is rigged with "Alchemy_2,Swords_7"
+    And "Fred" hand is rigged with "Swords_3"
+    When "Leader" "Joe" plays "Swords_9"
+    And "Player" "Paul" plays "Alchemy_2"
+    Then "Paul" receives invalid "You cannot play an Alchemy card, with other playable cards in your hand." card message
+    When "Player" "Paul" plays "Swords_7"
+    And "Player" "Fred" plays "Swords_3"
+    Then "Fred" is the loser with 25 injury points for this melee, total round injury points is 25
