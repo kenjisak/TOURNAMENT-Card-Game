@@ -152,7 +152,7 @@ public class TournamentGame {
         System.out.println(displayAllPlayersHandsHP());
 
         //playMelee in 12 time loop
-        for (int i = 1; i <= 12; i++) {
+        for (int i = 1; i <= 12; i++) {//change to a while loop and melee num counter, while endGame == False && meleeNum <= 12, add counter after playMelee Call, right after while loop, if EndGame == true, return nothing
             System.out.println("\nRound " + roundNum + ", Melee " + i + " Starting...");
             playMelee(input,output);
             System.out.println("Round " + roundNum + ", Melee " + i + " over...");
@@ -164,7 +164,7 @@ public class TournamentGame {
         System.out.println("Round " + roundNum + " over...");
         if(checkDeadPlayers()){//if a players dead then end the game
             System.out.println(endGame());
-            System.exit(0);
+            System.exit(0);//set Global EndGame = true,return nothing in here
         }
         updateRoundLeader();//else update leader and continue round
     }
@@ -248,7 +248,7 @@ public class TournamentGame {
             if(!shamedPlayerisAlive){//if the player died then end the game
                 System.out.println(endGame());
                 System.exit(0);
-            }
+            }//move this if and the boolean above to right under the while loop this func is called
             return cardIndexSelected;
         }
         output.println("Invalid card Index Selected.");
@@ -364,6 +364,8 @@ public class TournamentGame {
                         cardIndexSelected = processDiscardInput(cardInput,output,currPlyrIndex);
                         output.flush();
                     }
+                    //check if shamed player is dead in here instead
+                    //set EndGame = true and return nothing
                     continue;//skip while loop below, not gonna ask player to play a card
                 }
             }
@@ -463,6 +465,7 @@ public class TournamentGame {
         PrintWriter outputPlay = new PrintWriter(System.out);
         while (true) {//disable loop to play 1 round at a time
             tournamentGame.playRound(inputPlay,outputPlay);
+            //While EndGame == false
         }
     }
     public static void getInitInfo(Scanner scanner, PrintWriter output){
