@@ -1,4 +1,4 @@
-Feature: No Winners Scenario A
+Feature: Scenario A No Winners
   Game ends with no winner
   
   Scenario: There are 2 rounds played and the game ends with no winners

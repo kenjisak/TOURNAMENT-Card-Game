@@ -18,6 +18,7 @@ public class TournamentGame {
     public String currSuit;
     public Player loser;
     public Card chosenCard;
+    public boolean endGame;
 
     public TournamentGame(int numPlayers, String[] namesOfPlayers, int initHealthPoints){
         players = new Player[numPlayers];
@@ -31,6 +32,7 @@ public class TournamentGame {
         roundNum = 1;
         currSuit = "";//if we want to set to no suit then well set it to "No Suit"
         chosenCard = null;
+        endGame = false;
         recreateDeck();
     }
     public void recreateDeck(){//when shuffling, the card is edited and not reverted back for Merlin and Apprentice
@@ -157,7 +159,10 @@ public class TournamentGame {
             playMelee(input,output);
             System.out.println("Round " + roundNum + ", Melee " + i + " over...");
         }
-
+        if(endGame){//check if endGame flag is set right after melee, bc only set after discarding
+            System.out.println(endGame());
+            System.exit(0);
+        }
         playersTakeDmg();
         System.out.println(displayAllPlayersHP());
 
@@ -246,8 +251,9 @@ public class TournamentGame {
         if (cardIndexSelected >= 0 && cardIndexSelected < players[currPlyrIndex].getDeckInHand().size()){//stop asking for input, game hasn't ended){//if var = true/within index then break and stop asking input
             boolean shamedPlayerisAlive = shamePlayer(currPlyrIndex,cardIndexSelected);
             if(!shamedPlayerisAlive){//if the player died then end the game
-                System.out.println(endGame());
-                System.exit(0);
+//                System.out.println(endGame());
+//                System.exit(0);
+                endGame = true;
             }//move this if and the boolean above to right under the while loop this func is called
             return cardIndexSelected;
         }
@@ -364,8 +370,9 @@ public class TournamentGame {
                         cardIndexSelected = processDiscardInput(cardInput,output,currPlyrIndex);
                         output.flush();
                     }
-                    //check if shamed player is dead in here instead
-                    //set EndGame = true and return nothing
+                    if (endGame){
+                        return;//set EndGame = true and return nothing
+                    }
                     continue;//skip while loop below, not gonna ask player to play a card
                 }
             }

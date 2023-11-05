@@ -1,6 +1,7 @@
 package cucumber.stepdefinitions;
 
 import game.*;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -14,7 +15,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 
-public class Part3A {
+public class Part3 {
     public TournamentGame testGame;
     public StringWriter output;
     public String plyrsInput;
@@ -111,8 +112,12 @@ public class Part3A {
 
     @Then("the Game is over with no winners")
     public void theGameIsOverWithNoWinners() {
-        String endOutput = testGame.endGame();
-        System.out.println(endOutput);
+        String endOutput = "";
+
+        if(testGame.checkDeadPlayers()){//if a players dead then end the game
+            endOutput = testGame.endGame();
+            System.out.println(endOutput);
+        }
 
         assertTrue(endOutput.contains("no winners"));
     }
@@ -130,5 +135,24 @@ public class Part3A {
             int cardValue = Integer.parseInt(givenCard.split("_")[1]);
             return new Card("Basic",cardSuit,cardValue);
         }
+    }
+
+    /////////////SCENARIO B/////////////
+
+    @And("player {int} is shamed and discards their {string} card")
+    public void playerIsShamedAndDiscardsTheirCard(int plyrNum, String card) {
+        plyrsInput += "0\n";
+    }
+
+    @Then("the Game ends from player {int} being shamed")
+    public void theGameEndsFromPlayerBeingShamed(int plyrNum) {
+        testGame.playMelee(new Scanner(plyrsInput),new PrintWriter(output));
+
+        String endOutput = "";
+        if(testGame.endGame){//this is how we check to end the game in playRound
+            endOutput = testGame.endGame();
+            System.out.println(endOutput);
+        }
+        assertTrue(endOutput.contains("The winner(s) of the Tournament is: P1 P3"));
     }
 }
