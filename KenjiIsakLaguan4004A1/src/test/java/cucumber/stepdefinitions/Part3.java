@@ -155,4 +155,30 @@ public class Part3 {
         }
         assertTrue(endOutput.contains("The winner(s) of the Tournament is: P1 P3"));
     }
+    /////////////SCENARIO B/////////////
+
+    /////////////SCENARIO C/////////////
+    @Then("the Game ends with {string} as the winner\\(s) and not {string}")
+    public void theGameEndsWithAsTheWinnerS(String winnersNames, String losersNames) {
+        String endOutput = "";
+
+        if(testGame.checkDeadPlayers()){//if a players dead then end the game
+            endOutput = testGame.endGame();
+            System.out.println(endOutput);
+        }
+
+        String winnerOutput = endOutput.split("The")[1];
+        String[] winners = winnersNames.split(",");
+        for (String winner: winners) {
+            assertTrue(winnerOutput.contains(winner));// checks each winner name is in the end game winner declaration
+        }
+
+        String[] losers = losersNames.split(",");
+        for (String loser: losers) {
+            assertFalse(winnerOutput.contains(loser));// checks each loser name is NOT the end game winner declaration
+        }
+    }
+    /////////////SCENARIO C/////////////
+
+
 }
