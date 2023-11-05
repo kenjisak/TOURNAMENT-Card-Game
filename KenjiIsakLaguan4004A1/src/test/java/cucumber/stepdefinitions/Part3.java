@@ -157,7 +157,7 @@ public class Part3 {
     }
     /////////////SCENARIO B/////////////
 
-    /////////////SCENARIO C/////////////
+    /////////////SCENARIO C and D/////////////
     @Then("the Game ends with {string} as the winner\\(s) and not {string}")
     public void theGameEndsWithAsTheWinnerS(String winnersNames, String losersNames) {
         String endOutput = "";
@@ -178,7 +178,5 @@ public class Part3 {
             assertFalse(winnerOutput.contains(loser));// checks each loser name is NOT the end game winner declaration
         }
     }
-    /////////////SCENARIO C/////////////
-
-
+    /////////////SCENARIO C and D/////////////
 }
