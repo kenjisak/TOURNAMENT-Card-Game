@@ -122,23 +122,6 @@ public class Part3 {
         assertTrue(endOutput.contains("no winners"));
     }
 
-    /////////////HELPER FUNCTIONS/////////////
-    public Card createCard(String givenCard){
-        if (givenCard.contains("Alchemy")){
-            int cardValue = Integer.parseInt(givenCard.split("_")[1]);
-            return new Card("Alchemy",cardValue);
-        } else if (givenCard.contains("Merlin") || givenCard.contains("Apprentice")) {
-            String meApType = givenCard.split("_")[0];
-            return new Card(meApType);
-        }else{//is a basic weapon card
-            String cardSuit = givenCard.split("_")[0];
-            int cardValue = Integer.parseInt(givenCard.split("_")[1]);
-            return new Card("Basic",cardSuit,cardValue);
-        }
-    }
-
-    /////////////SCENARIO B/////////////
-
     @And("player {int} is shamed and discards their {string} card")
     public void playerIsShamedAndDiscardsTheirCard(int plyrNum, String card) {
         plyrsInput += "0\n";
@@ -155,9 +138,6 @@ public class Part3 {
         }
         assertTrue(endOutput.contains("The winner(s) of the Tournament is: P1 P3"));
     }
-    /////////////SCENARIO B/////////////
-
-    /////////////SCENARIO C and D/////////////
     @Then("the Game ends with {string} as the winner\\(s) and not {string}")
     public void theGameEndsWithAsTheWinnerS(String winnersNames, String losersNames) {
         String endOutput = "";
@@ -178,5 +158,18 @@ public class Part3 {
             assertFalse(winnerOutput.contains(loser));// checks each loser name is NOT the end game winner declaration
         }
     }
-    /////////////SCENARIO C and D/////////////
+    /////////////HELPER FUNCTIONS/////////////
+    public Card createCard(String givenCard){
+        if (givenCard.contains("Alchemy")){
+            int cardValue = Integer.parseInt(givenCard.split("_")[1]);
+            return new Card("Alchemy",cardValue);
+        } else if (givenCard.contains("Merlin") || givenCard.contains("Apprentice")) {
+            String meApType = givenCard.split("_")[0];
+            return new Card(meApType);
+        }else{//is a basic weapon card
+            String cardSuit = givenCard.split("_")[0];
+            int cardValue = Integer.parseInt(givenCard.split("_")[1]);
+            return new Card("Basic",cardSuit,cardValue);
+        }
+    }
 }

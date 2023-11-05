@@ -1,7 +1,7 @@
 Feature: Melee loser and injury points
   Verify correctness of the Loser and their Injury points after playing a melee
 
-  Scenario Outline: Every player in a 4 player game plays a card and a loser is determined
+  Scenario Outline: Every player plays a card in a melee and a loser is determined
     Given there are 4 players in a game with 50 hp each and players hands were handed out
     And player 1 hand is rigged with just <P1>
     And player 2 hand is rigged with just <P2>

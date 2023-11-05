@@ -1,7 +1,7 @@
 Feature: Robustness
   Attempting to break the rules
 
-  Scenario: a bunch of rule breaking
+  Scenario: 4 Melees are played showing the attempts of violating most the game rules
     Given the game starts
     When user enters 1 for number of players
     Then user receives invalid "Invalid Number Entered." message

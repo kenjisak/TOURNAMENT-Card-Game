@@ -298,9 +298,9 @@ public class TournamentGame {
                     output.println("You cannot start with an Alchemy card, with other type of cards left in hand.");
                 }
             }else{//not the Leader,check if card matches curr Suit
-                //if no suit and basic card chosen, return card index
-                //if no suit and MeAp card chosen, ask for input return card index
-                if((Objects.equals(currSuit, "No Suit") && Objects.equals(chosenCard.getType(), "Basic")) || Objects.equals(chosenCard.getSuit(), currSuit)){ return cardIndexSelected; }
+                //if no suit and chosen card isn't a MeAp, or if the chosen card matches the suit, return card index, since no input needed and all cards match
+                //if MeAp card chosen any time, ask for input then return card index
+                if((Objects.equals(currSuit, "No Suit") && (!Objects.equals(chosenCard.getType(), "Merlin")) && !Objects.equals(chosenCard.getType(), "Apprentice")) || Objects.equals(chosenCard.getSuit(), currSuit)){ return cardIndexSelected; }
                 if(Objects.equals(chosenCard.getType(), "Basic")){//error message for only Basic Type
                     output.println("This Card doesn't match the Suit of this Melee: " + currSuit);
                 }
