@@ -16,7 +16,7 @@ Feature: Scenario D One Winner
 
     When the Melee 2 starts
     And player 2 plays their "Merlin_Swords_15" card
-    And player 3 plays their "Swords_8" card
+    And player 3 plays their "Swords_12" card
     And player 1 plays their "Alchemy_2" card
     Then "P1" will be the loser for this melee
 

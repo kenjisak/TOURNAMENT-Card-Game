@@ -11,7 +11,7 @@ Feature: Scenario B Game ends by shaming
     When the Melee 1 starts
     Then "P1" is the current leader
     When player 1 plays their "Arrows_5" card
-    And player 2 is shamed and discards their "Alchemy_1" card
+    And player 2 is shamed and discards their "Sorcery_1" card
     Then the Game ends from player 2 being shamed
     And player 1 has 5 health points
     And player 2 has 0 health points
