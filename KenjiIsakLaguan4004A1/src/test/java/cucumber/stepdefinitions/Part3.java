@@ -158,6 +158,20 @@ public class Part3 {
             assertFalse(winnerOutput.contains(loser));// checks each loser name is NOT the end game winner declaration
         }
     }
+    @Then("player {int} has {int} health points")
+    public void evaluateHP(int plyrIndex, int hp) {
+        assertEquals(testGame.players[plyrIndex - 1].getHealthPoints(), hp);
+    }
+
+    @Then("player {int} is the loser with {int} injury points for this melee")
+    public void meleeloserwinjpts(int plyrIndex, int meleeInjPts) {
+        testGame.playMelee(new Scanner(plyrsInput), new PrintWriter(output));
+
+        assertEquals(testGame.players[plyrIndex - 1].getName(), testGame.loser.getName());
+        assertEquals(meleeInjPts, testGame.loser.getTotalInjuryPoints());
+
+        plyrsInput = "";//reset input for next melee
+    }
     /////////////HELPER FUNCTIONS/////////////
     public Card createCard(String givenCard){
         if (givenCard.contains("Alchemy")){

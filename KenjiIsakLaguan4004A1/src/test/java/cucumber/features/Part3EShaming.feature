@@ -14,14 +14,14 @@ Feature: Scenario E Shaming
     And player 2 plays their "Deception_10" card
     And player 3 is shamed and discards their "Arrows_7" card
     And player 4 plays their "Deception_8" card
-    Then "P1" will be the loser for this melee
+    Then player 1 is the loser with 25 injury points for this melee
 
     When the Melee 2 starts
     And player 1 plays their "Merlin_Swords_5" card
     And player 2 is shamed and discards their "Sorcery_15" card
     And player 3 plays their "Swords_5" card
     And player 4 plays their "Swords_9" card
-    Then "P4" will be the loser for this melee
+    Then player 4 is the loser with 40 injury points for this melee
 
     When the Melee 3 starts
     And player 4 plays their "Apprentice_Sorcery_12" card
@@ -36,7 +36,7 @@ Feature: Scenario E Shaming
     And player 1 plays their "Alchemy_5" card
     And player 2 plays their "Deception_2" card
     And player 3 plays their "Arrows_8" card
-    Then "P2" will be the loser for this melee
+    Then player 2 is the loser with 25 injury points for this melee
 
     When Round 1 is over
     Then the Game ends with "P3" as the winner(s) and not "P1,P2,P4"

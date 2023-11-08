@@ -13,3 +13,6 @@ Feature: Scenario B Game ends by shaming
     When player 1 plays their "Arrows_5" card
     And player 2 is shamed and discards their "Alchemy_1" card
     Then the Game ends from player 2 being shamed
+    And player 1 has 5 health points
+    And player 2 has 0 health points
+    And player 3 has 5 health points
