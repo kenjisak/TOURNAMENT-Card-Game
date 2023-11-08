@@ -41,13 +41,13 @@ Feature: Scenario A No Winners
     And player 3 plays their "Arrows_8" card
     Then "P3" will be the loser for this melee
 
-    When the Melee 2 starts
+    When the Melee 3 starts
     And player 3 plays their "Deception_5" card
     And player 1 plays their "Merlin_10" card
     And player 2 plays their "Merlin_3" card
     Then "P2" will be the loser for this melee
 
-    When the Melee 3 starts
+    When the Melee 4 starts
     And player 2 plays their "Sorcery_12" card
     And player 3 plays their "Sorcery_6" card
     And player 1 plays their "Sorcery_11" card
